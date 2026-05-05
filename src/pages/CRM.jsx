@@ -7,13 +7,13 @@ import ContactsTable from "../components/ContactsTable";
 const API_BASE = "http://13.61.16.106:1802";
 
 export default function CRM() {
-  const [activeTab, setActiveTab] = useState("companies"); // ✅ default set
+  const [activeTab, setActiveTab] = useState(null); // ✅ FIXED
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [uploading, setUploading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // ✅ debounce search
+  // debounce
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -21,7 +21,7 @@ export default function CRM() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  // ✅ CSV Upload
+  // CSV upload
   const handleCSVUpload = async (e) => {
     if (!activeTab) return;
 
@@ -60,10 +60,9 @@ export default function CRM() {
   return (
     <div className="bg-[#0B0B0B] text-white min-h-screen flex flex-col">
 
-      {/* MAIN */}
       <div className="flex flex-1 pt-[80px]">
 
-        {/* MOBILE OVERLAY */}
+        {/* OVERLAY */}
         {sidebarOpen && (
           <div
             className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -74,7 +73,8 @@ export default function CRM() {
         {/* SIDEBAR */}
         <div
           className={`
-            fixed lg:static z-50 top-[80px] bottom-0 w-64 bg-[#0F0F0F] border-r border-white/10 p-6
+            fixed lg:static top-[80px] bottom-0 w-64 bg-[#0F0F0F]
+            border-r border-white/10 p-6 z-30
             transform transition-transform duration-300
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
             lg:translate-x-0
@@ -93,6 +93,7 @@ export default function CRM() {
           >
             <Upload size={14} />
             {uploading ? "Uploading..." : "Import CSV"}
+
             <input
               type="file"
               hidden
@@ -138,7 +139,7 @@ export default function CRM() {
         {/* CONTENT */}
         <div className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-6">
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MOBILE MENU */}
           <div className="lg:hidden mb-4">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -148,29 +149,68 @@ export default function CRM() {
             </button>
           </div>
 
-          {/* SEARCH */}
-          <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
-            <div className="flex items-center gap-3 bg-[#111] px-4 py-2 border border-white/10 rounded w-full sm:max-w-xs">
-              <Search size={14} />
-              <input
-                className="bg-transparent outline-none text-sm w-full"
-                placeholder={`Search ${activeTab}...`}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+          {/* 🟢 CRM LANDING */}
+          {!activeTab && (
+            <div className="flex flex-col items-center justify-center h-[70vh] text-center">
+
+              <h2 className="text-xl font-semibold mb-2">
+                CRM Dashboard
+              </h2>
+
+              <p className="text-gray-400 text-sm mb-6 max-w-md">
+                Upload your data using CSV files. Only{" "}
+                <span className="text-white">.csv</span> format is supported.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => setActiveTab("companies")}
+                  className="px-5 py-2 bg-white text-black rounded text-sm flex items-center gap-2"
+                >
+                  <Building2 size={14} />
+                  Upload Companies
+                </button>
+
+                <button
+                  onClick={() => setActiveTab("contacts")}
+                  className="px-5 py-2 bg-white text-black rounded text-sm flex items-center gap-2"
+                >
+                  <Users size={14} />
+                  Upload Contacts
+                </button>
+              </div>
+
             </div>
-          </div>
+          )}
 
-          {/* TABLES */}
-          <div className="bg-[#0F0F0F] border border-white/10 rounded-lg p-4 overflow-x-auto">
-            {activeTab === "companies" && (
-              <CompaniesTable search={debouncedSearch} />
-            )}
+          {/* 🟢 SEARCH + TABLES */}
+          {activeTab && (
+            <>
+              {/* SEARCH */}
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
+                <div className="flex items-center gap-3 bg-[#111] px-4 py-2 border border-white/10 rounded w-full sm:max-w-xs">
+                  <Search size={14} />
+                  <input
+                    className="bg-transparent outline-none text-sm w-full"
+                    placeholder={`Search ${activeTab}...`}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
+              </div>
 
-            {activeTab === "contacts" && (
-              <ContactsTable search={debouncedSearch} />
-            )}
-          </div>
+              {/* TABLE */}
+              <div className="bg-[#0F0F0F] border border-white/10 rounded-lg p-4 overflow-x-auto">
+                {activeTab === "companies" && (
+                  <CompaniesTable search={debouncedSearch} />
+                )}
+
+                {activeTab === "contacts" && (
+                  <ContactsTable search={debouncedSearch} />
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
