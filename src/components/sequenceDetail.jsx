@@ -53,41 +53,52 @@ const [startTime, setStartTime] =
 
 const [endTime, setEndTime] =
   useState("");
-  if (!sequence) {
-  return (
-    <div className="text-white p-10">
-      Loading...
-    </div>
-  );
-}
+  const [editingStepId, setEditingStepId] =
+  useState(null);
+  
+
   
 const enrolledContacts = [];
 const handleSaveStep = async () => {
   try {
 
-    await api.post(
-      `/sequences/${id}/steps`,
-      {
-        step_order:
-          (sequence.steps?.length || 0) + 1,
+    const stepData = {
+      step_order:
+        (sequence.steps?.length || 0) + 1,
 
-        delay_days: delayDays,
+      delay_days: delayDays,
 
-        subject: subject,
+      subject: subject,
 
-        body_template: emailBody,
+      body_template: emailBody,
 
-        send_window_start:
-          startTime + ":00",
+      send_window_start:
+        startTime + ":00",
 
-        send_window_end:
-          endTime + ":00",
-      }
-    );
+      send_window_end:
+        endTime + ":00",
+    };
+
+    if (editingStepId) {
+
+      await api.patch(
+        `/sequences/${id}/steps/${editingStepId}`,
+        stepData
+      );
+
+    } else {
+
+      await api.post(
+        `/sequences/${id}/steps`,
+        stepData
+      );
+    }
 
     fetchSequence();
 
     setShowStepModal(false);
+
+    setEditingStepId(null);
 
   } catch (error) {
     console.error(error);
@@ -111,9 +122,9 @@ const handleSaveStep = async () => {
 };
 const handleDeleteStep = async (stepId) => {
   try {
-    await api.delete(
-      `/steps/${stepId}`
-    );
+   await api.delete(
+  `/sequences/${id}/steps/${stepId}`
+);
 
     fetchSequence();
 
@@ -123,23 +134,33 @@ const handleDeleteStep = async (stepId) => {
 };
 
 const handleEditStep = (step) => {
+
+  console.log(step);
+
+  setEditingStepId(step.step_id);
+
   setSubject(step.subject);
 
   setEmailBody(step.body_template);
 
   setDelayDays(step.delay_days);
 
-  setStartTime(
-    step.send_window_start?.slice(0, 5)
-  );
+ setStartTime(
+  String(step.send_window_start).slice(0, 5)
+);
 
-  setEndTime(
-    step.send_window_end?.slice(0, 5)
-  );
-
+setEndTime(
+  String(step.send_window_end).slice(0, 5)
+);
   setShowStepModal(true);
 };
-
+if (!sequence) {
+  return (
+    <div className="text-white p-10">
+      Loading...
+    </div>
+  );
+}
   return (
     <div className="min-h-screen bg-black text-white p-8">
       {/* Header */}
@@ -256,19 +277,22 @@ const handleEditStep = (step) => {
             </button>
           </div>
 
-          <div className="relative">
+         <div className="relative pointer-events-auto">
             <div className="absolute left-7 top-0 bottom-0 w-[2px] bg-[#222] pointer-events-none" />
 
-            <div className="space-y-8">
+          <div className="space-y-8">
               {(sequence.steps || []).map((step) => (
-                <div key={step.id} className="relative pl-24">
+               <div
+ key={step.step_id}
+  className="relative pl-24 z-50"
+>
                   {/* Number */}
                   <div className="absolute left-0 w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center font-semibold shadow-lg">
                     {step.step_order}
                   </div>
 
                   {/* Card */}
-                  <div className="bg-[#111111] border border-[#222] rounded-2xl p-6 hover:border-purple-500/30 transition">
+                 <div className="relative z-50 bg-[#111111] border border-[#222] rounded-2xl p-6 hover:border-purple-500/30 transition">
                     <div className="flex justify-between items-start mb-4">
                       <div>
                         <h3 className="text-xl font-semibold mb-2">
@@ -296,7 +320,7 @@ const handleEditStep = (step) => {
                        <button
   type="button"
   onClick={() =>
-    handleDeleteStep(step.id)
+    handleDeleteStep(step.step_id)
   }
   className="p-2 rounded-lg hover:bg-red-500/10 transition cursor-pointer z-50 relative"
 >
@@ -369,6 +393,7 @@ const handleEditStep = (step) => {
                   );
 
                   if (!enrollment) return null;
+                  
 
                   return (
                     <tr
