@@ -9,11 +9,9 @@ import {
   Clock,
 } from "lucide-react";
 
-function StepCard({
-  step,
-  onUpdate,
-  onDelete,
-}) {
+/* ---------------- STEP CARD ---------------- */
+
+function StepCard({ step, onUpdate, onDelete }) {
   const mergeTags = [
     "{{firstname}}",
     "{{lastname}}",
@@ -52,9 +50,7 @@ function StepCard({
                 value={step.delayDays}
                 onChange={(e) =>
                   onUpdate(step.id, {
-                    delayDays: parseInt(
-                      e.target.value
-                    ),
+                    delayDays: parseInt(e.target.value),
                   })
                 }
                 className="w-32 bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
@@ -75,7 +71,6 @@ function StepCard({
                     subject: e.target.value,
                   })
                 }
-                placeholder="Enter email subject..."
                 className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
               />
             </div>
@@ -94,20 +89,17 @@ function StepCard({
                     body: e.target.value,
                   })
                 }
-                placeholder="Write your email..."
                 className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none resize-none"
               />
 
+              {/* Merge Tags */}
               <div className="flex flex-wrap gap-2 mt-3">
                 {mergeTags.map((tag) => (
                   <button
                     key={tag}
                     onClick={() =>
                       onUpdate(step.id, {
-                        body:
-                          step.body +
-                          " " +
-                          tag,
+                        body: step.body + " " + tag,
                       })
                     }
                     className="px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs"
@@ -118,7 +110,7 @@ function StepCard({
               </div>
             </div>
 
-            {/* Time */}
+            {/* Time Window */}
             <div className="flex gap-6">
               <div>
                 <label className="block text-sm text-gray-400 mb-2">
@@ -130,13 +122,10 @@ function StepCard({
 
                   <input
                     type="time"
-                    value={
-                      step.sendWindowStart
-                    }
+                    value={step.sendWindowStart}
                     onChange={(e) =>
                       onUpdate(step.id, {
-                        sendWindowStart:
-                          e.target.value,
+                        sendWindowStart: e.target.value,
                       })
                     }
                     className="bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
@@ -154,13 +143,10 @@ function StepCard({
 
                   <input
                     type="time"
-                    value={
-                      step.sendWindowEnd
-                    }
+                    value={step.sendWindowEnd}
                     onChange={(e) =>
                       onUpdate(step.id, {
-                        sendWindowEnd:
-                          e.target.value,
+                        sendWindowEnd: e.target.value,
                       })
                     }
                     className="bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
@@ -175,16 +161,18 @@ function StepCard({
   );
 }
 
+/* ---------------- MAIN PAGE ---------------- */
+
 export default function CreateSequence() {
   const navigate = useNavigate();
 
-  const [sequenceName, setSequenceName] =
-    useState("");
-
+  const [sequenceName, setSequenceName] = useState("");
   const [goal, setGoal] = useState("");
+  const [status, setStatus] = useState("Draft");
 
-  const [status, setStatus] =
-    useState("Draft");
+  /* SEARCH + FILTER */
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState("All");
 
   const [steps, setSteps] = useState([
     {
@@ -195,9 +183,11 @@ export default function CreateSequence() {
       body: "",
       sendWindowStart: "09:00",
       sendWindowEnd: "17:00",
+      status: "Draft",
     },
   ]);
 
+  /* ADD STEP */
   const addStep = () => {
     const newStep = {
       id: Date.now().toString(),
@@ -207,25 +197,24 @@ export default function CreateSequence() {
       body: "",
       sendWindowStart: "09:00",
       sendWindowEnd: "17:00",
+      status: "Draft",
     };
 
     setSteps([...steps, newStep]);
   };
 
+  /* UPDATE STEP */
   const updateStep = (id, updates) => {
-    setSteps(
-      steps.map((step) =>
-        step.id === id
-          ? { ...step, ...updates }
-          : step
+    setSteps((prev) =>
+      prev.map((step) =>
+        step.id === id ? { ...step, ...updates } : step
       )
     );
   };
 
+  /* DELETE STEP */
   const deleteStep = (id) => {
-    const filtered = steps.filter(
-      (step) => step.id !== id
-    );
+    const filtered = steps.filter((step) => step.id !== id);
 
     setSteps(
       filtered.map((step, index) => ({
@@ -235,30 +224,45 @@ export default function CreateSequence() {
     );
   };
 
-  
+  /* FILTER LOGIC */
+  const filteredSteps = steps.filter((step) => {
+    const matchesSearch =
+      step.subject
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      step.body
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+    const matchesStatus =
+      filterStatus === "All"
+        ? true
+        : step.status === filterStatus;
+
+    return matchesSearch && matchesStatus;
+  });
+
+  /* SAVE */
   const handleSave = async () => {
-  try {
-    const response = await api.post(
-      "/sequences",
-      {
+    try {
+      const response = await api.post("/sequences", {
         name: sequenceName,
-        goal: goal,
+        goal,
         status: "draft",
-      }
-    );
+        steps,
+      });
 
-    console.log(response.data);
-
-  } catch (error) {
-    console.error(error);
-  }
-};
-
+      console.log(response.data);
+      navigate("/sequences");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-5xl mx-auto p-8">
-        {/* Header */}
+        {/* HEADER */}
         <div className="mb-10">
           <Link
             to="/sequences"
@@ -273,72 +277,69 @@ export default function CreateSequence() {
           </h1>
 
           <p className="text-gray-400">
-            Build automated email
-            workflows
+            Build automated email workflows
           </p>
         </div>
 
-        {/* Details */}
+        {/* DETAILS */}
         <div className="bg-[#111111] border border-[#222] rounded-3xl p-8 mb-8">
           <h2 className="text-2xl font-semibold mb-6">
             Sequence Details
           </h2>
 
           <div className="space-y-5">
-            <div>
-              <label className="block text-sm text-gray-400 mb-2">
-                Sequence Name
-              </label>
+            <input
+              value={sequenceName}
+              onChange={(e) =>
+                setSequenceName(e.target.value)
+              }
+              placeholder="Sequence Name"
+              className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
+            />
 
-              <input
-                type="text"
-                value={sequenceName}
-                onChange={(e) =>
-                  setSequenceName(
-                    e.target.value
-                  )
-                }
-                placeholder="New Lead Outreach"
-                className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
-              />
-            </div>
+            <input
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              placeholder="Goal"
+              className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
+            />
 
-            <div>
-              <label className="block text-sm text-gray-400 mb-2">
-                Goal
-              </label>
-
-              <input
-                type="text"
-                value={goal}
-                onChange={(e) =>
-                  setGoal(e.target.value)
-                }
-                placeholder="Book discovery calls..."
-                className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm text-gray-400 mb-2">
-                Status
-              </label>
-
-              <select
-                value={status}
-                onChange={(e) =>
-                  setStatus(e.target.value)
-                }
-                className="bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
-              >
-                <option>Draft</option>
-                <option>Active</option>
-              </select>
-            </div>
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
+            >
+              <option>Draft</option>
+              <option>Active</option>
+            </select>
           </div>
         </div>
 
-        {/* Steps */}
+        {/* SEARCH + FILTER */}
+        <div className="flex gap-4 mb-6">
+          <input
+            placeholder="Search steps..."
+            value={searchTerm}
+            onChange={(e) =>
+              setSearchTerm(e.target.value)
+            }
+            className="flex-1 bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
+          />
+
+          <select
+            value={filterStatus}
+            onChange={(e) =>
+              setFilterStatus(e.target.value)
+            }
+            className="bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none"
+          >
+            <option value="All">All</option>
+            <option value="Draft">Draft</option>
+            <option value="Active">Active</option>
+          </select>
+        </div>
+
+        {/* STEPS */}
         <div className="bg-[#111111] border border-[#222] rounded-3xl p-8 mb-32">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-semibold">
@@ -347,7 +348,7 @@ export default function CreateSequence() {
 
             <button
               onClick={addStep}
-              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600"
             >
               <Plus className="w-4 h-4" />
               Add Step
@@ -355,7 +356,7 @@ export default function CreateSequence() {
           </div>
 
           <div className="space-y-5">
-            {steps.map((step) => (
+            {filteredSteps.map((step) => (
               <StepCard
                 key={step.id}
                 step={step}
@@ -367,21 +368,19 @@ export default function CreateSequence() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* BOTTOM BAR */}
       <div className="fixed bottom-0 left-0 right-0 bg-[#111111] border-t border-[#222]">
         <div className="max-w-5xl mx-auto px-8 py-4 flex justify-end gap-4">
           <button
-            onClick={() =>
-              navigate("/sequences")
-            }
-            className="px-6 py-3 rounded-xl border border-[#222] text-gray-300"
+            onClick={() => navigate("/sequences")}
+            className="px-6 py-3 rounded-xl border border-[#222]"
           >
             Cancel
           </button>
 
           <button
             onClick={handleSave}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600"
           >
             Save Sequence
           </button>
