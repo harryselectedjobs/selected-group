@@ -83,15 +83,19 @@ export default function Navbar() {
               </li>
             ))}
 
-            {/* 🔥 CRM LINK */}
             <li>
-              <Link
-                to="/crm"
-                className="text-sm tracking-widest uppercase text-gray-400 hover:text-white transition"
-              >
-                CRM
-              </Link>
-            </li>
+  <Link
+    to="/crm"
+    onClick={() => {
+      if (window.location.pathname === "/crm") {
+        window.location.reload();
+      }
+    }}
+    className="text-sm tracking-widest uppercase text-gray-400 hover:text-white transition"
+  >
+    CRM
+  </Link>
+</li>
 
           </ul>
 

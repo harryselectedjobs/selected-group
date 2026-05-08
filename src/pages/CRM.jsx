@@ -85,24 +85,30 @@ export default function CRM() {
           <h2 className="text-lg font-semibold mb-6">CRM</h2>
 
           {/* CSV Upload */}
-          <label
-            className={`flex items-center justify-center gap-2 px-3 py-2 text-sm rounded mb-6 transition
-            ${
-              !activeTab
-                ? "bg-gray-600 cursor-not-allowed"
-                : "bg-white text-black cursor-pointer hover:bg-gray-200"
-            }`}
-          >
-            <Upload size={14} />
-            {uploading ? "Uploading..." : "Import CSV"}
+<label
+  className={`flex items-center justify-center gap-2 px-3 py-2 text-sm rounded mb-6 transition
+  ${
+    activeTab !== "companies" &&
+    activeTab !== "contacts"
+      ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+      : "bg-white text-black cursor-pointer hover:bg-gray-200"
+  }`}
+>
+  <Upload size={14} />
 
-            <input
-              type="file"
-              hidden
-              disabled={!activeTab}
-              onChange={handleCSVUpload}
-            />
-          </label>
+  {uploading ? "Uploading..." : "Import CSV"}
+
+  <input
+    type="file"
+    hidden
+    accept=".csv"
+    disabled={
+      activeTab !== "companies" &&
+      activeTab !== "contacts"
+    }
+    onChange={handleCSVUpload}
+  />
+</label>
 
           {/* NAV */}
           <div className="flex flex-col gap-2 text-sm">
@@ -136,9 +142,9 @@ export default function CRM() {
               Contacts
             </button>
             <button
-  onClick={() => {
-    setActiveTab("sequences");
-    setSidebarOpen(false);
+            onClick={() => {
+              setActiveTab("sequences");
+              setSidebarOpen(false);
   }}
   className={`px-3 py-2 rounded flex items-center gap-2 transition ${
     activeTab === "sequences"
@@ -166,40 +172,75 @@ export default function CRM() {
           </div>
 
           {/* 🟢 CRM LANDING */}
-          {!activeTab && (
-            <div className="flex flex-col items-center justify-center h-[70vh] text-center">
+{!activeTab && (
+  <div className="flex flex-col items-center justify-center h-[70vh] text-center">
 
-              <h2 className="text-xl font-semibold mb-2">
-                CRM Dashboard
-              </h2>
+    <h2 className="text-2xl font-semibold mb-2">
+      CRM Dashboard
+    </h2>
 
-              <p className="text-gray-400 text-sm mb-6 max-w-md">
-                Upload your data using CSV files. Only{" "}
-                <span className="text-white">.csv</span> format is supported.
-              </p>
+    <p className="text-gray-400 text-sm mb-8 max-w-md leading-relaxed">
+      Upload and manage your company and contact data using CSV files.
+      Only <span className="text-white font-medium">.csv</span> format is supported.
+    </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => setActiveTab("companies")}
-                  className="px-5 py-2 bg-white text-black rounded text-sm flex items-center gap-2"
-                >
-                  <Building2 size={14} />
-                  Upload Companies
-                </button>
+    <div className="flex flex-col sm:flex-row gap-4">
 
-                <button
-                  onClick={() => setActiveTab("contacts")}
-                  className="px-5 py-2 bg-white text-black rounded text-sm flex items-center gap-2"
-                >
-                  <Users size={14} />
-                  Upload Contacts
-                </button>
-              </div>
+      {/* Upload Companies */}
+      <label className="group px-6 py-3 bg-white text-black rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer hover:bg-gray-200 transition-all shadow-sm">
+        <Building2
+          size={16}
+          className="group-hover:scale-110 transition-transform"
+        />
 
-            </div>
-          )}
+        {uploading && activeTab === "companies"
+          ? "Uploading..."
+          : "Upload Companies"}
 
-          {/* 🟢 SEARCH + TABLES */}
+        <input
+          type="file"
+          hidden
+          accept=".csv"
+          onChange={(e) => {
+            setActiveTab("companies");
+
+            setTimeout(() => {
+              handleCSVUpload(e);
+            }, 0);
+          }}
+        />
+      </label>
+
+      {/* Upload Contacts */}
+      <label className="group px-6 py-3 bg-white text-black rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer hover:bg-gray-200 transition-all shadow-sm">
+        <Users
+          size={16}
+          className="group-hover:scale-110 transition-transform"
+        />
+
+        {uploading && activeTab === "contacts"
+          ? "Uploading..."
+          : "Upload Contacts"}
+
+        <input
+          type="file"
+          hidden
+          accept=".csv"
+          onChange={(e) => {
+            setActiveTab("contacts");
+
+            setTimeout(() => {
+              handleCSVUpload(e);
+            }, 0);
+          }}
+        />
+      </label>
+
+    </div>
+  </div>
+)}
+
+          
       {/* 🟢 SEARCH + TABLES */}
 {activeTab && activeTab !== "sequences" && (
   <>
