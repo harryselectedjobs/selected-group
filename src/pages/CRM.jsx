@@ -3,6 +3,8 @@ import { Search, Upload, Building2, Users } from "lucide-react";
 
 import CompaniesTable from "../components/CompaniesTable";
 import ContactsTable from "../components/ContactsTable";
+import { Mail } from "lucide-react";
+import SequenceList from "../components/sequenceList";
 
 const API_BASE = "http://13.61.16.106:1802";
 
@@ -133,6 +135,20 @@ export default function CRM() {
               <Users size={14} />
               Contacts
             </button>
+            <button
+  onClick={() => {
+    setActiveTab("sequences");
+    setSidebarOpen(false);
+  }}
+  className={`px-3 py-2 rounded flex items-center gap-2 transition ${
+    activeTab === "sequences"
+      ? "bg-white text-black"
+      : "text-gray-400 hover:bg-white/10"
+  }`}
+>
+  <Mail size={14} />
+  Sequences
+</button>
           </div>
         </div>
 
@@ -184,33 +200,40 @@ export default function CRM() {
           )}
 
           {/* 🟢 SEARCH + TABLES */}
-          {activeTab && (
-            <>
-              {/* SEARCH */}
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
-                <div className="flex items-center gap-3 bg-[#111] px-4 py-2 border border-white/10 rounded w-full sm:max-w-xs">
-                  <Search size={14} />
-                  <input
-                    className="bg-transparent outline-none text-sm w-full"
-                    placeholder={`Search ${activeTab}...`}
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                </div>
-              </div>
+      {/* 🟢 SEARCH + TABLES */}
+{activeTab && activeTab !== "sequences" && (
+  <>
+    {/* SEARCH */}
+    <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
+      <div className="flex items-center gap-3 bg-[#111] px-4 py-2 border border-white/10 rounded w-full sm:max-w-xs">
+        <Search size={14} />
 
-              {/* TABLE */}
-              <div className="bg-[#0F0F0F] border border-white/10 rounded-lg p-4 overflow-x-auto">
-                {activeTab === "companies" && (
-                  <CompaniesTable search={debouncedSearch} />
-                )}
+        <input
+          className="bg-transparent outline-none text-sm w-full"
+          placeholder={`Search ${activeTab}...`}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+    </div>
 
-                {activeTab === "contacts" && (
-                  <ContactsTable search={debouncedSearch} />
-                )}
-              </div>
-            </>
-          )}
+    {/* TABLE */}
+    <div className="bg-[#0F0F0F] border border-white/10 rounded-lg p-4 overflow-x-auto">
+      {activeTab === "companies" && (
+        <CompaniesTable search={debouncedSearch} />
+      )}
+
+      {activeTab === "contacts" && (
+        <ContactsTable search={debouncedSearch} />
+      )}
+    </div>
+  </>
+)}
+
+{/* 🟣 SEQUENCES PAGE */}
+{activeTab === "sequences" && (
+  <SequenceList />
+)}
         </div>
       </div>
     </div>
