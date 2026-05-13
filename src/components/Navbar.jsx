@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo2.png";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home",      href: "#home",    route: null },
+  { label: "About",     href: null,       route: "/about" },
+  { label: "Use Cases",          href: null, route: "/use-cases" },
+  { label: "Engagement Models", href: null, route: "/engagement-models" },
+  { label: "Contact",   href: "#contact", route: null },
 ];
 
 export default function Navbar() {
@@ -17,21 +17,34 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("Home");
 
-  const location = useLocation(); // 🔥 detect current page
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Scroll effect
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Handle scroll navigation (ONLY for home page)
-  const handleNav = (label, href) => {
+  // Sync active state with current route
+  useEffect(() => {
+    if (location.pathname === "/use-cases") setActive("Use Cases");
+    else if (location.pathname === "/about") setActive("About");
+    else if (location.pathname === "/engagement-models") setActive("Engagement Models");
+    else if (location.pathname === "/") setActive("Home");
+  }, [location.pathname]);
+
+  const handleNav = (label, href, route) => {
     setActive(label);
     setMenuOpen(false);
 
-    // if not on homepage → go to homepage first
+    // Route-based navigation (e.g. Use Cases page)
+    if (route) {
+      navigate(route);
+      return;
+    }
+
+    // Scroll-based navigation
     if (location.pathname !== "/") {
       window.location.href = "/" + href;
       return;
@@ -68,10 +81,10 @@ export default function Navbar() {
           <ul className="hidden md:flex items-center gap-10">
 
             {/* Landing links */}
-            {navLinks.map(({ label, href }) => (
+            {navLinks.map(({ label, href, route }) => (
               <li key={label}>
                 <button
-                  onClick={() => handleNav(label, href)}
+                  onClick={() => handleNav(label, href, route)}
                   className={`text-sm tracking-widest uppercase transition ${
                     active === label
                       ? "text-white"
@@ -120,13 +133,13 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-10"
           >
 
-            {navLinks.map(({ label, href }, i) => (
+            {navLinks.map(({ label, href, route }, i) => (
               <motion.button
                 key={label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                onClick={() => handleNav(label, href)}
+                onClick={() => handleNav(label, href, route)}
                 className="text-3xl text-white"
               >
                 {label}

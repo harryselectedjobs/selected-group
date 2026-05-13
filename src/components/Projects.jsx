@@ -134,7 +134,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="bg-[#0A0A0A] py-28 md:py-36">
+    <section id="projects" className="bg-[#0A0A0A] py-16 md:py-20 border-t border-white/[0.05]">
       <div className="max-w-7xl mx-auto px-6">
 
         <div

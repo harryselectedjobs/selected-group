@@ -98,7 +98,7 @@ export default function WhyChooseUs() {
   }, []);
 
   return (
-    <section className="bg-black py-28 md:py-36">
+    <section className="bg-black py-16 md:py-20 border-t border-white/[0.05]">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="grid md:grid-cols-2 gap-16 lg:gap-28 items-start">

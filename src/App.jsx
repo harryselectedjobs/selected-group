@@ -5,9 +5,12 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import Hero from "./components/Hero";
-import About from "./components/About";
-import Services from "./components/Services";
-import Projects from "./components/Projects";
+import TrustedBy from "./components/TrustedBy";
+import PracticeAreas from "./components/PracticeAreas";
+import HowWeWork from "./components/HowWeWork";
+import Testimonials from "./components/Testimonials";
+import EngagementModels from "./components/EngagementModels";
+import ReadyToBuild from "./components/ReadyToBuild";
 import WhyChooseUs from "./components/WhyChooseUs";
 import Contact from "./components/Contact";
 
@@ -16,18 +19,22 @@ import SequenceList from "./components/sequenceList";
 import CreateSequence from "./components/CreateSequence";
 
 import CRM from "./pages/CRM";
+import UseCasesPage from "./pages/UseCasesPage";
+import AboutPage from "./pages/AboutPage";
+import EngagementModelsPage from "./pages/EngagementModelsPage";
 
 function Home() {
   return (
     <main>
       <Hero />
-      <About />
-      <Services />
-      <Projects />
+      <TrustedBy />
+      <PracticeAreas />
+      <HowWeWork />
+      <Testimonials />
+      <EngagementModels />
+      <ReadyToBuild />
       <WhyChooseUs />
       <Contact />
-
-      {/* Sequences Section */}
       <SequenceList />
     </main>
   );
@@ -40,27 +47,14 @@ export default function App() {
         <Navbar />
 
         <Routes>
-          {/* Homepage */}
           <Route path="/" element={<Home />} />
-
-          {/* CRM Page */}
+          <Route path="/use-cases" element={<UseCasesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/engagement-models" element={<EngagementModelsPage />} />
           <Route path="/crm" element={<CRM />} />
-
-          {/* Sequences */}
-          <Route
-            path="/sequences"
-            element={<SequenceList />}
-          />
-
-          {/* Sequence Detail */}
-          <Route
-            path="/sequences/:id"
-            element={<SequenceDetail />}
-          />
-          <Route
-  path="/sequences/create"
-  element={<CreateSequence />}
-/>
+          <Route path="/sequences" element={<SequenceList />} />
+          <Route path="/sequences/:id" element={<SequenceDetail />} />
+          <Route path="/sequences/create" element={<CreateSequence />} />
         </Routes>
 
         <Footer />
