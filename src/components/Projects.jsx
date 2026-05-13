@@ -98,7 +98,7 @@ function ProjectCard({ title, category, image, delay }) {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-5 group-hover:opacity-0 transition-opacity duration-300">
-        <div className="text-white/40 text-xs tracking-widest uppercase mb-1">
+        <div className="text-white/65 text-xs tracking-widest uppercase mb-1">
           {category}
         </div>
         <h3 className="text-white font-medium text-sm">{title}</h3>
@@ -144,7 +144,7 @@ export default function Projects() {
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-6">
               <span className="w-8 h-px bg-white/30" />
-              <span className="text-[#A0A0A0] text-xs font-medium tracking-[0.25em] uppercase">
+              <span className="text-white/65 text-xs font-medium tracking-[0.25em] uppercase">
                 GTM Placements
               </span>
             </div>
@@ -154,7 +154,7 @@ export default function Projects() {
             </h2>
           </div>
 
-          <p className="text-[#A0A0A0] text-sm max-w-xs leading-relaxed">
+          <p className="text-white/65 text-sm max-w-xs leading-relaxed">
             Executive search and GTM hiring across SaaS, enterprise software, and scaleups in US & Europe.
           </p>
         </div>

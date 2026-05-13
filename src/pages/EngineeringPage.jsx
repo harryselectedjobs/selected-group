@@ -194,7 +194,7 @@ function RoleCard({ icon: Icon, accent, title, description, roles, tags, highlig
       <p className="text-white/45 text-sm leading-relaxed">{description}</p>
 
       <div className="border-t border-white/[0.06] pt-4">
-        <p className="text-white/30 text-xs font-medium tracking-widest uppercase mb-3">Key Roles</p>
+        <p className="text-white/50 text-xs font-medium tracking-widest uppercase mb-3">Key Roles</p>
         <ul className="flex flex-col gap-1.5">
           {visibleRoles.map((role) => (
             <li key={role} className="flex items-center gap-2 text-white/60 text-sm">
@@ -326,7 +326,7 @@ export default function EngineeringPage() {
         <div ref={introRef}>
           <div className="flex items-center justify-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">Our Focus</span>
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">Our Focus</span>
             <span className="w-8 h-px bg-white/20" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
@@ -338,7 +338,7 @@ export default function EngineeringPage() {
             technology businesses to identify and secure talent ranging from senior technical leadership through to
             highly skilled individual contributors.
           </p>
-          <p className="text-white/35 text-base leading-relaxed max-w-3xl mx-auto mt-5">
+          <p className="text-white/60 text-base leading-relaxed max-w-3xl mx-auto mt-5">
             What differentiates a true specialist in this space is not just role coverage, but a deep understanding of
             the technologies, environments and challenges that define modern engineering organisations.
           </p>
@@ -371,7 +371,7 @@ export default function EngineeringPage() {
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-5">
               <span className="w-8 h-px bg-white/20" />
-              <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">Specialisations</span>
+              <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">Specialisations</span>
               <span className="w-8 h-px bg-white/20" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
@@ -397,7 +397,7 @@ export default function EngineeringPage() {
             <div className="text-center mb-14">
               <div className="flex items-center justify-center gap-3 mb-5">
                 <span className="w-8 h-px bg-white/20" />
-                <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+                <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
                   Technology Ecosystem
                 </span>
                 <span className="w-8 h-px bg-white/20" />

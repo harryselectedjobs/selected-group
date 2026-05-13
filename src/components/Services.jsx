@@ -145,7 +145,7 @@ function ModuleCard({ mod, delay }) {
           >
             <Icon size={22} style={{ color: mod.accent }} />
           </div>
-          <span className="text-white/15 text-3xl font-bold tracking-tight font-mono">
+          <span className="text-white/30 text-3xl font-bold tracking-tight font-mono">
             {mod.number}
           </span>
         </div>
@@ -173,7 +173,7 @@ function ModuleCard({ mod, delay }) {
 
         {/* Key roles */}
         <div className="mb-6">
-          <p className="text-white/30 text-xs tracking-widest uppercase mb-3">Key Roles</p>
+          <p className="text-white/50 text-xs tracking-widest uppercase mb-3">Key Roles</p>
           <ul className="space-y-1.5">
             {mod.roles.slice(0, expanded ? mod.roles.length : 3).map((role) => (
               <li key={role} className="flex items-center gap-2 text-white/60 text-sm">
@@ -262,7 +262,7 @@ export default function Services() {
         <div ref={headerRef} className="max-w-3xl mb-16">
           <div className="flex items-center gap-3 mb-6">
             <span className="w-8 h-px bg-white/30" />
-            <span className="text-white/40 text-xs font-medium tracking-[0.3em] uppercase">
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
               Our Specialist Practices
             </span>
           </div>

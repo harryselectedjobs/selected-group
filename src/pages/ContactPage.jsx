@@ -124,7 +124,7 @@ export default function ContactPage() {
               >
                 <Icon size={18} style={{ color: accent }} />
               </div>
-              <p className="text-white/35 text-[10px] font-semibold tracking-[0.25em] uppercase mb-2">
+              <p className="text-white/60 text-[10px] font-semibold tracking-[0.25em] uppercase mb-2">
                 {label}
               </p>
               {href ? (
@@ -161,7 +161,7 @@ export default function ContactPage() {
               Product Management and Professional Services. We work with Series A to enterprise-level companies
               across the US and European markets.
             </p>
-            <p className="text-white/35 text-sm leading-relaxed">
+            <p className="text-white/60 text-sm leading-relaxed">
               All hiring mandates are treated with the strictest confidentiality. We do not share candidate
               details or client briefs without express permission.
             </p>
@@ -169,13 +169,13 @@ export default function ContactPage() {
 
           {/* What happens next */}
           <div>
-            <h3 className="text-white/35 text-[11px] font-bold tracking-[0.22em] uppercase mb-5">
+            <h3 className="text-white/60 text-[11px] font-bold tracking-[0.22em] uppercase mb-5">
               What Happens Next
             </h3>
             <div className="flex flex-col gap-4">
               {nextSteps.map(({ n, text }) => (
                 <div key={n} className="flex items-start gap-4">
-                  <span className="text-white/20 text-xs font-mono font-bold pt-0.5 flex-shrink-0">{n}</span>
+                  <span className="text-white/45 text-xs font-mono font-bold pt-0.5 flex-shrink-0">{n}</span>
                   <div className="flex-1 border-b border-white/[0.05] pb-4">
                     <p className="text-white/65 text-sm leading-relaxed">{text}</p>
                   </div>
@@ -186,7 +186,7 @@ export default function ContactPage() {
 
           {/* Practice areas */}
           <div className="border border-white/[0.07] p-6">
-            <h3 className="text-white/35 text-[11px] font-bold tracking-[0.22em] uppercase mb-4">
+            <h3 className="text-white/60 text-[11px] font-bold tracking-[0.22em] uppercase mb-4">
               Our Practice Areas
             </h3>
             <div className="flex flex-col gap-2">
@@ -237,7 +237,7 @@ export default function ContactPage() {
                   <h2 className="text-white text-2xl font-bold tracking-tight mb-1">
                     Send Us a Brief
                   </h2>
-                  <p className="text-white/35 text-sm">
+                  <p className="text-white/60 text-sm">
                     Fill in the details below and we'll be in touch within 24 hours.
                   </p>
                 </div>
@@ -247,7 +247,7 @@ export default function ContactPage() {
                   {/* Row 1: Name + Company */}
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-white/35 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
+                      <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Full Name *
                       </label>
                       <input
@@ -260,7 +260,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-white/35 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
+                      <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Company *
                       </label>
                       <input
@@ -277,7 +277,7 @@ export default function ContactPage() {
                   {/* Row 2: Email + Phone */}
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-white/35 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
+                      <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Work Email *
                       </label>
                       <input
@@ -290,7 +290,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-white/35 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
+                      <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Phone Number
                       </label>
                       <input
@@ -305,7 +305,7 @@ export default function ContactPage() {
 
                   {/* Practice area */}
                   <div>
-                    <label className="block text-white/35 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
+                    <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                       Practice Area *
                     </label>
                     <select
@@ -323,7 +323,7 @@ export default function ContactPage() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-white/35 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
+                    <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                       Hiring Brief *
                     </label>
                     <textarea
@@ -355,7 +355,7 @@ export default function ContactPage() {
                     )}
                   </button>
 
-                  <p className="text-white/20 text-xs text-center leading-relaxed">
+                  <p className="text-white/45 text-xs text-center leading-relaxed">
                     By submitting this form you agree that your details may be used to contact you about our services.
                     All information is kept strictly confidential.
                   </p>

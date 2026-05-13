@@ -117,7 +117,7 @@ export default function HowWeWork() {
         <div ref={headerRef} className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
               Our Approach
             </span>
             <span className="w-8 h-px bg-white/20" />

@@ -122,7 +122,7 @@ export default function Testimonials() {
         <div ref={headerRef} className="mb-14">
           <div className="flex items-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/30" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
               Client Testimonials
             </span>
           </div>

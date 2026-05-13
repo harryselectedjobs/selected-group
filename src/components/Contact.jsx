@@ -55,17 +55,17 @@ export default function Contact() {
           <div className="max-w-2xl mb-16">
             <div className="flex items-center gap-3 mb-6">
               <span className="w-8 h-px bg-white/30" />
-              <span className="text-[#A0A0A0] text-xs font-medium tracking-[0.25em] uppercase">
+              <span className="text-white/65 text-xs font-medium tracking-[0.25em] uppercase">
                 Executive GTM Recruitment
               </span>
             </div>
 
             <h2 className="text-[3.25rem] font-bold text-white leading-tight tracking-tight mb-4">
               Let’s Build Your <br />
-              <span className="text-[#A0A0A0]">GTM Team</span>
+              <span className="text-white/65">GTM Team</span>
             </h2>
 
-            <p className="text-[#A0A0A0] text-base leading-relaxed">
+            <p className="text-white/65 text-base leading-relaxed">
               We partner with enterprise software companies to place high-performing sales leaders,
               account executives, and GTM talent across US and European markets.
             </p>
@@ -82,7 +82,7 @@ export default function Contact() {
                       <Icon size={16} className="text-white/50" />
                     </div>
                     <div>
-                      <div className="text-[#A0A0A0] text-xs tracking-widest uppercase mb-1">
+                      <div className="text-white/65 text-xs tracking-widest uppercase mb-1">
                         {label}
                       </div>
                       {href ? (
@@ -98,7 +98,7 @@ export default function Contact() {
               </div>
 
               <div className="border-t border-white/[0.06] pt-8">
-                <p className="text-[#A0A0A0] text-xs tracking-wide leading-relaxed">
+                <p className="text-white/65 text-xs tracking-wide leading-relaxed">
                   All conversations are confidential. We support hiring decisions for
                   growth-stage to enterprise GTM teams. Response time: 24 hours.
                 </p>
@@ -113,7 +113,7 @@ export default function Contact() {
                   <h3 className="text-white text-2xl font-semibold mb-3">
                     Request Received
                   </h3>
-                  <p className="text-[#A0A0A0] text-sm leading-relaxed">
+                  <p className="text-white/65 text-sm leading-relaxed">
                     Our GTM recruitment team will review your requirement and respond shortly.
                   </p>
                 </div>
@@ -122,7 +122,7 @@ export default function Contact() {
 
   {/* Full Name */}
   <div>
-    <label className="block text-[#A0A0A0] text-xs tracking-widest uppercase mb-2">
+    <label className="block text-white/65 text-xs tracking-widest uppercase mb-2">
       Full Name
     </label>
     <input
@@ -139,7 +139,7 @@ export default function Contact() {
 
   {/* Email */}
   <div>
-    <label className="block text-[#A0A0A0] text-xs tracking-widest uppercase mb-2">
+    <label className="block text-white/65 text-xs tracking-widest uppercase mb-2">
       Work Email
     </label>
     <input
@@ -156,7 +156,7 @@ export default function Contact() {
 
   {/* Message */}
   <div>
-    <label className="block text-[#A0A0A0] text-xs tracking-widest uppercase mb-2">
+    <label className="block text-white/65 text-xs tracking-widest uppercase mb-2">
       Requirement
     </label>
     <textarea

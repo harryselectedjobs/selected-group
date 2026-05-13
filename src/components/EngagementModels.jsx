@@ -84,7 +84,7 @@ function ModelCard({ title, description, detail, delay, active, onHover, onLeave
         className="overflow-hidden transition-all duration-300"
         style={{ maxHeight: active ? '80px' : '0px', opacity: active ? 1 : 0 }}
       >
-        <p className="text-white/35 text-xs leading-relaxed pt-1">{detail}</p>
+        <p className="text-white/55 text-xs leading-relaxed pt-1">{detail}</p>
       </div>
     </div>
   );
@@ -125,7 +125,7 @@ export default function EngagementModels() {
         <div ref={headerRef} className="text-center mb-14">
           <div className="flex items-center justify-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
               Engagement Models
             </span>
             <span className="w-8 h-px bg-white/20" />

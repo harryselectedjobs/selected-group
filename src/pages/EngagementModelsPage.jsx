@@ -140,15 +140,15 @@ function ModelCard({ icon: Icon, accent, title, subtitle, description, feeStruct
       {/* Details */}
       <div className="border-t border-white/[0.06] pt-4 flex flex-col gap-3">
         <div>
-          <p className="text-white/30 text-xs font-medium tracking-wide uppercase mb-1">Fee Structure</p>
+          <p className="text-white/55 text-xs font-medium tracking-wide uppercase mb-1">Fee Structure</p>
           <p className="text-white/70 text-sm font-semibold">{feeStructure}</p>
         </div>
         <div>
-          <p className="text-white/30 text-xs font-medium tracking-wide uppercase mb-1">Payment Timing</p>
+          <p className="text-white/55 text-xs font-medium tracking-wide uppercase mb-1">Payment Timing</p>
           <p className="text-white/70 text-sm">{paymentTiming}</p>
         </div>
         <div>
-          <p className="text-white/30 text-xs font-medium tracking-wide uppercase mb-1">Best For</p>
+          <p className="text-white/55 text-xs font-medium tracking-wide uppercase mb-1">Best For</p>
           <p className="text-sm leading-relaxed" style={{ color: accent }}>{bestFor}</p>
         </div>
       </div>
@@ -172,7 +172,7 @@ function ModelCard({ icon: Icon, accent, title, subtitle, description, feeStruct
             {considerations.map((c) => (
               <li key={c} className="flex items-center gap-2">
                 <XCircle size={13} className="text-white/25 flex-shrink-0" />
-                <span className="text-white/35 text-xs">{c}</span>
+                <span className="text-white/60 text-xs">{c}</span>
               </li>
             ))}
           </ul>
@@ -223,7 +223,7 @@ export default function EngagementModelsPage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex items-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
               How We Work
             </span>
           </div>
@@ -265,7 +265,7 @@ export default function EngagementModelsPage() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-5">
               <span className="w-8 h-px bg-white/20" />
-              <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+              <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
                 Side by Side
               </span>
               <span className="w-8 h-px bg-white/20" />

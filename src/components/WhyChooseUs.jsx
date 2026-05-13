@@ -66,7 +66,7 @@ function FeatureBlock({ icon: Icon, title, description, index }) {
         <h3 className="text-white font-semibold text-base mb-2 tracking-tight">
           {title}
         </h3>
-        <p className="text-[#A0A0A0] text-sm leading-relaxed">
+        <p className="text-white/65 text-sm leading-relaxed">
           {description}
         </p>
       </div>
@@ -108,7 +108,7 @@ export default function WhyChooseUs() {
 
             <div className="flex items-center gap-3 mb-6">
               <span className="w-8 h-px bg-white/30" />
-              <span className="text-[#A0A0A0] text-xs font-medium tracking-[0.25em] uppercase">
+              <span className="text-white/65 text-xs font-medium tracking-[0.25em] uppercase">
                 GTM Recruitment Advantage
               </span>
             </div>
@@ -116,10 +116,10 @@ export default function WhyChooseUs() {
             <h2 className="text-[3.25rem] font-bold text-white leading-tight tracking-tight mb-6">
               Why Top SaaS Companies
               <br />
-              <span className="text-[#A0A0A0]">Choose Us</span>
+              <span className="text-white/65">Choose Us</span>
             </h2>
 
-            <p className="text-[#A0A0A0] text-base leading-relaxed mb-10">
+            <p className="text-white/65 text-base leading-relaxed mb-10">
               We specialize in placing high-performing GTM talent — from sales leaders to
               enterprise account executives — helping companies scale revenue teams with precision.
             </p>
@@ -128,7 +128,7 @@ export default function WhyChooseUs() {
               <p className="text-white/60 text-sm italic leading-relaxed">
                 "They consistently delivered high-caliber GTM talent that matched both our growth stage and sales motion."
               </p>
-              <p className="text-[#A0A0A0] text-xs mt-3 tracking-wide uppercase">
+              <p className="text-white/65 text-xs mt-3 tracking-wide uppercase">
                 — VP Sales, Enterprise SaaS Client
               </p>
             </div>

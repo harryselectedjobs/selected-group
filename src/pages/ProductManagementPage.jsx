@@ -192,7 +192,7 @@ function RoleCard({ icon: Icon, accent, title, description, roles, tags, highlig
       <p className="text-white/45 text-sm leading-relaxed">{description}</p>
 
       <div className="border-t border-white/[0.06] pt-4">
-        <p className="text-white/30 text-xs font-medium tracking-widest uppercase mb-3">Key Roles</p>
+        <p className="text-white/50 text-xs font-medium tracking-widest uppercase mb-3">Key Roles</p>
         <ul className="flex flex-col gap-1.5">
           {visibleRoles.map((role) => (
             <li key={role} className="flex items-center gap-2 text-white/60 text-sm">
@@ -324,7 +324,7 @@ export default function ProductManagementPage() {
         <div ref={introRef}>
           <div className="flex items-center justify-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">Our Focus</span>
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">Our Focus</span>
             <span className="w-8 h-px bg-white/20" />
           </div>
           <h2 className="text-[3.25rem] font-bold text-white tracking-tight mb-6">
@@ -335,7 +335,7 @@ export default function ProductManagementPage() {
             operate, how they interact with engineering and go-to-market teams, and how great product leaders balance
             customer insight with commercial outcomes.
           </p>
-          <p className="text-white/35 text-base leading-relaxed max-w-3xl mx-auto mt-5">
+          <p className="text-white/60 text-base leading-relaxed max-w-3xl mx-auto mt-5">
             Our clients range from venture-backed startups and scale-ups to global SaaS platforms and enterprise
             technology businesses — at every stage of the product journey.
           </p>
@@ -368,7 +368,7 @@ export default function ProductManagementPage() {
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-5">
               <span className="w-8 h-px bg-white/20" />
-              <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">Specialisations</span>
+              <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">Specialisations</span>
               <span className="w-8 h-px bg-white/20" />
             </div>
             <h2 className="text-[3.25rem] font-bold text-white tracking-tight mb-3">
@@ -394,7 +394,7 @@ export default function ProductManagementPage() {
             <div className="text-center mb-14">
               <div className="flex items-center justify-center gap-3 mb-5">
                 <span className="w-8 h-px bg-white/20" />
-                <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+                <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
                   Industry Context
                 </span>
                 <span className="w-8 h-px bg-white/20" />
@@ -424,7 +424,7 @@ export default function ProductManagementPage() {
             </div>
 
             <div className="bg-[#0d0d0d] border border-white/[0.07] p-8">
-              <p className="text-white/35 text-xs font-bold tracking-widest uppercase mb-4">
+              <p className="text-white/60 text-xs font-bold tracking-widest uppercase mb-4">
                 Methodologies & Tools
               </p>
               <div className="flex flex-wrap gap-3">

@@ -187,7 +187,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex items-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
               About Us
             </span>
           </div>
@@ -210,7 +210,7 @@ export default function AboutPage() {
         <div ref={missionRef}>
           <div className="flex items-center justify-center gap-3 mb-5">
             <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
               Our Mission
             </span>
             <span className="w-8 h-px bg-white/20" />
@@ -223,7 +223,7 @@ export default function AboutPage() {
             expertise. We exist to bridge the gap between the world's best technology companies and the talent that
             will define their next chapter — with rigour, honesty, and genuine partnership.
           </p>
-          <p className="text-white/35 text-base leading-relaxed max-w-3xl mx-auto mt-5">
+          <p className="text-white/60 text-base leading-relaxed max-w-3xl mx-auto mt-5">
             We work exclusively across engineering, product, go-to-market, and professional services talent within
             the technology sector. This focus isn't a limitation — it's our edge.
           </p>
@@ -236,7 +236,7 @@ export default function AboutPage() {
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-5">
               <span className="w-8 h-px bg-white/20" />
-              <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+              <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
                 Our Values
               </span>
               <span className="w-8 h-px bg-white/20" />
@@ -263,7 +263,7 @@ export default function AboutPage() {
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-5">
               <span className="w-8 h-px bg-white/20" />
-              <span className="text-white/35 text-xs font-medium tracking-[0.3em] uppercase">
+              <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
                 Our Approach
               </span>
               <span className="w-8 h-px bg-white/20" />
