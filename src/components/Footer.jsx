@@ -51,7 +51,7 @@ export default function Footer() {
     <footer className="bg-[#050505]">
 
       {/* CTA Banner */}
-      <div className="border-t border-white/[0.06] border-b border-white/[0.06]">
+      {/* <div className="border-t border-white/[0.06] border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="text-white/35 text-xs font-semibold tracking-[0.22em] uppercase mb-2">
@@ -70,7 +70,7 @@ export default function Footer() {
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
