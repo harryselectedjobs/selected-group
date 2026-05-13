@@ -26,6 +26,7 @@ import EngineeringPage from "./pages/EngineeringPage";
 import ProductManagementPage from "./pages/ProductManagementPage";
 import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
 import ContactPage from "./pages/ContactPage";
+import GTMPage from "./pages/GTMPage";
 
 function Home() {
   return (
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/product-management" element={<ProductManagementPage />} />
           <Route path="/professional-services" element={<ProfessionalServicesPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/gtm" element={<GTMPage />} />
           <Route path="/crm" element={<CRM />} />
           <Route path="/sequences" element={<SequenceList />} />
           <Route path="/sequences/:id" element={<SequenceDetail />} />

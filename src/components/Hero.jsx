@@ -16,6 +16,7 @@ const slides = [
     orb1: 'rgba(13,42,94,0.9)',
     orb2: 'rgba(10,31,74,0.7)',
     base: '#02080f',
+    route: '/gtm',
     stats: [
       { value: '1,000+', label: 'Placements' },
       { value: 'US & EU', label: 'Markets' },
@@ -34,6 +35,7 @@ const slides = [
     orb1: 'rgba(45,27,105,0.9)',
     orb2: 'rgba(30,15,74,0.7)',
     base: '#080412',
+    route: '/product-management',
     stats: [
       { value: 'CPO', label: 'Executive Level' },
       { value: 'Full Stack', label: 'Product Teams' },
@@ -52,6 +54,7 @@ const slides = [
     orb1: 'rgba(13,58,31,0.9)',
     orb2: 'rgba(10,45,24,0.7)',
     base: '#010d06',
+    route: '/engineering',
     stats: [
       { value: 'CTO', label: 'Executive Level' },
       { value: 'Full Stack', label: 'Engineering' },
@@ -70,6 +73,7 @@ const slides = [
     orb1: 'rgba(74,32,0,0.9)',
     orb2: 'rgba(58,24,0,0.7)',
     base: '#100601',
+    route: '/professional-services',
     stats: [
       { value: 'CSO', label: 'Executive Level' },
       { value: 'Global', label: 'Delivery' },
@@ -245,7 +249,7 @@ export default function Hero() {
               >
                 <button
                   onClick={() =>
-                    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+                    slide.route ? navigate(slide.route) : document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
                   }
                   className="group flex items-center gap-3 px-8 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:opacity-90"
                   style={{ backgroundColor: slide.accent, color: '#000' }}

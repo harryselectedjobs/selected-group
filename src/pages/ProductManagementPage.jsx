@@ -308,7 +308,7 @@ export default function ProductManagementPage() {
             </button>
             <button
               onClick={() => {
-                navigate('/');
+                navigate('/contact');
                 setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300);
               }}
               className="flex items-center gap-2 border border-white/20 text-white px-8 py-4 text-sm font-medium tracking-widest uppercase transition-all duration-300 hover:border-white/50 hover:bg-white/5"

@@ -9,8 +9,8 @@ const practices = [
     title: 'GTM Talent Recruitment',
     description:
       'Place the revenue leaders who drive growth. From CROs to enterprise AEs, we find go-to-market talent that closes and scales.',
-    link: 'Learn more',
-    route: null,
+    link: 'Find GTM Talent',
+    route: '/gtm',
   },
   {
     icon: Code2,
@@ -18,7 +18,7 @@ const practices = [
     title: 'Engineering Recruitment',
     description:
       'Build the teams that build your product. From frontend to infrastructure, we find engineers who ship.',
-    link: 'Learn more',
+    link: 'Explore Engineering Roles',
     route: '/engineering',
   },
   {
@@ -27,7 +27,7 @@ const practices = [
     title: 'Professional Services Recruitment',
     description:
       'Deliver, implement and scale technology. Implementation experts who drive transformation.',
-    link: 'Learn more',
+    link: 'Explore Professional Services',
     route: '/professional-services',
   },
   {
@@ -36,7 +36,7 @@ const practices = [
     title: 'Product Management Recruitment',
     description:
       'Define, prioritise and drive product success. Product leaders who balance vision with execution.',
-    link: 'Learn more',
+    link: 'Explore Product Roles',
     route: '/product-management',
   },
 ];

@@ -20,7 +20,7 @@ const modules = [
       'Sales Engineers',
     ],
     markets: 'US & European Markets',
-    route: null,
+    route: '/gtm',
   },
   {
     icon: Layers,
