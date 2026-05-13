@@ -116,7 +116,7 @@ export default function UseCases() {
             <span className="w-8 h-px bg-white/20" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+          <h2 className="text-[3.25rem] font-bold text-white tracking-tight mb-4">
             Proven Success Across Scenarios
           </h2>
 

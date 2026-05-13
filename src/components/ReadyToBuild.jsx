@@ -50,7 +50,7 @@ export default function ReadyToBuild() {
 
         {/* Content */}
         <div ref={ref} className="relative z-10 text-center max-w-2xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+          <h2 className="text-[3.25rem] font-bold text-white tracking-tight mb-4">
             Ready to Build Your Team?
           </h2>
 

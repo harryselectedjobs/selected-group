@@ -175,6 +175,8 @@ export default function Hero() {
           {/* Vignette edges */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent pointer-events-none" />
+          {/* Top mask — prevents hero text from showing through navbar */}
+          <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/70 to-transparent pointer-events-none z-20" />
 
           {/* Content — justify-start + fixed pt so h1 always sits at the same Y */}
           <div className="relative z-10 h-full flex flex-col justify-start">
@@ -208,7 +210,7 @@ export default function Hero() {
                 variants={contentVariants}
                 initial="hidden"
                 animate="visible"
-                className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white leading-[1.06] tracking-tight mb-6 max-w-5xl"
+                className="text-[2.75rem] md:text-[3.25rem] font-bold text-white leading-[1.06] tracking-tight mb-6 max-w-5xl"
               >
                 {slide.title[0]}
                 <br />

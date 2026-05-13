@@ -131,7 +131,7 @@ export default function EngagementModels() {
             <span className="w-8 h-px bg-white/20" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+          <h2 className="text-[3.25rem] font-bold text-white tracking-tight mb-4">
             Flexible Engagement Models
           </h2>
 
@@ -165,7 +165,7 @@ export default function EngagementModels() {
             }}
             className="group flex items-center gap-3 bg-white text-black px-10 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:bg-white/90"
           >
-            Compare All Models
+            Compare Engagement Models
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>

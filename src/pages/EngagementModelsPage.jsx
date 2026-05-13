@@ -227,7 +227,7 @@ export default function EngagementModelsPage() {
               How We Work
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4 max-w-3xl leading-tight">
+          <h1 className="text-[3.25rem] font-bold text-white tracking-tight mb-4 max-w-3xl leading-tight">
             Engagement{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
               Models

@@ -22,6 +22,10 @@ import CRM from "./pages/CRM";
 import UseCasesPage from "./pages/UseCasesPage";
 import AboutPage from "./pages/AboutPage";
 import EngagementModelsPage from "./pages/EngagementModelsPage";
+import EngineeringPage from "./pages/EngineeringPage";
+import ProductManagementPage from "./pages/ProductManagementPage";
+import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
+import ContactPage from "./pages/ContactPage";
 
 function Home() {
   return (
@@ -35,7 +39,6 @@ function Home() {
       <ReadyToBuild />
       <WhyChooseUs />
       <Contact />
-      <SequenceList />
     </main>
   );
 }
@@ -51,6 +54,10 @@ export default function App() {
           <Route path="/use-cases" element={<UseCasesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/engagement-models" element={<EngagementModelsPage />} />
+          <Route path="/engineering" element={<EngineeringPage />} />
+          <Route path="/product-management" element={<ProductManagementPage />} />
+          <Route path="/professional-services" element={<ProfessionalServicesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/crm" element={<CRM />} />
           <Route path="/sequences" element={<SequenceList />} />
           <Route path="/sequences/:id" element={<SequenceDetail />} />

@@ -2,9 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { Send, Mail, MapPin, Phone } from 'lucide-react';
 
 const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'hello@selectedgroup.com' },
-  { icon: Phone, label: 'Phone', value: '+1 (800) 000-0000' },
-  { icon: MapPin, label: 'Global Offices', value: 'New York • London • Dubai' },
+  { icon: Mail,  label: 'Email',   value: 'harry@selected.jobs',          href: 'mailto:harry@selected.jobs' },
+  { icon: Phone, label: 'Phone',   value: '0203 005 2908',                href: 'tel:02030052908' },
+  { icon: MapPin,label: 'Office',  value: '3 Manor Royal, Crawley RH10 9LU', href: null },
 ];
 
 export default function Contact() {
@@ -60,7 +60,7 @@ export default function Contact() {
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight mb-4">
+            <h2 className="text-[3.25rem] font-bold text-white leading-tight tracking-tight mb-4">
               Let’s Build Your <br />
               <span className="text-[#A0A0A0]">GTM Team</span>
             </h2>
@@ -76,7 +76,7 @@ export default function Contact() {
             {/* Contact Info */}
             <div>
               <div className="flex flex-col gap-8 mb-12">
-                {contactInfo.map(({ icon: Icon, label, value }) => (
+                {contactInfo.map(({ icon: Icon, label, value, href }) => (
                   <div key={label} className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-white/5 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Icon size={16} className="text-white/50" />
@@ -85,9 +85,13 @@ export default function Contact() {
                       <div className="text-[#A0A0A0] text-xs tracking-widest uppercase mb-1">
                         {label}
                       </div>
-                      <div className="text-white text-sm font-medium">
-                        {value}
-                      </div>
+                      {href ? (
+                        <a href={href} className="text-white text-sm font-medium hover:text-white/70 transition-colors">
+                          {value}
+                        </a>
+                      ) : (
+                        <div className="text-white text-sm font-medium">{value}</div>
+                      )}
                     </div>
                   </div>
                 ))}

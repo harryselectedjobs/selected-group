@@ -127,7 +127,7 @@ export default function Testimonials() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight max-w-2xl">
+          <h2 className="text-[3.25rem] font-bold text-white leading-tight tracking-tight max-w-2xl">
             Don't take our word for it —{' '}
             <span className="text-white/50">hear from our customers</span>
           </h2>

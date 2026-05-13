@@ -113,7 +113,7 @@ export default function WhyChooseUs() {
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight mb-6">
+            <h2 className="text-[3.25rem] font-bold text-white leading-tight tracking-tight mb-6">
               Why Top SaaS Companies
               <br />
               <span className="text-[#A0A0A0]">Choose Us</span>

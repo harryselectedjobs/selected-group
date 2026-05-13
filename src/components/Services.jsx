@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Users, Layers, Code2, Briefcase } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const modules = [
   {
@@ -19,6 +20,7 @@ const modules = [
       'Sales Engineers',
     ],
     markets: 'US & European Markets',
+    route: null,
   },
   {
     icon: Layers,
@@ -37,6 +39,7 @@ const modules = [
       'Growth & Data Product Managers',
     ],
     markets: 'SaaS, AI & Enterprise Software',
+    route: '/product-management',
   },
   {
     icon: Code2,
@@ -55,6 +58,7 @@ const modules = [
       'Security & QA Engineers',
     ],
     markets: 'Startups, Scale-ups & Enterprise',
+    route: '/engineering',
   },
   {
     icon: Briefcase,
@@ -73,6 +77,7 @@ const modules = [
       'Business Analysts & PMO Leads',
     ],
     markets: 'Global Consultancies & SaaS Vendors',
+    route: '/professional-services',
   },
 ];
 
@@ -107,6 +112,7 @@ function useScrollReveal(delay = 0) {
 }
 
 function ModuleCard({ mod, delay }) {
+  const navigate = useNavigate();
   const ref = useScrollReveal(delay);
   const [expanded, setExpanded] = useState(false);
   const Icon = mod.icon;
@@ -203,11 +209,15 @@ function ModuleCard({ mod, delay }) {
         {/* CTA */}
         <button
           onClick={() =>
-            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+            mod.route
+              ? navigate(mod.route)
+              : document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
           }
           className="group/btn flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300"
         >
-          <span className="text-xs tracking-widest uppercase font-medium">Get in Touch</span>
+          <span className="text-xs tracking-widest uppercase font-medium">
+            {mod.route ? 'Explore Practice' : 'Get in Touch'}
+          </span>
           <span
             className="w-6 h-px transition-all duration-300 group-hover/btn:w-10"
             style={{ backgroundColor: mod.accent }}
@@ -257,7 +267,7 @@ export default function Services() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight mb-4">
+          <h2 className="text-[3.25rem] font-bold text-white leading-tight tracking-tight mb-4">
             Four Specialist
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">

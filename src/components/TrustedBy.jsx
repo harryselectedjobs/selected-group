@@ -51,8 +51,10 @@ export default function TrustedBy() {
         <div
           ref={trackRef}
           className="flex items-center"
-          style={{ animation: 'marquee 24s linear infinite', width: 'max-content' }}
+          style={{ animation: 'marquee 32s linear infinite', width: 'max-content', willChange: 'transform' }}
         >
+          <LogoStrip />
+          <LogoStrip />
           <LogoStrip />
           <LogoStrip />
         </div>
@@ -61,7 +63,7 @@ export default function TrustedBy() {
       <style>{`
         @keyframes marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-25%); }
         }
       `}</style>
     </section>

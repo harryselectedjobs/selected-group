@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo2.png";
 
@@ -9,7 +9,13 @@ const navLinks = [
   { label: "About",     href: null,       route: "/about" },
   { label: "Use Cases",          href: null, route: "/use-cases" },
   { label: "Engagement Models", href: null, route: "/engagement-models" },
-  { label: "Contact",   href: "#contact", route: null },
+  { label: "Contact",   href: null,       route: "/contact" },
+];
+
+const practiceLinks = [
+  { label: "Engineering & Technology", route: "/engineering",           accent: "#34D399" },
+  { label: "Product Management",       route: "/product-management",    accent: "#A78BFA" },
+  { label: "Professional Services",    route: "/professional-services", accent: "#FBBF24" },
 ];
 
 export default function Navbar() {
@@ -31,6 +37,7 @@ export default function Navbar() {
     if (location.pathname === "/use-cases") setActive("Use Cases");
     else if (location.pathname === "/about") setActive("About");
     else if (location.pathname === "/engagement-models") setActive("Engagement Models");
+    else if (location.pathname === "/contact") setActive("Contact");
     else if (location.pathname === "/") setActive("Home");
   }, [location.pathname]);
 
@@ -62,8 +69,8 @@ export default function Navbar() {
         transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-black/80 backdrop-blur-xl border-b border-white/10"
-            : "bg-transparent"
+            ? "bg-black/90 backdrop-blur-xl border-b border-white/10"
+            : "bg-black/40 backdrop-blur-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">

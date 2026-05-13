@@ -62,7 +62,7 @@ function StepCard({ icon: Icon, accent, title, description, delay }) {
   return (
     <div
       ref={ref}
-      className="group flex flex-col items-center text-center px-4"
+      className="group flex flex-col items-center text-center px-4 relative z-[1]"
     >
       {/* Icon box */}
       <div
@@ -123,7 +123,7 @@ export default function HowWeWork() {
             <span className="w-8 h-px bg-white/20" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+          <h2 className="text-[3.25rem] font-bold text-white tracking-tight mb-4">
             How We Work
           </h2>
 
@@ -136,24 +136,11 @@ export default function HowWeWork() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-4 relative">
 
           {/* Horizontal connector line (desktop only) */}
-          <div className="absolute top-8 left-[12.5%] right-[12.5%] h-px bg-white/[0.06] hidden lg:block pointer-events-none" />
+          <div className="absolute top-8 left-[12.5%] right-[12.5%] h-px bg-white/[0.06] hidden lg:block pointer-events-none z-0" />
 
           {steps.map((step, i) => (
             <StepCard key={step.title} {...step} delay={i * 100} />
           ))}
-        </div>
-
-        {/* Bottom divider / CTA strip */}
-        <div className="mt-20 pt-12 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-white/40 text-sm max-w-md text-center sm:text-left">
-            Across GTM Talent, Product Management, Engineering & Technology, and Professional Services — one consistent standard of delivery.
-          </p>
-          <button
-            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="flex-shrink-0 px-8 py-3.5 bg-white text-black text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:bg-white/90"
-          >
-            Start a Search
-          </button>
         </div>
 
       </div>

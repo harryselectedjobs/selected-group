@@ -263,7 +263,7 @@ export default function UseCasesPage() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4 max-w-2xl leading-tight">
+          <h1 className="text-[3.25rem] font-bold text-white tracking-tight mb-4 max-w-2xl leading-tight">
             Use Cases &amp;{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
               Success Stories
@@ -319,7 +319,7 @@ export default function UseCasesPage() {
               <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
             </button>
             <button
-              onClick={() => { navigate('/'); setTimeout(() => document.querySelector('#engagement-models')?.scrollIntoView({ behavior: 'smooth' }), 300); }}
+              onClick={() => { navigate('/engagement-models#quick-comparison'); setTimeout(() => document.querySelector('#engagement-models')?.scrollIntoView({ behavior: 'smooth' }), 300); }}
               className="flex items-center justify-center px-8 py-4 text-sm font-medium tracking-widest uppercase border border-white/20 text-white/70 hover:border-white/50 hover:text-white transition-all duration-300 w-full sm:w-auto"
             >
               Compare Engagement Models

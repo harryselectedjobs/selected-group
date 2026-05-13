@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ArrowRight, Code2, Briefcase, Layers, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const practices = [
   {
@@ -9,6 +10,7 @@ const practices = [
     description:
       'Place the revenue leaders who drive growth. From CROs to enterprise AEs, we find go-to-market talent that closes and scales.',
     link: 'Learn more',
+    route: null,
   },
   {
     icon: Code2,
@@ -17,6 +19,7 @@ const practices = [
     description:
       'Build the teams that build your product. From frontend to infrastructure, we find engineers who ship.',
     link: 'Learn more',
+    route: '/engineering',
   },
   {
     icon: Briefcase,
@@ -25,6 +28,7 @@ const practices = [
     description:
       'Deliver, implement and scale technology. Implementation experts who drive transformation.',
     link: 'Learn more',
+    route: '/professional-services',
   },
   {
     icon: Layers,
@@ -33,10 +37,12 @@ const practices = [
     description:
       'Define, prioritise and drive product success. Product leaders who balance vision with execution.',
     link: 'Learn more',
+    route: '/product-management',
   },
 ];
 
-function PracticeCard({ icon: Icon, accent, title, description, link, delay }) {
+function PracticeCard({ icon: Icon, accent, title, description, link, route, delay }) {
+  const navigate = useNavigate();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -90,7 +96,7 @@ function PracticeCard({ icon: Icon, accent, title, description, link, delay }) {
 
       {/* Learn more */}
       <button
-        onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+        onClick={() => route ? navigate(route) : document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
         className="flex items-center gap-1.5 text-sm font-semibold transition-colors duration-200 mt-1"
         style={{ color: accent }}
       >
@@ -140,7 +146,7 @@ export default function PracticeAreas() {
             <span className="w-8 h-px bg-white/20" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+          <h2 className="text-[3.25rem] font-bold text-white tracking-tight mb-4">
             Our Specialist Practice Areas
           </h2>
 
