@@ -1,21 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo2.png";
 
 const navLinks = [
-  { label: "Home",      href: "#home",    route: null },
-  { label: "About",     href: null,       route: "/about" },
-  { label: "Use Cases",          href: null, route: "/use-cases" },
+  { label: "Home", href: "#home", route: null },
+  { label: "About", href: null, route: "/about" },
+  { label: "Case Studies", href: null, route: "/case-studies" },
   { label: "Engagement Models", href: null, route: "/engagement-models" },
-  { label: "Contact",   href: null,       route: "/contact" },
-];
-
-const practiceLinks = [
-  { label: "Engineering & Technology", route: "/engineering",           accent: "#34D399" },
-  { label: "Product Management",       route: "/product-management",    accent: "#A78BFA" },
-  { label: "Professional Services",    route: "/professional-services", accent: "#FBBF24" },
+  { label: "Contact", href: null, route: "/contact" },
 ];
 
 export default function Navbar() {
@@ -28,36 +22,48 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+
     window.addEventListener("scroll", onScroll);
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Sync active state with current route
+  // Sync active state with route
   useEffect(() => {
-    if (location.pathname === "/use-cases") setActive("Use Cases");
-    else if (location.pathname === "/about") setActive("About");
-    else if (location.pathname === "/engagement-models") setActive("Engagement Models");
-    else if (location.pathname === "/contact") setActive("Contact");
-    else if (location.pathname === "/") setActive("Home");
+    if (location.pathname === "/case-studies") {
+      setActive("Case Studies");
+    } else if (location.pathname === "/about") {
+      setActive("About");
+    } else if (location.pathname === "/engagement-models") {
+      setActive("Engagement Models");
+    } else if (location.pathname === "/contact") {
+      setActive("Contact");
+    } else if (location.pathname === "/crm") {
+      setActive("CRM");
+    } else if (location.pathname === "/") {
+      setActive("Home");
+    }
   }, [location.pathname]);
 
   const handleNav = (label, href, route) => {
     setActive(label);
     setMenuOpen(false);
 
-    // Route-based navigation (e.g. Use Cases page)
+    // Route Navigation
     if (route) {
       navigate(route);
       return;
     }
 
-    // Scroll-based navigation
+    // Scroll Navigation
     if (location.pathname !== "/") {
       window.location.href = "/" + href;
       return;
     }
 
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -74,7 +80,6 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">
-
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img
@@ -86,8 +91,6 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-10">
-
-            {/* Landing links */}
             {navLinks.map(({ label, href, route }) => (
               <li key={label}>
                 <button
@@ -103,23 +106,23 @@ export default function Navbar() {
               </li>
             ))}
 
+            {/* CRM */}
             <li>
-  <Link
-    to="/crm"
-    onClick={() => {
-      if (window.location.pathname === "/crm") {
-        window.location.reload();
-      }
-    }}
-    className="text-sm tracking-widest uppercase text-gray-400 hover:text-white transition"
-  >
-    CRM
-  </Link>
-</li>
-
+              <Link
+                to="/crm"
+                onClick={() => setActive("CRM")}
+                className={`text-sm tracking-widest uppercase transition ${
+                  active === "CRM"
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                CRM
+              </Link>
+            </li>
           </ul>
 
-          {/* Mobile Button */}
+          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -139,7 +142,6 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-10"
           >
-
             {navLinks.map(({ label, href, route }, i) => (
               <motion.button
                 key={label}
@@ -153,15 +155,17 @@ export default function Navbar() {
               </motion.button>
             ))}
 
-            {/* 🔥 CRM mobile */}
+            {/* CRM Mobile */}
             <Link
               to="/crm"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setActive("CRM");
+                setMenuOpen(false);
+              }}
               className="text-3xl text-white"
             >
               CRM
             </Link>
-
           </motion.div>
         )}
       </AnimatePresence>

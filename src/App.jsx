@@ -27,6 +27,8 @@ import ProductManagementPage from "./pages/ProductManagementPage";
 import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
 import ContactPage from "./pages/ContactPage";
 import GTMPage from "./pages/GTMPage";
+import ResearchPage from "./pages/ResearchPage";
+import CaseStudiesLanding from "./pages/CaseStudies/CaseStudiesLanding";
 
 function Home() {
   return (
@@ -63,7 +65,13 @@ export default function App() {
           <Route path="/crm" element={<CRM />} />
           <Route path="/sequences" element={<SequenceList />} />
           <Route path="/sequences/:id" element={<SequenceDetail />} />
+          <Route path="/case-studies" element={<CaseStudiesLanding />} />
           <Route path="/sequences/create" element={<CreateSequence />} />
+          
+          <Route
+          path="/research"
+          element={<ResearchPage />}
+        />
         </Routes>
 
         <Footer />
