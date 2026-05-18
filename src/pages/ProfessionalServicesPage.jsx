@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Crown, Briefcase, Users, Wrench, CheckCircle2, FileText, Headphones, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import VideoPageHero from '../components/VideoPageHero';
 
 const stats = [
   { value: 'CSO', label: 'Executive Level Hiring' },
@@ -258,74 +259,23 @@ export default function ProfessionalServicesPage() {
   return (
     <div className="bg-black min-h-screen">
 
-      {/* Hero banner */}
-      <div className="pt-32 pb-16 px-6 relative overflow-hidden bg-black">
-        <div
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none"
-          style={{ backgroundColor: 'rgba(74,32,0,0.8)' }}
-        />
-        <div
-          className="absolute bottom-0 -left-20 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none"
-          style={{ backgroundColor: 'rgba(58,24,0,0.5)' }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
-            backgroundSize: '80px 80px',
-          }}
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="w-8 h-px" style={{ backgroundColor: '#FBBF24' }} />
-            <span className="text-xs font-semibold tracking-[0.3em] uppercase" style={{ color: '#FBBF24' }}>
-              Specialist Practice
-            </span>
-          </div>
-
-          <h1 className="text-[3.25rem] font-bold text-white tracking-tight mb-4 max-w-3xl leading-tight">
-            Professional{' '}
-            <span
-              className="text-transparent bg-clip-text"
-              style={{ backgroundImage: 'linear-gradient(120deg, #ffffff 30%, #FBBF24)' }}
-            >
-              Services
-            </span>
-          </h1>
-
-          <p className="text-white/50 text-base md:text-lg max-w-2xl leading-relaxed mb-8">
-            A specialist professional services recruitment business focused on the individuals who ensure technology
-            delivers real-world value — from pre-sales solution design through to implementation, transformation and
-            long-term customer success.
-          </p>
-
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={() => {
-                navigate('/');
-                setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300);
-              }}
-              className="group flex items-center gap-3 px-8 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:opacity-90"
-              style={{ backgroundColor: '#FBBF24', color: '#000' }}
-            >
-              Hire Services Talent
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
-            <button
-              onClick={() => {
-                navigate('/contact');
-                setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300);
-              }}
-              className="flex items-center gap-2 border border-white/20 text-white px-8 py-4 text-sm font-medium tracking-widest uppercase transition-all duration-300 hover:border-white/50 hover:bg-white/5"
-            >
-              Submit a Brief
-            </button>
-          </div>
-        </div>
-      </div>
+      <VideoPageHero
+        videoId="AHJVDFop9sU"
+        eyebrow="Specialist Practice"
+        title="Professional"
+        titleAccent="Services"
+        description="A specialist professional services recruitment business focused on the individuals who ensure technology delivers real-world value — from pre-sales solution design through to implementation, transformation and long-term customer success."
+        stats={[
+          { value: 'CSO', label: 'Executive Level Hiring' },
+          { value: 'Global', label: 'Delivery Capability' },
+          { value: 'ERP & SaaS', label: 'Specialisms' },
+          { value: 'End-to-End', label: 'Services Lifecycle' },
+        ]}
+        actions={[
+          { label: 'Hire Services Talent', primary: true, onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
+          { label: 'Submit a Brief', onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
+        ]}
+      />
 
       {/* Overview */}
       <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 text-center">
@@ -353,14 +303,13 @@ export default function ProfessionalServicesPage() {
       {/* Stats banner */}
       <div
         ref={statsRef}
-        className="border-t border-white/[0.05] py-14 md:py-18 px-6"
-        style={{ background: 'linear-gradient(135deg, #1a0d00 0%, #0d1a3a 50%, #1a0d00 100%)' }}
+        className="border-t border-b border-white/[0.05] py-14 md:py-18 px-6 bg-[#050505]"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {stats.map((s) => (
               <div key={s.label}>
-                <div className="text-3xl md:text-4xl font-bold mb-2 tracking-tight" style={{ color: '#FBBF24' }}>
+                <div className="text-3xl md:text-4xl font-bold mb-2 tracking-tight text-white">
                   {s.value}
                 </div>
                 <div className="text-white/45 text-sm font-medium tracking-wide">{s.label}</div>
@@ -460,12 +409,8 @@ export default function ProfessionalServicesPage() {
       </div>
 
       {/* CTA */}
-      <div className="border-t border-white/[0.05] py-20 px-6 text-center relative overflow-hidden">
-        <div
-          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none opacity-20"
-          style={{ backgroundColor: 'rgba(74,32,0,0.9)' }}
-        />
-        <div className="max-w-xl mx-auto relative z-10">
+      <div className="border-t border-white/[0.05] py-20 px-6 text-center">
+        <div className="max-w-xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
             Build Your Services Capability
           </h2>

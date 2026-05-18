@@ -27,8 +27,15 @@ import ProductManagementPage from "./pages/ProductManagementPage";
 import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
 import ContactPage from "./pages/ContactPage";
 import GTMPage from "./pages/GTMPage";
+<<<<<<< HEAD
 import ResearchPage from "./pages/ResearchPage";
 import CaseStudiesLanding from "./pages/CaseStudies/CaseStudiesLanding";
+=======
+import GTMCasesPage from "./pages/GTMCasesPage";
+import ProductCasesPage from "./pages/ProductCasesPage";
+import EngineeringCasesPage from "./pages/EngineeringCasesPage";
+import ProfessionalServicesCasesPage from "./pages/ProfessionalServicesCasesPage";
+>>>>>>> 9e95f8d0e37db94204ac2a78ec161f67862e2a21
 
 function Home() {
   return (
@@ -55,6 +62,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/use-cases" element={<UseCasesPage />} />
+          <Route path="/use-cases/gtm" element={<GTMCasesPage />} />
+          <Route path="/use-cases/product-management" element={<ProductCasesPage />} />
+          <Route path="/use-cases/engineering" element={<EngineeringCasesPage />} />
+          <Route path="/use-cases/professional-services" element={<ProfessionalServicesCasesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/engagement-models" element={<EngagementModelsPage />} />
           <Route path="/engineering" element={<EngineeringPage />} />
