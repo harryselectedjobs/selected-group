@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Building2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const caseStudies = [
@@ -122,6 +123,28 @@ const caseStudies = [
     imageUrl:
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
   },
+  {
+    company: "Celonis",
+    headline: "Enterprise Value & Commercial Talent Across EMEA",
+    narrative:
+      "As the global leader in Process Mining and Execution Management, Celonis partnered with Selected Group to attract high-calibre commercial and consulting talent capable of combining technical credibility with commercial acumen. Selected supported hiring across Value Engineering, Enterprise Sales, and strategic GTM leadership — delivering 12 hires across multiple functions and regions while providing market intelligence and compensation benchmarking throughout.",
+    metrics: [
+      "12 hires",
+      "EMEA expansion",
+      "Enterprise SaaS",
+      "GTM leadership",
+    ],
+    roles: [
+      "Value Partner",
+      "Senior Value Engineer",
+      "Enterprise Account Executive",
+      "Strategic Sales",
+      "GTM Leadership",
+      "Enterprise Transformation",
+    ],
+    imageUrl:
+      "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&q=80",
+  },
 ];
 
 export default function FeaturedCaseStudies() {
@@ -215,18 +238,22 @@ export default function FeaturedCaseStudies() {
                   </div>
                 </div>
 
-                <button
-  onClick={() => {
-    if (study.company === "Palantir") {
-      navigate("/case-studies/palantir");
-    }
-  }}
-  className="group flex items-center gap-2 text-[#C8A96B] hover:text-[#D4B77C] transition-colors font-medium"
->
-  View Full Case Study
+                {study.company === "Celonis" ? (
+  <Link
+    to="/case-studies/celonis"
+    className="group flex items-center gap-2 text-[#C8A96B] hover:text-[#D4B77C] transition-colors font-medium"
+  >
+    View Full Case Study
 
-  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-</button>
+    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+  </Link>
+) : (
+  <button className="group flex items-center gap-2 text-[#C8A96B] hover:text-[#D4B77C] transition-colors font-medium">
+    View Full Case Study
+
+    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+  </button>
+)}
               </div>
             </motion.div>
           ))}
