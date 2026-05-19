@@ -10,7 +10,6 @@ import PracticeAreas from "./components/PracticeAreas";
 import HowWeWork from "./components/HowWeWork";
 import Testimonials from "./components/Testimonials";
 import EngagementModels from "./components/EngagementModels";
-// import ReadyToBuild from "./components/ReadyToBuild";
 import WhyChooseUs from "./components/WhyChooseUs";
 import Contact from "./components/Contact";
 
@@ -47,7 +46,6 @@ function Home() {
       <HowWeWork />
       <Testimonials />
       <EngagementModels />
-      <ReadyToBuild />
       <WhyChooseUs />
       <Contact />
     </main>

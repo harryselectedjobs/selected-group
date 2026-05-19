@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Send, Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle } from 'lucide-react';
+import {
+  Send,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  ArrowRight,
+  CheckCircle,
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+const API_BASE = 'http://13.61.16.106:1802';
 
 const contactDetails = [
   {
@@ -53,18 +63,73 @@ const practiceOptions = [
 
 export default function ContactPage() {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
-    name: '', email: '', company: '', phone: '', practice: '', message: '',
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    practice: '',
+    message: '',
   });
+
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const handleSubmit = (e) => {
+  // =========================
+  // SUBMIT API INTEGRATION
+  // =========================
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSubmitted(true); }, 1200);
+    setError('');
+
+    try {
+      const response = await fetch(`${API_BASE}/contact-us/add`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          full_name: form.name,
+          company_name: form.company,
+          work_email: form.email,
+          phone_number: form.phone,
+          practice_area: form.practice,
+          hiring_brief: form.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.message || 'Failed to submit form');
+      }
+
+      setSubmitted(true);
+
+      // reset form
+      setForm({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        practice: '',
+        message: '',
+      });
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,10 +141,12 @@ export default function ContactPage() {
           className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full blur-[160px] pointer-events-none opacity-40"
           style={{ backgroundColor: 'rgba(79,156,249,0.3)' }}
         />
+
         <div
           className="absolute bottom-0 -left-20 w-[500px] h-[500px] rounded-full blur-[130px] pointer-events-none opacity-30"
           style={{ backgroundColor: 'rgba(167,139,250,0.3)' }}
         />
+
         <div
           className="absolute inset-0 opacity-[0.025] pointer-events-none"
           style={{
@@ -88,24 +155,29 @@ export default function ContactPage() {
             backgroundSize: '80px 80px',
           }}
         />
+
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex items-center gap-3 mb-6">
             <span className="w-8 h-px bg-white/30" />
+
             <span className="text-white/40 text-xs font-semibold tracking-[0.3em] uppercase">
               Get In Touch
             </span>
           </div>
+
           <h1 className="text-[3.25rem] font-bold text-white tracking-tight mb-5 max-w-2xl leading-tight">
             Let's Find Your{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
               Next Hire
             </span>
           </h1>
+
           <p className="text-white/50 text-base md:text-lg max-w-xl leading-relaxed">
-            Specialist recruitment across GTM, Engineering, Product Management and Professional Services.
-            All conversations are strictly confidential.
+            Specialist recruitment across GTM, Engineering, Product
+            Management and Professional Services. All conversations are
+            strictly confidential.
           </p>
         </div>
       </div>
@@ -113,117 +185,170 @@ export default function ContactPage() {
       {/* Contact detail cards */}
       <div className="max-w-7xl mx-auto px-6 pb-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {contactDetails.map(({ icon: Icon, label, value, sub, href, accent }) => (
-            <div
-              key={label}
-              className="group bg-[#0d0d0d] border border-white/[0.07] p-6 hover:border-white/20 transition-all duration-300 hover:-translate-y-0.5"
-            >
+          {contactDetails.map(
+            ({ icon: Icon, label, value, sub, href, accent }) => (
               <div
-                className="w-10 h-10 flex items-center justify-center mb-4"
-                style={{ backgroundColor: `${accent}18` }}
+                key={label}
+                className="group bg-[#0d0d0d] border border-white/[0.07] p-6 hover:border-white/20 transition-all duration-300 hover:-translate-y-0.5"
               >
-                <Icon size={18} style={{ color: accent }} />
-              </div>
-              <p className="text-white/60 text-[10px] font-semibold tracking-[0.25em] uppercase mb-2">
-                {label}
-              </p>
-              {href ? (
-                <a
-                  href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel="noreferrer"
-                  className="text-white text-sm font-semibold hover:opacity-70 transition-opacity"
+                <div
+                  className="w-10 h-10 flex items-center justify-center mb-4"
+                  style={{ backgroundColor: `${accent}18` }}
                 >
-                  {value}
-                </a>
-              ) : (
-                <p className="text-white text-sm font-semibold">{value}</p>
-              )}
-              {sub && <p className="text-white/40 text-xs mt-0.5">{sub}</p>}
-            </div>
-          ))}
+                  <Icon size={18} style={{ color: accent }} />
+                </div>
+
+                <p className="text-white/60 text-[10px] font-semibold tracking-[0.25em] uppercase mb-2">
+                  {label}
+                </p>
+
+                {href ? (
+                  <a
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel="noreferrer"
+                    className="text-white text-sm font-semibold hover:opacity-70 transition-opacity"
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <p className="text-white text-sm font-semibold">
+                    {value}
+                  </p>
+                )}
+
+                {sub && (
+                  <p className="text-white/40 text-xs mt-0.5">
+                    {sub}
+                  </p>
+                )}
+              </div>
+            )
+          )}
         </div>
       </div>
 
-      {/* Main two-column layout */}
+      {/* Main Layout */}
       <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-5 gap-12 lg:gap-16">
 
-        {/* Left: info + next steps */}
+        {/* Left */}
         <div className="lg:col-span-2 flex flex-col gap-10">
 
-          {/* About */}
           <div>
             <h2 className="text-white text-xl font-bold tracking-tight mb-4">
               Working With Us
             </h2>
+
             <p className="text-white/45 text-sm leading-relaxed mb-4">
-              Selected Group is a specialist technology recruitment business operating across GTM, Engineering,
-              Product Management and Professional Services. We work with Series A to enterprise-level companies
-              across the US and European markets.
+              Selected Group is a specialist technology recruitment
+              business operating across GTM, Engineering, Product
+              Management and Professional Services.
             </p>
+
             <p className="text-white/60 text-sm leading-relaxed">
-              All hiring mandates are treated with the strictest confidentiality. We do not share candidate
-              details or client briefs without express permission.
+              All hiring mandates are treated with the strictest
+              confidentiality.
             </p>
           </div>
 
-          {/* What happens next */}
+          {/* Next Steps */}
           <div>
             <h3 className="text-white/60 text-[11px] font-bold tracking-[0.22em] uppercase mb-5">
               What Happens Next
             </h3>
+
             <div className="flex flex-col gap-4">
               {nextSteps.map(({ n, text }) => (
                 <div key={n} className="flex items-start gap-4">
-                  <span className="text-white/45 text-xs font-mono font-bold pt-0.5 flex-shrink-0">{n}</span>
+                  <span className="text-white/45 text-xs font-mono font-bold pt-0.5 flex-shrink-0">
+                    {n}
+                  </span>
+
                   <div className="flex-1 border-b border-white/[0.05] pb-4">
-                    <p className="text-white/65 text-sm leading-relaxed">{text}</p>
+                    <p className="text-white/65 text-sm leading-relaxed">
+                      {text}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Practice areas */}
+          {/* Practice Areas */}
           <div className="border border-white/[0.07] p-6">
             <h3 className="text-white/60 text-[11px] font-bold tracking-[0.22em] uppercase mb-4">
               Our Practice Areas
             </h3>
+
             <div className="flex flex-col gap-2">
               {[
-                { label: 'GTM Talent', route: '/', accent: '#4F9CF9' },
-                { label: 'Engineering & Technology', route: '/engineering', accent: '#34D399' },
-                { label: 'Product Management', route: '/product-management', accent: '#A78BFA' },
-                { label: 'Professional Services', route: '/professional-services', accent: '#FBBF24' },
+                {
+                  label: 'GTM Talent',
+                  route: '/',
+                  accent: '#4F9CF9',
+                },
+                {
+                  label: 'Engineering & Technology',
+                  route: '/engineering',
+                  accent: '#34D399',
+                },
+                {
+                  label: 'Product Management',
+                  route: '/product-management',
+                  accent: '#A78BFA',
+                },
+                {
+                  label: 'Professional Services',
+                  route: '/professional-services',
+                  accent: '#FBBF24',
+                },
               ].map((p) => (
                 <button
                   key={p.label}
                   onClick={() => navigate(p.route)}
                   className="flex items-center gap-2 text-white/50 text-sm hover:text-white transition-colors duration-200 text-left group py-1"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: p.accent }} />
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: p.accent }}
+                  />
+
                   {p.label}
-                  <ArrowRight size={12} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  <ArrowRight
+                    size={12}
+                    className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
                 </button>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Right: form */}
+        {/* Right Form */}
         <div className="lg:col-span-3">
           <div className="bg-[#0d0d0d] border border-white/[0.07] p-8 md:p-10">
+
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-16 text-center gap-5">
                 <div className="w-16 h-16 rounded-full bg-[#34D399]/10 flex items-center justify-center">
-                  <CheckCircle size={32} className="text-[#34D399]" />
+                  <CheckCircle
+                    size={32}
+                    className="text-[#34D399]"
+                  />
                 </div>
+
                 <div>
-                  <h3 className="text-white text-2xl font-bold mb-2">Message Received</h3>
+                  <h3 className="text-white text-2xl font-bold mb-2">
+                    Message Received
+                  </h3>
+
                   <p className="text-white/45 text-sm leading-relaxed max-w-sm">
-                    Thank you for reaching out. Harry and the team will review your brief and be in touch within 24 hours.
+                    Thank you for reaching out. Harry and the team will
+                    review your brief and be in touch within 24 hours.
                   </p>
                 </div>
+
                 <button
                   onClick={() => setSubmitted(false)}
                   className="mt-2 text-white/40 text-xs tracking-widest uppercase hover:text-white transition-colors"
@@ -237,86 +362,140 @@ export default function ContactPage() {
                   <h2 className="text-white text-2xl font-bold tracking-tight mb-1">
                     Send Us a Brief
                   </h2>
+
                   <p className="text-white/60 text-sm">
-                    Fill in the details below and we'll be in touch within 24 hours.
+                    Fill in the details below and we'll be in touch
+                    within 24 hours.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                {/* ERROR */}
+                {error && (
+                  <div className="mb-5 border border-red-500/20 bg-red-500/10 text-red-300 text-sm px-4 py-3">
+                    {error}
+                  </div>
+                )}
 
-                  {/* Row 1: Name + Company */}
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-5"
+                >
+                  {/* Name + Company */}
                   <div className="grid sm:grid-cols-2 gap-5">
+
                     <div>
                       <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Full Name *
                       </label>
+
                       <input
                         type="text"
                         required
                         value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            name: e.target.value,
+                          })
+                        }
                         placeholder="Your name"
                         className="w-full bg-[#141414] border border-white/[0.1] text-white placeholder-white/25 px-4 py-3.5 text-sm focus:outline-none focus:border-white/40 transition-colors duration-200"
                       />
                     </div>
+
                     <div>
                       <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Company *
                       </label>
+
                       <input
                         type="text"
                         required
                         value={form.company}
-                        onChange={(e) => setForm({ ...form, company: e.target.value })}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            company: e.target.value,
+                          })
+                        }
                         placeholder="Company name"
                         className="w-full bg-[#141414] border border-white/[0.1] text-white placeholder-white/25 px-4 py-3.5 text-sm focus:outline-none focus:border-white/40 transition-colors duration-200"
                       />
                     </div>
                   </div>
 
-                  {/* Row 2: Email + Phone */}
+                  {/* Email + Phone */}
                   <div className="grid sm:grid-cols-2 gap-5">
+
                     <div>
                       <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Work Email *
                       </label>
+
                       <input
                         type="email"
                         required
                         value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            email: e.target.value,
+                          })
+                        }
                         placeholder="name@company.com"
                         className="w-full bg-[#141414] border border-white/[0.1] text-white placeholder-white/25 px-4 py-3.5 text-sm focus:outline-none focus:border-white/40 transition-colors duration-200"
                       />
                     </div>
+
                     <div>
                       <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Phone Number
                       </label>
+
                       <input
                         type="tel"
                         value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            phone: e.target.value,
+                          })
+                        }
                         placeholder="+44 ..."
                         className="w-full bg-[#141414] border border-white/[0.1] text-white placeholder-white/25 px-4 py-3.5 text-sm focus:outline-none focus:border-white/40 transition-colors duration-200"
                       />
                     </div>
                   </div>
 
-                  {/* Practice area */}
+                  {/* Practice */}
                   <div>
                     <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                       Practice Area *
                     </label>
+
                     <select
                       required
                       value={form.practice}
-                      onChange={(e) => setForm({ ...form, practice: e.target.value })}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          practice: e.target.value,
+                        })
+                      }
                       className="w-full bg-[#141414] border border-white/[0.1] text-white px-4 py-3.5 text-sm focus:outline-none focus:border-white/40 transition-colors duration-200 appearance-none cursor-pointer"
                     >
-                      <option value="" disabled className="text-white/30">Select a practice area</option>
+                      <option value="" disabled>
+                        Select a practice area
+                      </option>
+
                       {practiceOptions.map((o) => (
-                        <option key={o} value={o} className="bg-[#141414]">{o}</option>
+                        <option
+                          key={o}
+                          value={o}
+                          className="bg-[#141414]"
+                        >
+                          {o}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -326,12 +505,18 @@ export default function ContactPage() {
                     <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                       Hiring Brief *
                     </label>
+
                     <textarea
                       rows={5}
                       required
                       value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      placeholder="Tell us about your hiring needs — role, seniority, location, timeline..."
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          message: e.target.value,
+                        })
+                      }
+                      placeholder="Tell us about your hiring needs..."
                       className="w-full bg-[#141414] border border-white/[0.1] text-white placeholder-white/25 px-4 py-3.5 text-sm resize-none focus:outline-none focus:border-white/40 transition-colors duration-200"
                     />
                   </div>
@@ -350,24 +535,25 @@ export default function ContactPage() {
                     ) : (
                       <>
                         Submit Brief
-                        <Send size={14} className="transition-transform group-hover:translate-x-1" />
+
+                        <Send
+                          size={14}
+                          className="transition-transform group-hover:translate-x-1"
+                        />
                       </>
                     )}
                   </button>
 
                   <p className="text-white/45 text-xs text-center leading-relaxed">
-                    By submitting this form you agree that your details may be used to contact you about our services.
-                    All information is kept strictly confidential.
+                    By submitting this form you agree that your details
+                    may be used to contact you about our services.
                   </p>
-
                 </form>
               </>
             )}
           </div>
         </div>
-
       </div>
-
     </div>
   );
 }
