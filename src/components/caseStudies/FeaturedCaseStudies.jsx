@@ -7,127 +7,150 @@ import { Link } from "react-router-dom";
 const caseStudies = [
   {
     company: "Palantir",
-    headline: "Scaling Forward Deployed Engineering Across US & Europe",
+    headline:
+      "Building a Go-To-Market Function for Private Sector Expansion",
     narrative:
-      "Selected Group partnered with Palantir to build specialist forward deployed engineering teams capable of operating across complex enterprise and government-facing environments. The mandate required candidates with deep technical expertise alongside exceptional client-facing communication skills.",
-    metrics: ["18 hires", "7 months", "US + Europe", "Enterprise AI"],
+      "Selected partnered with Palantir to help build its private sector Go-To-Market capability across Europe. The mandate focused on assembling high-performing enterprise sales, consulting, presales, marketing and professional services teams capable of supporting large-scale commercial expansion beyond the public sector.",
+    metrics: [
+      "Enterprise GTM",
+      "Private sector expansion",
+      "Europe-wide hiring",
+      "Commercial growth",
+    ],
     roles: [
-      "Forward Deployed Engineer",
-      "ML Engineer",
-      "Solutions Architect",
-      "Technical Consultant",
+      "Enterprise Sales",
+      "Management Consultant",
+      "Presales Specialist",
+      "Marketing Professional",
+      "Professional Services",
+      "Enterprise Leader",
     ],
     imageUrl:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
   },
+
   {
     company: "Oracle",
-    headline: "Enterprise SaaS Expansion Across European Markets",
+    headline:
+      "Enterprise Sales Hiring Across the Benelux Market",
     narrative:
-      "Oracle engaged Selected Group to support strategic expansion across multiple European territories, focusing on enterprise sales leadership, solutions engineering and professional services hiring.",
+      "Oracle engaged Selected to support strategic enterprise sales hiring across the Benelux region during a major European expansion initiative. The project focused on rebuilding market perception, reducing attrition and securing high-performing enterprise sales talent within one of Oracle’s most challenging hiring markets.",
     metrics: [
-      "24 placements",
-      "5 countries",
-      "Enterprise SaaS",
-      "92% retention",
+      "10 hires",
+      "8 months",
+      "Benelux region",
+      "Reduced attrition",
     ],
     roles: [
       "Enterprise AE",
-      "Solutions Engineer",
-      "Delivery Consultant",
-      "VP Sales",
+      "Sales Director",
+      "Enterprise Sales",
+      "Commercial Leadership",
     ],
     imageUrl:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80",
   },
+
   {
     company: "Apple",
     headline:
-      "Building Specialist Product & Engineering Leadership",
+      "Scaling Enterprise B2B Sales & Partner Teams Across Europe",
     narrative:
-      "Selected Group supported confidential hiring initiatives across engineering leadership and product strategy functions, identifying senior-level candidates capable of operating within highly demanding innovation environments.",
+      "Apple partnered with Selected during a major expansion of its B2B enterprise sales operations across Europe. The mandate included hiring across enterprise sales, SI teams, partner management, public sector and field marketing functions while supporting Apple’s transition into enterprise-focused commercial growth.",
     metrics: [
-      "Executive search",
-      "Product leadership",
-      "Global talent",
-      "Confidential mandate",
+      "20 positions",
+      "UK & Europe",
+      "Enterprise B2B",
+      "2.3 placements/month",
     ],
     roles: [
-      "VP Engineering",
-      "Director Product",
-      "Principal Engineer",
-      "Product Strategist",
+      "Partner Manager",
+      "Major Accounts Lead",
+      "Public Sector Lead",
+      "Field Marketing Lead",
+      "Enterprise Sales",
+      "Presales",
     ],
     imageUrl:
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80",
   },
+
   {
     company: "Behavox",
-    headline: "AI & Surveillance Technology Hiring at Scale",
+    headline:
+      "Supporting Hypergrowth Through Strategic Enterprise Hiring",
     narrative:
-      "Behavox partnered with Selected Group to accelerate hiring across machine learning, platform engineering and enterprise client delivery functions during a high-growth expansion phase.",
+      "Behavox partnered with Selected during a rapid hypergrowth phase to scale account management, customer success and implementation teams across the UK and US markets. The project supported customer retention, delivery capability and long-term operational growth within the FinTech sector.",
     metrics: [
-      "AI hiring",
-      "Platform engineering",
-      "Global expansion",
-      "Enterprise delivery",
+      "10 hires",
+      "6 months",
+      "UK & US",
+      "Low attrition",
     ],
     roles: [
-      "ML Engineer",
-      "Platform Architect",
-      "Data Scientist",
-      "Enterprise Solutions",
+      "Account Manager",
+      "Customer Success",
+      "Implementation Project Manager",
+      "Enterprise Delivery",
+      "Post-Sales Consultant",
     ],
     imageUrl:
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
   },
+
   {
     company: "Aviv",
     headline:
-      "Scaling Product & Technology Teams During Hypergrowth",
+      "Building Product Leadership Teams Across Europe",
     narrative:
-      "Selected Group delivered strategic hiring support across product management, engineering and commercial technology teams to support rapid scaling initiatives.",
+      "Selected supported AVIV Group’s strategic marketplace transformation initiative by recruiting high-performing Product professionals across Europe. The engagement focused on building leadership capability to support digital innovation, platform consolidation and customer experience transformation.",
     metrics: [
-      "Hypergrowth",
-      "Product hiring",
-      "Engineering scale",
-      "European markets",
+      "Product leadership",
+      "European hiring",
+      "Marketplace transformation",
+      "Digital growth",
     ],
     roles: [
-      "Product Manager",
-      "Engineering Lead",
-      "Tech Lead",
-      "Growth PM",
+      "Product Director",
+      "Product Leadership",
+      "Product Strategy",
+      "Digital Product",
+      "Technology Leadership",
     ],
     imageUrl:
       "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&q=80",
   },
+
   {
     company: "OverIT",
     headline:
-      "Professional Services & Implementation Talent Delivery",
+      "Scaling Commercial & Professional Services Teams Internationally",
     narrative:
-      "OverIT partnered with Selected Group to build specialist implementation and consulting teams capable of supporting enterprise software transformation projects globally.",
+      "OverIT partnered with Selected to build enterprise software sales, presales, marketing and professional services teams across Europe and the US. The project supported the company’s international growth strategy within the Field Service Management technology market.",
     metrics: [
+      "Europe & US",
+      "Enterprise software",
+      "Commercial hiring",
       "Professional services",
-      "Global delivery",
-      "ERP implementation",
-      "Consulting teams",
     ],
     roles: [
-      "Implementation Consultant",
-      "Solution Architect",
-      "Project Manager",
-      "Technical Consultant",
+      "SDR",
+      "VP Sales",
+      "Presales Consultant",
+      "Marketing Professional",
+      "Professional Services",
+      "Enterprise Sales",
     ],
     imageUrl:
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
   },
+
   {
     company: "Celonis",
-    headline: "Enterprise Value & Commercial Talent Across EMEA",
+    headline:
+      "Enterprise Value & Commercial Talent Across EMEA",
     narrative:
-      "As the global leader in Process Mining and Execution Management, Celonis partnered with Selected Group to attract high-calibre commercial and consulting talent capable of combining technical credibility with commercial acumen. Selected supported hiring across Value Engineering, Enterprise Sales, and strategic GTM leadership — delivering 12 hires across multiple functions and regions while providing market intelligence and compensation benchmarking throughout.",
+      "As the global leader in Process Mining and Execution Management, Celonis partnered with Selected Group to attract high-calibre commercial and consulting talent capable of combining technical credibility with commercial acumen. Selected supported hiring across Value Engineering, Enterprise Sales and strategic GTM leadership while delivering market intelligence and compensation benchmarking across EMEA.",
     metrics: [
       "12 hires",
       "EMEA expansion",
