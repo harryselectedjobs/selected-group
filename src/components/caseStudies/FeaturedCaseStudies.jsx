@@ -171,7 +171,7 @@ const caseStudies = [
 ];
 
 export default function FeaturedCaseStudies() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <section className="py-32 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -261,22 +261,30 @@ export default function FeaturedCaseStudies() {
                   </div>
                 </div>
 
-                {study.company === "Celonis" ? (
-  <Link
-    to="/case-studies/celonis"
-    className="group flex items-center gap-2 text-[#C8A96B] hover:text-[#D4B77C] transition-colors font-medium"
-  >
-    View Full Case Study
+                <Link
+                  to={
+                    study.company === "Celonis"
+                      ? "/case-studies/celonis"
+                      : study.company === "Apple"
+                        ? "/case-studies/apple"
+                        : study.company === "Palantir"
+                          ? "/case-studies/palantir"
+                          : study.company === "Aviv"
+                            ? "/case-studies/aviv"
+                            : study.company === "Behavox"
+                              ? "/case-studies/behavox"
+                              : study.company === "OverIT"
+                                ? "/case-studies/overit"
+                                : study.company === "Oracle"
+                                  ? "/case-studies/oracle"
+                                  : "/case-studies"
+                  }
+                  className="group flex items-center gap-2 text-[#C8A96B] hover:text-[#D4B77C] transition-colors font-medium"
+                >
+                  View Full Case Study
 
-    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-  </Link>
-) : (
-  <button className="group flex items-center gap-2 text-[#C8A96B] hover:text-[#D4B77C] transition-colors font-medium">
-    View Full Case Study
-
-    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-  </button>
-)}
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
             </motion.div>
           ))}
