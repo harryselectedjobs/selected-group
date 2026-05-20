@@ -1,12 +1,12 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const slides = [
   {
@@ -16,13 +16,13 @@ const slides = [
     videoId: 'qz9ADlOqqs8',
     title: ['GTM', 'Recruitment'],
     description:
-      'Enterprise software sales and go-to-market recruitment specialist, placing high-performing sales leaders across the US and European markets with over 1,000 successful placements.',
-    cta: 'Find GTM Talent',
-    route: '/gtm',
+      "Enterprise software sales and go-to-market recruitment specialist, placing high-performing sales leaders across the US and European markets with over 1,000 successful placements.",
+    cta: "Find GTM Talent",
+    route: "/gtm",
     stats: [
-      { value: '1,000+', label: 'Placements' },
-      { value: 'US & EU', label: 'Markets' },
-      { value: 'C-Suite', label: 'Executive Hires' },
+      { value: "1,000+", label: "Placements" },
+      { value: "US & EU", label: "Markets" },
+      { value: "C-Suite", label: "Executive Hires" },
     ],
   },
 
@@ -37,9 +37,9 @@ const slides = [
     cta: 'Explore Executive Search',
     route: '/executive-recruitment',
     stats: [
-      { value: 'C-Suite', label: 'Leadership' },
-      { value: 'Global', label: 'Network' },
-      { value: 'Board', label: 'Mandates' },
+      { value: "C-Suite", label: "Leadership" },
+      { value: "Global", label: "Network" },
+      { value: "Board", label: "Mandates" },
     ],
   },
 
@@ -50,13 +50,13 @@ const slides = [
     videoId: 'zwUsFN__jtE',
     title: ['Product', 'Management'],
     description:
-      'Product management sits at the centre of every successful technology business, connecting customer needs, commercial strategy and engineering execution.',
-    cta: 'Explore Product Roles',
-    route: '/product-management',
+      "Product management sits at the centre of every successful technology business, connecting customer needs, commercial strategy and engineering execution.",
+    cta: "Explore Product Roles",
+    route: "/product-management",
     stats: [
-      { value: 'CPO', label: 'Executive Level' },
-      { value: 'SaaS', label: 'Products' },
-      { value: 'AI', label: 'Innovation' },
+      { value: "CPO", label: "Executive Level" },
+      { value: "SaaS", label: "Products" },
+      { value: "AI", label: "Innovation" },
     ],
   },
 
@@ -67,30 +67,30 @@ const slides = [
     videoId: 'Hgg7M3kSqyE',
     title: ['Engineering'],
     description:
-      'Building the teams responsible for designing, developing, scaling and securing modern enterprise technology products.',
-    cta: 'Explore Engineering',
-    route: '/engineering',
+      "Building the teams responsible for designing, developing, scaling and securing modern enterprise technology products.",
+    cta: "Explore Engineering",
+    route: "/engineering",
     stats: [
-      { value: 'CTO', label: 'Leadership' },
-      { value: 'Cloud', label: 'Infrastructure' },
-      { value: 'AI', label: 'Technology' },
+      { value: "CTO", label: "Leadership" },
+      { value: "Cloud", label: "Infrastructure" },
+      { value: "AI", label: "Technology" },
     ],
   },
 
   {
-    id: 'professional',
-    number: '05',
-    label: 'Professional Services',
-    videoId: 'AHJVDFop9sU',
-    title: ['Professional', 'Services'],
+    id: "professional",
+    number: "05",
+    label: "Professional Services",
+    videoId: "AHJVDFop9sU",
+    title: ["Professional", "Services"],
     description:
-      'Specialist recruitment across pre-sales, consulting, implementation and customer success teams.',
-    cta: 'Explore Services',
-    route: '/professional-services',
+      "Specialist recruitment across pre-sales, consulting, implementation and customer success teams.",
+    cta: "Explore Services",
+    route: "/professional-services",
     stats: [
-      { value: 'ERP', label: 'Platforms' },
-      { value: 'Global', label: 'Delivery' },
-      { value: 'SaaS', label: 'Transformation' },
+      { value: "ERP", label: "Platforms" },
+      { value: "Global", label: "Delivery" },
+      { value: "SaaS", label: "Transformation" },
     ],
   },
 ];
@@ -179,7 +179,7 @@ export default function Hero() {
         className="absolute inset-0 z-[2]"
         style={{
           background:
-            'linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.1) 100%)',
+            "linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.1) 100%)",
         }}
       />
 
@@ -187,7 +187,7 @@ export default function Hero() {
         className="absolute inset-0 z-[2]"
         style={{
           background:
-            'linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.65) 25%, transparent 60%)',
+            "linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.65) 25%, transparent 60%)",
         }}
       />
 
@@ -267,9 +267,7 @@ export default function Hero() {
               {slide.title[0]}
               <br />
 
-              <span className="text-white/65">
-                {slide.title[1]}
-              </span>
+              <span className="text-white/65">{slide.title[1]}</span>
             </motion.h1>
 
             {/* DESCRIPTION */}
@@ -337,11 +335,12 @@ export default function Hero() {
               </button>
 
               <button
-                onClick={() =>
+                onClick={() => {
+                  navigate("/our-expertise", { state: { page: slide.id } });
                   document
-                    .querySelector('#about')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
+                    .querySelector("#about")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="
                   border border-white/15
                   text-white/75
@@ -381,11 +380,7 @@ export default function Hero() {
                   key={stat.label}
                   className={`
                     pr-6 sm:pr-8
-                    ${
-                      i !== 0
-                        ? 'pl-6 sm:pl-8 border-l border-white/10'
-                        : ''
-                    }
+                    ${i !== 0 ? "pl-6 sm:pl-8 border-l border-white/10" : ""}
                   `}
                 >
                   <div className="text-white text-xl sm:text-2xl font-bold tracking-tight">
@@ -464,18 +459,15 @@ export default function Hero() {
         "
       >
         {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-          >
+          <button key={i} onClick={() => setCurrent(i)}>
             <span
               className={`
                 block rounded-full transition-all duration-300
 
                 ${
                   i === current
-                    ? 'w-7 h-[2px] bg-white opacity-80'
-                    : 'w-2 h-[2px] bg-white opacity-25'
+                    ? "w-7 h-[2px] bg-white opacity-80"
+                    : "w-2 h-[2px] bg-white opacity-25"
                 }
               `}
             />
@@ -508,8 +500,8 @@ export default function Hero() {
 
                 ${
                   i === current
-                    ? 'text-white'
-                    : 'text-white/25 group-hover:text-white/50'
+                    ? "text-white"
+                    : "text-white/25 group-hover:text-white/50"
                 }
               `}
             >
@@ -520,11 +512,7 @@ export default function Hero() {
               className={`
                 h-px bg-white transition-all
 
-                ${
-                  i === current
-                    ? 'w-10 opacity-70'
-                    : 'w-3 opacity-20'
-                }
+                ${i === current ? "w-10 opacity-70" : "w-3 opacity-20"}
               `}
             />
           </button>
@@ -535,9 +523,9 @@ export default function Hero() {
       {!paused && (
         <motion.div
           key={current}
-          initial={{ width: '0%' }}
-          animate={{ width: '100%' }}
-          transition={{ duration: 7, ease: 'linear' }}
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 7, ease: "linear" }}
           className="
             absolute bottom-0 left-0
             h-[2px]
@@ -551,8 +539,8 @@ export default function Hero() {
       <button
         onClick={() =>
           document
-            .querySelector('#about')
-            ?.scrollIntoView({ behavior: 'smooth' })
+            .querySelector("#about")
+            ?.scrollIntoView({ behavior: "smooth" })
         }
         className="
           hidden lg:flex

@@ -33,8 +33,10 @@ import GTMExpertisePage from "./pages/HeroPages/GTMExpertisePage";
 import EngineeringPage from "./pages/EngineeringPage";
 import ProductManagementPage from "./pages/ProductManagementPage";
 import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
-import ExecutiveRecruitmentPage from "./pages/ExecutiveRecruitmentPage";
-
+import ContactPage from "./pages/ContactPage";
+import GTMPage from "./pages/GTMPage";
+import ResearchPage from "./pages/ResearchPage";
+import OurExpertise from "./pages/OurExpertise";
 import EngagementModelsPage from "./pages/EngagementModelsPage";
 
 /* ───────────────── USE CASE PAGES ───────────────── */
@@ -105,11 +107,6 @@ export default function App() {
             element={<ProfessionalServicesPage />}
           />
 
-          <Route
-            path="/executive-recruitment"
-            element={<ExecutiveRecruitmentPage />}
-          />
-
           {/* ───────────── ENGAGEMENT MODELS ───────────── */}
           <Route
             path="/engagement-models"
@@ -138,13 +135,15 @@ export default function App() {
             path="/use-cases/professional-services"
             element={<ProfessionalServicesCasesPage />}
           />
-
+          {/* MAIN PAGES */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/engagement-models" element={<EngagementModelsPage />} />
+          <Route path="/engineering" element={<EngineeringPage />} />
           {/* ───────────── CASE STUDIES ───────────── */}
           <Route
             path="/case-studies"
             element={<CaseStudiesLanding />}
           />
-
           <Route
             path="/case-studies/celonis"
             element={<CelonisCaseStudy />}
@@ -154,6 +153,10 @@ export default function App() {
             path="/case-studies/apple"
             element={<AppleCaseStudy />}
           />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/gtm" element={<GTMPage />} />
+          <Route path="/research" element={<ResearchPage />} />
+          <Route path="/our-expertise" element={<OurExpertise />} />
 
           <Route
             path="/case-studies/palantir"
@@ -169,12 +172,11 @@ export default function App() {
           path="/case-studies/overit"
           element={<OverITCaseStudy />}
           />
-
+          <Route path="/case-studies/celonis" element={<CelonisCaseStudy />} />
           <Route
           path="/case-studies/oracle"
           element={<OracleCaseStudy />}
           />
-
 
           <Route
           path="/case-studies/behavox"
