@@ -33,9 +33,7 @@ import GTMExpertisePage from "./pages/HeroPages/GTMExpertisePage";
 import EngineeringPage from "./pages/EngineeringPage";
 import ProductManagementPage from "./pages/ProductManagementPage";
 import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
-import ContactPage from "./pages/ContactPage";
-import GTMPage from "./pages/GTMPage";
-import ResearchPage from "./pages/ResearchPage";
+
 import OurExpertise from "./pages/OurExpertise";
 import EngagementModelsPage from "./pages/EngagementModelsPage";
 
@@ -77,12 +75,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="noise bg-black min-h-screen text-white overflow-x-hidden">
-
         {/* GLOBAL NAVBAR */}
         <Navbar />
 
         <Routes>
-
           {/* ───────────── HOME ───────────── */}
           <Route path="/" element={<Home />} />
 
@@ -108,18 +104,12 @@ export default function App() {
           />
 
           {/* ───────────── ENGAGEMENT MODELS ───────────── */}
-          <Route
-            path="/engagement-models"
-            element={<EngagementModelsPage />}
-          />
+          <Route path="/engagement-models" element={<EngagementModelsPage />} />
 
           {/* ───────────── USE CASES ───────────── */}
           <Route path="/use-cases" element={<UseCasesPage />} />
 
-          <Route
-            path="/use-cases/gtm"
-            element={<GTMCasesPage />}
-          />
+          <Route path="/use-cases/gtm" element={<GTMCasesPage />} />
 
           <Route
             path="/use-cases/product-management"
@@ -140,19 +130,10 @@ export default function App() {
           <Route path="/engagement-models" element={<EngagementModelsPage />} />
           <Route path="/engineering" element={<EngineeringPage />} />
           {/* ───────────── CASE STUDIES ───────────── */}
-          <Route
-            path="/case-studies"
-            element={<CaseStudiesLanding />}
-          />
-          <Route
-            path="/case-studies/celonis"
-            element={<CelonisCaseStudy />}
-          />
+          <Route path="/case-studies" element={<CaseStudiesLanding />} />
+          <Route path="/case-studies/celonis" element={<CelonisCaseStudy />} />
 
-          <Route
-            path="/case-studies/apple"
-            element={<AppleCaseStudy />}
-          />
+          <Route path="/case-studies/apple" element={<AppleCaseStudy />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/gtm" element={<GTMPage />} />
           <Route path="/research" element={<ResearchPage />} />
@@ -163,51 +144,27 @@ export default function App() {
             element={<PalantirCaseStudy />}
           />
 
-          <Route
-            path="/case-studies/aviv"
-            element={<AvivCaseStudy />}
-          />
+          <Route path="/case-studies/aviv" element={<AvivCaseStudy />} />
 
-          <Route
-          path="/case-studies/overit"
-          element={<OverITCaseStudy />}
-          />
+          <Route path="/case-studies/overit" element={<OverITCaseStudy />} />
           <Route path="/case-studies/celonis" element={<CelonisCaseStudy />} />
-          <Route
-          path="/case-studies/oracle"
-          element={<OracleCaseStudy />}
-          />
+          <Route path="/case-studies/oracle" element={<OracleCaseStudy />} />
 
-          <Route
-          path="/case-studies/behavox"
-          element={<BehavoxCaseStudy />}
-          />
-
+          <Route path="/case-studies/behavox" element={<BehavoxCaseStudy />} />
 
           {/* ───────────── CRM ───────────── */}
           <Route path="/crm" element={<CRM />} />
 
           {/* ───────────── SEQUENCES ───────────── */}
-          <Route
-            path="/sequences"
-            element={<SequenceList />}
-          />
+          <Route path="/sequences" element={<SequenceList />} />
 
-          <Route
-            path="/sequences/create"
-            element={<CreateSequence />}
-          />
+          <Route path="/sequences/create" element={<CreateSequence />} />
 
-          <Route
-            path="/sequences/:id"
-            element={<SequenceDetail />}
-          />
-
+          <Route path="/sequences/:id" element={<SequenceDetail />} />
         </Routes>
 
         {/* GLOBAL FOOTER */}
         <Footer />
-
       </div>
     </BrowserRouter>
   );
