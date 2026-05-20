@@ -27,6 +27,7 @@ import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
 import ContactPage from "./pages/ContactPage";
 import GTMPage from "./pages/GTMPage";
 import ResearchPage from "./pages/ResearchPage";
+import OurExpertise from "./pages/OurExpertise";
 
 import GTMCasesPage from "./pages/GTMCasesPage";
 import ProductCasesPage from "./pages/ProductCasesPage";
@@ -80,10 +81,7 @@ export default function App() {
 
           {/* MAIN PAGES */}
           <Route path="/about" element={<AboutPage />} />
-          <Route
-            path="/engagement-models"
-            element={<EngagementModelsPage />}
-          />
+          <Route path="/engagement-models" element={<EngagementModelsPage />} />
           <Route path="/engineering" element={<EngineeringPage />} />
           <Route
             path="/product-management"
@@ -96,6 +94,7 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/gtm" element={<GTMPage />} />
           <Route path="/research" element={<ResearchPage />} />
+          <Route path="/our-expertise" element={<OurExpertise />} />
 
           {/* CRM */}
           <Route path="/crm" element={<CRM />} />
@@ -108,10 +107,7 @@ export default function App() {
           {/* CASE STUDIES */}
           <Route path="/case-studies" element={<CaseStudiesLanding />} />
 
-          <Route
-            path="/case-studies/celonis"
-            element={<CelonisCaseStudy />}
-          />
+          <Route path="/case-studies/celonis" element={<CelonisCaseStudy />} />
 
           <Route
             path="/case-studies/palantir"
