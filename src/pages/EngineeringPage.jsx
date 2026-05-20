@@ -267,7 +267,7 @@ export default function EngineeringPage() {
         ]}
         actions={[
           { label: 'Hire Engineering Talent', primary: true, onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
-          { label: 'Submit a Brief', onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
+         
         ]}
       />
 

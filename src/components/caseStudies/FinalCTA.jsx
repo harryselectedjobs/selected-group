@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function FinalCTA() {
   return (
@@ -38,18 +39,26 @@ export default function FinalCTA() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {/* Primary CTA */}
-            <button className="group px-8 py-5 bg-[#C8A96B] text-[#0A0A0A] font-medium rounded-lg hover:bg-[#D4B77C] transition-all duration-300 flex items-center justify-center gap-2">
-              <Calendar className="w-5 h-5" />
+<Link to="/contact">
+  <button
+    className="group px-8 py-5 bg-[#C8A96B] text-[#0A0A0A] font-medium rounded-lg hover:bg-[#D4B77C] transition-all duration-300 flex items-center justify-center gap-2"
+  >
+    <Calendar className="w-5 h-5" />
 
-              Schedule Consultation
+    Schedule Consultation
 
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+  </button>
+</Link>
 
-            {/* Secondary CTA */}
-            <button className="px-8 py-5 border border-[rgba(255,255,255,0.15)] text-[#F5F5F5] font-medium rounded-lg hover:bg-[rgba(255,255,255,0.04)] transition-all duration-300">
-              View Engagement Models
-            </button>
+{/* Secondary CTA */}
+<Link to="/engagement-models">
+  <button
+    className="px-8 py-5 border border-[rgba(255,255,255,0.15)] text-[#F5F5F5] font-medium rounded-lg hover:bg-[rgba(255,255,255,0.04)] transition-all duration-300"
+  >
+    View Engagement Models
+  </button>
+</Link>
           </div>
         </motion.div>
       </div>

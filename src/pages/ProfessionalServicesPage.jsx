@@ -273,7 +273,7 @@ export default function ProfessionalServicesPage() {
         ]}
         actions={[
           { label: 'Hire Services Talent', primary: true, onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
-          { label: 'Submit a Brief', onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
+    
         ]}
       />
 

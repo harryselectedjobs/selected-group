@@ -265,8 +265,7 @@ export default function ProductManagementPage() {
         ]}
         actions={[
           { label: 'Hire Product Talent', primary: true, onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
-          { label: 'Submit a Brief', onClick: () => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); } },
-        ]}
+         ]}
       />
 
       {/* Overview */}

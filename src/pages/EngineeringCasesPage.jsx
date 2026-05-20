@@ -264,11 +264,7 @@ export default function EngineeringCasesPage() {
               className="flex items-center gap-2 text-white/38 text-[10px] sm:text-xs tracking-widest uppercase hover:text-white/65 transition-colors duration-200">
               <ArrowLeft size={12} /> All Use Cases
             </button>
-            <button onClick={() => { navigate('/'); setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300); }}
-              className="group flex items-center gap-3 bg-white text-black px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-bold tracking-widest uppercase hover:bg-white/90 transition-all duration-300">
-              Discuss a Brief
-              <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+            
           </div>
         </div>
       </div>
