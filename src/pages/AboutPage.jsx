@@ -315,7 +315,7 @@ export default function AboutPage() {
           </p>
           <button
             onClick={() => {
-              navigate('/');
+              navigate('/contact');
               setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300);
             }}
             className="group inline-flex items-center gap-3 bg-white text-black px-8 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:bg-white/90"

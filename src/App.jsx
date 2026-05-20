@@ -24,9 +24,11 @@ import EngagementModelsPage from "./pages/EngagementModelsPage";
 import EngineeringPage from "./pages/EngineeringPage";
 import ProductManagementPage from "./pages/ProductManagementPage";
 import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
+import ExecutiveRecruitmentPage from "./pages/ExecutiveRecruitmentPage";
 import ContactPage from "./pages/ContactPage";
 import GTMPage from "./pages/GTMPage";
 import ResearchPage from "./pages/ResearchPage";
+import GTMExpertisePage from "./pages/HeroPages/GTMExpertisePage";
 
 import GTMCasesPage from "./pages/GTMCasesPage";
 import ProductCasesPage from "./pages/ProductCasesPage";
@@ -93,9 +95,16 @@ export default function App() {
             path="/professional-services"
             element={<ProfessionalServicesPage />}
           />
+          <Route
+          path="/executive-recruitment"
+          element={<ExecutiveRecruitmentPage />}
+        />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/gtm" element={<GTMPage />} />
           <Route path="/research" element={<ResearchPage />} />
+          <Route path="/gtm-expertise" element={<GTMExpertisePage />} />
+
+          
 
           {/* CRM */}
           <Route path="/crm" element={<CRM />} />
