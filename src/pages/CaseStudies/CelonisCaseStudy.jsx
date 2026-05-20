@@ -321,48 +321,54 @@ export default function CelonisCaseStudy() {
         </motion.div>
       </section>
 
-      {/* ─────────────────────── DOWNLOAD ─────────────────────── */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="relative overflow-hidden rounded-2xl border border-[rgba(200,169,107,0.2)]
-                     bg-[rgba(200,169,107,0.04)] px-10 py-12 lg:px-16 lg:py-14
-                     flex flex-col lg:flex-row items-start lg:items-center gap-10 justify-between"
-        >
-          {/* decorative lines */}
-          <div className="absolute top-0 left-0 w-24 h-px bg-[#C8A96B]" />
-          <div className="absolute top-0 left-0 w-px h-24 bg-[#C8A96B]" />
-          <div className="absolute bottom-0 right-0 w-24 h-px bg-[#C8A96B]/40" />
-          <div className="absolute bottom-0 right-0 w-px h-24 bg-[#C8A96B]/40" />
-
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-[#C8A96B] mb-4">
-              Download PDF
-            </p>
-            <h3 className="text-2xl lg:text-3xl font-bold text-[#F0EDE8] mb-3">
-              Get the Full Case Study
-            </h3>
-            <p className="text-[#A09A90] max-w-xl leading-relaxed">
-              Access the complete Celonis case study document including hiring strategy,
-              delivered roles, and partnership outcomes.
-            </p>
-          </div>
-
-          <a
-            href="/Celonis Case Study.pdf"
-            download
-            className="group shrink-0 inline-flex items-center gap-3 px-8 py-4 rounded-xl
-                       bg-[#C8A96B] text-[#0A0A0A] font-bold text-sm
-                       hover:bg-[#D6B97A] active:scale-95 transition-all duration-200"
-          >
-            <Download className="w-4 h-4" />
-            Download PDF
-          </a>
-        </motion.div>
-      </section>
+      {/* ───────────────────── DOWNLOAD ───────────────────── */}
+            <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="relative overflow-hidden rounded-2xl
+                border border-[rgba(200,169,107,0.2)]
+                bg-[rgba(200,169,107,0.04)]
+                px-10 py-12 lg:px-16 lg:py-14
+                flex flex-col lg:flex-row items-start lg:items-center
+                gap-10 justify-between"
+              >
+                <div className="absolute top-0 left-0 w-24 h-px bg-[#C8A96B]" />
+                <div className="absolute top-0 left-0 w-px h-24 bg-[#C8A96B]" />
+      
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-[#C8A96B] mb-4">
+                    Download PDF
+                  </p>
+      
+                  <h3 className="text-2xl lg:text-3xl font-bold mb-3">
+                    Get the Full Case Study
+                  </h3>
+      
+                  <p className="text-[#A09A90] max-w-xl leading-relaxed">
+                    Access the complete Celonis case study including Product
+                    hiring strategy, leadership placements, and transformation outcomes.
+                  </p>
+                </div>
+      
+                {/* button */}
+              
+      
+                <a
+                  href="/pdfs/Celonis Case Study.pdf"
+                  download
+                  className="group shrink-0 inline-flex items-center gap-3
+                  px-8 py-4 rounded-xl bg-[#C8A96B]
+                  text-[#0A0A0A] font-bold text-sm
+                  hover:bg-[#D6B97A] transition-all duration-200"
+                >
+                  <Download className="w-4 h-4" />
+                  Download PDF
+                </a>
+              </motion.div>
+            </section>
 
       {/* ─────────────────────── PARTNERSHIP ─────────────────────── */}
       <section className="bg-[#0D0D0D] border-t border-[rgba(255,255,255,0.06)]">
@@ -411,7 +417,7 @@ export default function CelonisCaseStudy() {
         </div>
       </section>
 
-      
+
     </div>
   );
 }

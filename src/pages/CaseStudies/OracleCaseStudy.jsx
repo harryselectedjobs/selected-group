@@ -409,7 +409,7 @@ export default function OracleCaseStudy() {
           </div>
 
           <a
-            href="/Oracle Case Study.pdf"
+            href="/pdfs/Oracle Case Study.pdf"
             download
             className="group shrink-0 inline-flex items-center gap-3 px-8 py-4 rounded-xl
             bg-[#C8A96B] text-[#0A0A0A] font-bold text-sm

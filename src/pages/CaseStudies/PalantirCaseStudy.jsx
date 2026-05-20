@@ -1,106 +1,519 @@
-import React from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { ArrowLeft, Download, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
+
+/* ───────────────── animations ───────────────── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+/* ───────────────── data ───────────────── */
+const stats = [
+  { value: "250", label: "Target Enterprises" },
+  { value: "Europe", label: "Market Expansion" },
+  { value: "GTM", label: "Team Buildout" },
+  { value: "Private", label: "Sector Growth" },
+];
+
+const mandateAreas = [
+  "Enterprise Sales",
+  "Management Consulting",
+  "Presales & Solutions",
+  "Commercial Leadership",
+];
+
+const placements = [
+  "Enterprise Sales Leaders",
+  "Commercial GTM Professionals",
+  "Presales Specialists",
+  "Professional Services Talent",
+  "Marketing Leadership",
+  "Enterprise Consulting Experts",
+];
+
+const partnershipServices = [
+  "Strategic enterprise talent mapping",
+  "Commercial leadership recruitment",
+  "Private sector GTM hiring support",
+  "Candidate qualification and assessment",
+  "Cross-European talent pipeline development",
+  "Consultative hiring strategy support",
+];
+
+/* ───────────────── label ───────────────── */
+function SectionLabel({ number, label }) {
+  return (
+    <div className="flex items-center gap-4 mb-10">
+      <span className="text-[11px] font-mono text-[#C8A96B] opacity-60">
+        {String(number).padStart(2, "0")}
+      </span>
+
+      <div className="h-px flex-1 bg-[rgba(255,255,255,0.08)]" />
+
+      <span className="text-[11px] uppercase tracking-[0.25em] text-[#C8A96B]">
+        {label}
+      </span>
+    </div>
+  );
+}
 
 export default function PalantirCaseStudy() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <main className="bg-[#0A0A0A] text-white min-h-screen pt-32 pb-20">
-      <div className="max-w-5xl mx-auto px-6 lg:px-10">
+    <div className="bg-[#080808] min-h-screen text-[#F0EDE8] overflow-x-hidden">
+
+      {/* ───────────────── NAV ───────────────── */}
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between
+        px-6 lg:px-12 py-5 bg-[rgba(8,8,8,0.85)] backdrop-blur-lg
+        border-b border-[rgba(255,255,255,0.04)]"
+      >
+        <Link
+          to="/case-studies"
+          className="group inline-flex items-center gap-2 text-sm text-[#888]
+          hover:text-[#C8A96B] transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Case Studies
+        </Link>
+
+        <span className="text-[11px] uppercase tracking-[0.25em] text-[#C8A96B]">
+          Palantir
+        </span>
+      </nav>
+
+      {/* ───────────────── HERO ───────────────── */}
+      <header className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=1800&q=80"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+
+          <div className="absolute inset-0 bg-[#080808]/75" />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent" />
+
+          <div className="absolute bottom-[38%] left-0 right-0 h-px bg-[#C8A96B]/20" />
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-20 pt-40 w-full"
         >
-          <p className="uppercase tracking-[0.25em] text-xs text-[#C8A96B] mb-4">
-            Case Study
-          </p>
 
-          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-8">
-            Palantir Technologies
-          </h1>
+          <motion.div
+            variants={fadeUp}
+            className="flex items-center gap-3 mb-8"
+          >
+            <div className="h-px w-12 bg-[#C8A96B]" />
 
-          <p className="text-xl text-[#B0B0B0] leading-relaxed mb-16 max-w-4xl">
-            Scaling enterprise sales and management consulting teams across Europe
-            to accelerate private sector growth initiatives.
-          </p>
-        </motion.div>
+            <span className="text-xs uppercase tracking-[0.3em] text-[#C8A96B]">
+              Case Study
+            </span>
+          </motion.div>
 
-        {/* Company Overview */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-6 text-[#F5F5F5]">
-            Company Overview
-          </h2>
+          <motion.h1
+            variants={fadeUp}
+            className="font-black leading-[0.88] tracking-[-0.03em] mb-8"
+            style={{
+              fontSize: "clamp(5rem, 16vw, 14rem)",
+            }}
+          >
+            Palantir
+          </motion.h1>
 
-          <p className="text-[#B0B0B0] text-lg leading-relaxed">
-            Palantir Technologies, established in 2003 by a team including
-            Peter Thiel and Alex Karp, is a leading data analytics and enterprise
-            software company specializing in large-scale data integration,
-            operational intelligence, and AI-driven decision making.
-          </p>
-        </section>
+          <motion.p
+            variants={fadeUp}
+            className="text-lg lg:text-xl text-[#A09A90]
+            max-w-2xl mb-16 leading-relaxed"
+          >
+            Building a Go-To-Market Function for Private Sector Expansion
+          </motion.p>
 
-        {/* Selected Mandate */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-6 text-[#F5F5F5]">
-            Selected Mandate
-          </h2>
-
-          <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8">
-            <p className="text-[#B0B0B0] text-lg leading-relaxed">
-              Palantir faced challenges expanding into the private sector due to
-              the absence of a dedicated Go-To-Market strategy. Selected Group
-              was tasked with building a high-performing enterprise sales and
-              management consulting organization capable of engaging Fortune 250
-              private sector companies across Europe.
-            </p>
-          </div>
-        </section>
-
-        {/* Outcomes */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-10 text-[#F5F5F5]">
-            Outcomes & ROI
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              "Strategic GTM hiring initiative",
-              "Enterprise sales expansion across Europe",
-              "High-performing leadership placements",
-            ].map((item, index) => (
+          {/* STATS */}
+          <motion.div
+            variants={fadeUp}
+            className="grid grid-cols-2 lg:grid-cols-4 border
+            border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden"
+          >
+            {stats.map((s, i) => (
               <div
-                key={index}
-                className="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08]"
+                key={i}
+                className={`relative px-8 py-10 bg-[rgba(255,255,255,0.02)]
+                ${
+                  i < stats.length - 1
+                    ? "border-r border-[rgba(255,255,255,0.08)]"
+                    : ""
+                }
+                ${
+                  i < 2
+                    ? "border-b border-[rgba(255,255,255,0.08)] lg:border-b-0"
+                    : ""
+                }`}
               >
-                <p className="text-[#C8A96B] font-medium leading-relaxed">
-                  {item}
-                </p>
+                <div className="absolute top-0 left-0 w-6 h-px bg-[#C8A96B]" />
+                <div className="absolute top-0 left-0 w-px h-6 bg-[#C8A96B]" />
+
+                <div className="text-5xl lg:text-7xl font-black text-[#C8A96B] leading-none mb-3 tracking-tight">
+                  {s.value}
+                </div>
+
+                <div className="text-[11px] uppercase tracking-[0.22em] text-[#888]">
+                  {s.label}
+                </div>
               </div>
             ))}
-          </div>
-        </section>
+          </motion.div>
 
-        {/* Client Quote */}
-        <section className="mb-20">
-          <div className="border-l-2 border-[#C8A96B] pl-8">
-            <p className="text-2xl leading-relaxed text-[#F5F5F5] italic mb-6">
-              “Selected surpassed our aspirations by presenting an abundance of
-              outstanding talent.”
+        </motion.div>
+      </header>
+
+      {/* ───────────────── OVERVIEW ───────────────── */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+        <SectionLabel number={1} label="Overview" />
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+          className="grid lg:grid-cols-12 gap-12 lg:gap-20"
+        >
+
+          <motion.div variants={fadeUp} className="lg:col-span-5">
+            <h2 className="text-4xl lg:text-5xl font-bold leading-tight text-[#F0EDE8]">
+              Expanding Beyond the{" "}
+              <span className="text-[#C8A96B]">
+                Public Sector
+              </span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            className="lg:col-span-7 space-y-5 text-[#A09A90]
+            text-lg leading-relaxed"
+          >
+
+            <motion.p variants={fadeUp}>
+              Palantir Technologies established itself as a global leader
+              in advanced data analytics through platforms such as Palantir Gotham
+              and Palantir Foundry.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              While highly successful within government and defence environments,
+              expanding into the private enterprise market required a completely
+              new Go-To-Market strategy and commercial infrastructure.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              To accelerate this transition, Palantir needed experienced enterprise
+              sales, consulting, presales, and leadership professionals capable
+              of engaging the top 250 private sector organisations across Europe.
+            </motion.p>
+
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ───────────────── MANDATE ───────────────── */}
+      <section className="bg-[#0D0D0D] border-y border-[rgba(255,255,255,0.06)]">
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+          <SectionLabel number={2} label="Selected's Mandate" />
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid lg:grid-cols-12 gap-12 lg:gap-20"
+          >
+
+            <motion.div variants={fadeUp} className="lg:col-span-4 space-y-4">
+
+              <h2 className="text-3xl font-bold mb-8 text-[#F0EDE8]">
+                Commercial Team Buildout
+              </h2>
+
+              {mandateAreas.map((area, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-4 px-5 py-4 rounded-xl
+                  border border-[rgba(200,169,107,0.18)]
+                  bg-[rgba(200,169,107,0.05)]"
+                >
+                  <span className="text-[10px] font-mono text-[#C8A96B] opacity-50">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  <span className="text-sm font-semibold text-[#C8A96B]">
+                    {area}
+                  </span>
+                </div>
+              ))}
+
+            </motion.div>
+
+            <motion.div
+              variants={stagger}
+              className="lg:col-span-8 space-y-5 text-[#A09A90]
+              text-lg leading-relaxed"
+            >
+
+              <motion.p variants={fadeUp}>
+                Selected partnered closely with Palantir’s leadership team
+                to build a scalable commercial hiring framework focused on
+                enterprise expansion across Europe.
+              </motion.p>
+
+              <motion.p variants={fadeUp}>
+                The engagement focused on recruiting enterprise sales professionals,
+                management consultants, presales specialists, marketing talent,
+                and commercial leadership hires capable of operating in complex
+                enterprise technology environments.
+              </motion.p>
+
+              <motion.p variants={fadeUp}>
+                Through strategic market mapping and targeted outreach,
+                Selected successfully developed high-quality talent pipelines
+                aligned with Palantir’s long-term private sector growth strategy.
+              </motion.p>
+
+            </motion.div>
+
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ───────────────── RESULTS ───────────────── */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+        <SectionLabel number={3} label="Results" />
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+          className="grid lg:grid-cols-12 gap-12 lg:gap-20"
+        >
+
+          <motion.div variants={fadeUp} className="lg:col-span-4">
+
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-[#F0EDE8] leading-tight">
+              Building a Scalable GTM Infrastructure
+            </h2>
+
+            <p className="text-[#A09A90] text-lg leading-relaxed mb-6">
+              Selected helped Palantir establish a stronger commercial
+              presence within the private enterprise market while accelerating
+              hiring across multiple customer-facing functions.
             </p>
 
-            <div>
-              <div className="font-semibold text-white">
-                Philippe Mathieu
-              </div>
+            <p className="text-[#A09A90] text-lg leading-relaxed">
+              The partnership strengthened enterprise engagement capabilities,
+              expanded leadership capacity, and enabled deeper penetration
+              across strategic European markets.
+            </p>
 
-              <div className="text-[#B0B0B0]">
-                President EMEA, Palantir
-              </div>
+          </motion.div>
+
+          <motion.div variants={stagger} className="lg:col-span-8">
+
+            <motion.p
+              variants={fadeUp}
+              className="text-[11px] uppercase tracking-[0.25em]
+              text-[#C8A96B] mb-6"
+            >
+              Key Outcomes
+            </motion.p>
+
+            <div className="space-y-3">
+
+              {placements.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  className="group flex items-center gap-5 px-6 py-5 rounded-xl
+                  border border-[rgba(255,255,255,0.07)]
+                  bg-[rgba(255,255,255,0.02)]
+                  hover:border-[rgba(200,169,107,0.25)]
+                  hover:bg-[rgba(200,169,107,0.04)]
+                  transition-all duration-300"
+                >
+
+                  <CheckCircle2
+                    className="w-5 h-5 text-[#C8A96B]
+                    shrink-0 opacity-80"
+                  />
+
+                  <span className="font-medium text-[#F0EDE8]">
+                    {item}
+                  </span>
+
+                  <span className="ml-auto text-[11px] font-mono text-[#555]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                </motion.div>
+              ))}
+
             </div>
-          </div>
-        </section>
 
-      </div>
-    </main>
+          </motion.div>
+
+        </motion.div>
+
+      </section>
+
+      {/* ───────────────────── DOWNLOAD ───────────────────── */}
+            <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="relative overflow-hidden rounded-2xl
+                border border-[rgba(200,169,107,0.2)]
+                bg-[rgba(200,169,107,0.04)]
+                px-10 py-12 lg:px-16 lg:py-14
+                flex flex-col lg:flex-row items-start lg:items-center
+                gap-10 justify-between"
+              >
+                <div className="absolute top-0 left-0 w-24 h-px bg-[#C8A96B]" />
+                <div className="absolute top-0 left-0 w-px h-24 bg-[#C8A96B]" />
+      
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-[#C8A96B] mb-4">
+                    Download PDF
+                  </p>
+      
+                  <h3 className="text-2xl lg:text-3xl font-bold mb-3">
+                    Get the Full Case Study
+                  </h3>
+      
+                  <p className="text-[#A09A90] max-w-xl leading-relaxed">
+                    Access the complete Palantir case study including Product
+                    hiring strategy, leadership placements, and transformation outcomes.
+                  </p>
+                </div>
+      
+                {/* button */}
+              
+      
+                <a
+                  href="/pdfs/Palantir Case Study.pdf"
+                  download
+                  className="group shrink-0 inline-flex items-center gap-3
+                  px-8 py-4 rounded-xl bg-[#C8A96B]
+                  text-[#0A0A0A] font-bold text-sm
+                  hover:bg-[#D6B97A] transition-all duration-200"
+                >
+                  <Download className="w-4 h-4" />
+                  Download PDF
+                </a>
+              </motion.div>
+            </section>
+
+      {/* ───────────────── PARTNERSHIP ───────────────── */}
+      <section className="bg-[#0D0D0D] border-t border-[rgba(255,255,255,0.06)]">
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+          <SectionLabel number={4} label="Partnership Value" />
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl lg:text-4xl font-bold mb-14
+              max-w-2xl text-[#F0EDE8] leading-tight"
+            >
+              Selected supported Palantir through:
+            </motion.h2>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+              {partnershipServices.map((service, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  className="group p-7 rounded-xl
+                  border border-[rgba(255,255,255,0.07)]
+                  bg-[rgba(255,255,255,0.02)]
+                  hover:border-[rgba(200,169,107,0.2)]
+                  hover:bg-[rgba(200,169,107,0.03)]
+                  transition-all duration-300"
+                >
+
+                  <span className="text-[10px] font-mono text-[#C8A96B] opacity-40 block mb-5">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  <div className="w-8 h-[2px] bg-[#C8A96B] mb-5 group-hover:w-14 transition-all duration-300" />
+
+                  <p className="text-[#F0EDE8] font-medium leading-relaxed">
+                    {service}
+                  </p>
+
+                </motion.div>
+              ))}
+
+            </div>
+
+            <motion.p
+              variants={fadeUp}
+              className="mt-14 text-[#A09A90] text-lg
+              leading-relaxed max-w-4xl"
+            >
+              By building a high-performing commercial and consulting
+              infrastructure, Selected helped Palantir accelerate
+              its transition into the private enterprise market
+              and establish a scalable foundation for long-term growth.
+            </motion.p>
+
+          </motion.div>
+
+        </div>
+
+      </section>
+
+    </div>
   );
 }

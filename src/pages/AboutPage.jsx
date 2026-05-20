@@ -1,330 +1,607 @@
-import { useEffect, useRef } from 'react';
-import { Target, Handshake, Star, TrendingUp, ArrowRight, Zap, Users, Search, MessageSquare } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Play,
+} from "lucide-react";
 
-/* ── What Drives Us cards ── */
-const drives = [
-  {
-    icon: Target,
-    accent: '#4F9CF9',
-    title: 'Specialist Focus',
-    description:
-      'We work exclusively within technology and go-to-market talent. No generalist sprawl — deep expertise in the roles and markets that matter to you.',
-  },
-  {
-    icon: Handshake,
-    accent: '#34D399',
-    title: 'Partnership',
-    description:
-      'We embed ourselves in your hiring process. Your success is our success — we act as an extension of your team, not a transactional vendor.',
-  },
-  {
-    icon: Star,
-    accent: '#A78BFA',
-    title: 'Quality',
-    description:
-      'Every candidate we present is rigorously assessed. We\'d rather send three exceptional people than ten mediocre ones.',
-  },
-  {
-    icon: TrendingUp,
-    accent: '#FBBF24',
-    title: 'Outcomes',
-    description:
-      'We measure ourselves by long-term retention and business impact, not just placements made. Our track record of 92% 12-month retention speaks for itself.',
-  },
-];
+import { Link } from "react-router-dom";
 
-/* ── What Makes Us Different items ── */
-const differences = [
-  {
-    icon: Zap,
-    accent: '#4F9CF9',
-    title: 'We Understand Technology',
-    description:
-      'Our consultants have backgrounds in tech and have worked alongside engineers, PMs, and GTM teams. We speak your language and can genuinely evaluate candidates.',
-  },
-  {
-    icon: Search,
-    accent: '#34D399',
-    title: 'We Access Passive Talent',
-    description:
-      'The best candidates aren\'t on job boards. Our deep networks and proactive outreach reach the top 10% who aren\'t actively looking — but are open to the right opportunity.',
-  },
-  {
-    icon: Zap,
-    accent: '#A78BFA',
-    title: 'We Move Fast',
-    description:
-      'Speed matters in competitive hiring markets. Our average time to first qualified candidate is 7 days. We run tight, efficient processes without cutting corners.',
-  },
-  {
-    icon: MessageSquare,
-    accent: '#FBBF24',
-    title: "We're Consultative",
-    description:
-      'We don\'t just fill briefs — we challenge them when needed. If your hiring spec won\'t get you the outcome you need, we\'ll tell you and help you redesign it.',
-  },
-];
+/* ───────────────── animations ───────────────── */
 
-/* ── Stats ── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+/* ───────────────── data ───────────────── */
+
 const stats = [
-  { value: '500+', label: 'Placements Made' },
-  { value: '150+', label: 'Clients Served' },
-  { value: '92%', label: '12-Month Retention' },
-  { value: '7 Days', label: 'Avg. Time to First Candidate' },
+  { value: "10+", label: "Years Experience" },
+  { value: "3000+", label: "Placements" },
+  { value: "Global", label: "Technology Clients" },
+  { value: "GTM", label: "Product & Engineering" },
 ];
 
-/* ── Reusable scroll-reveal hook ── */
-function useScrollReveal(delay = 0, threshold = 0.1) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-          }, delay);
-          observer.disconnect();
-        }
-      },
-      { threshold }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [delay, threshold]);
-  return ref;
-}
+const services = [
+  "Contingency Recruitment",
+  "Retained Search",
+  "Recruitment Process Outsourcing",
+  "Executive Talent Mapping",
+];
 
-/* ── Drive card ── */
-function DriveCard({ icon: Icon, accent, title, description, delay }) {
-  const ref = useScrollReveal(delay);
+const specialisms = [
+  "Go-To-Market (GTM)",
+  "Professional Services",
+  "Product",
+  "Engineering",
+];
+
+const values = [
+  "Relationship-first recruitment partnerships",
+  "Deep technology market expertise",
+  "Honest and transparent communication",
+  "Long-term customer success focus",
+  "Strategic scaling support",
+  "Sustainable hiring and retention mindset",
+];
+
+const achievements = [
+  "3,000+ successful placements globally",
+  "Trusted by startups to enterprise organisations",
+  "Partnerships across AI, SaaS, Cybersecurity & FinTech",
+  "Over a decade of technology recruitment expertise",
+  "Global delivery across Europe and North America",
+  "Long-standing relationships with world-class technology businesses",
+];
+
+const clients = [
+  "Palantir",
+  "Apple",
+  "Oracle",
+  "Anthropic",
+  "Celonis",
+  "Behavox",
+  "SentinelOne",
+  "Wiz",
+  "Darktrace",
+  "Snyk",
+  "Confluent",
+  "monday.com",
+  "Plaid",
+  "Ramp",
+  "Rubrik",
+  "Pure Storage",
+];
+
+/* ───────────────── section label ───────────────── */
+
+function SectionLabel({ number, label }) {
   return (
-    <div
-      ref={ref}
-      className="group bg-[#0d0d0d] border border-white/[0.07] p-7 flex flex-col gap-4 transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:bg-[#111111] relative"
-    >
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ backgroundColor: accent }}
-      />
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center"
-        style={{ backgroundColor: `${accent}18` }}
-      >
-        <Icon size={22} style={{ color: accent }} />
-      </div>
-      <div>
-        <h3 className="text-white font-bold text-lg tracking-tight mb-2">{title}</h3>
-        <p className="text-white/45 text-sm leading-relaxed">{description}</p>
-      </div>
+    <div className="flex items-center gap-4 mb-10">
+      <span className="text-[11px] font-mono text-[#C8A96B] opacity-60">
+        {String(number).padStart(2, "0")}
+      </span>
+
+      <div className="h-px flex-1 bg-[rgba(255,255,255,0.08)]" />
+
+      <span className="text-[11px] uppercase tracking-[0.25em] text-[#C8A96B]">
+        {label}
+      </span>
     </div>
   );
 }
 
-/* ── Difference card ── */
-function DifferenceCard({ icon: Icon, accent, title, description, delay }) {
-  const ref = useScrollReveal(delay);
-  return (
-    <div
-      ref={ref}
-      className="bg-[#0a0a0a] border border-white/[0.07] p-8 transition-all duration-300 hover:border-white/15"
-    >
-      <div className="flex items-start gap-4">
-        <div
-          className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-          style={{ backgroundColor: `${accent}18` }}
-        >
-          <Icon size={18} style={{ color: accent }} />
-        </div>
-        <div>
-          <h4 className="text-white font-bold text-base tracking-tight mb-2">{title}</h4>
-          <p className="text-white/40 text-sm leading-relaxed">{description}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ── Page ── */
 export default function AboutPage() {
-  const navigate = useNavigate();
-  const missionRef = useScrollReveal(0, 0.2);
-  const statsRef = useScrollReveal(0, 0.15);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-[#080808] min-h-screen text-[#F0EDE8] overflow-x-hidden">
 
-      {/* Hero banner */}
-      <div className="pt-32 pb-16 px-6 relative overflow-hidden bg-black">
-        <div
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none"
-          style={{ backgroundColor: 'rgba(13,42,94,0.7)' }}
-        />
-        <div
-          className="absolute bottom-0 -left-20 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none"
-          style={{ backgroundColor: 'rgba(45,27,105,0.4)' }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
-            backgroundSize: '80px 80px',
-          }}
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+      {/* ───────────────── HERO ───────────────── */}
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
-              About Us
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+
+        {/* background */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1800&auto=format&fit=crop"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+
+          <div className="absolute inset-0 bg-[#080808]/80" />
+
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/50 to-[#080808]" />
+        </div>
+
+        {/* content */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-40 pb-24 w-full"
+        >
+
+          <motion.div
+            variants={fadeUp}
+            className="flex items-center gap-3 mb-8"
+          >
+            <div className="h-px w-12 bg-[#C8A96B]" />
+
+            <span className="text-xs uppercase tracking-[0.3em] text-[#C8A96B]">
+              About Selected Group
             </span>
-          </div>
+          </motion.div>
 
-          <h1 className="text-[3.25rem] font-bold text-white tracking-tight mb-4 max-w-2xl leading-tight">
-            About{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
-              Selected Group
-            </span>
-          </h1>
+          <motion.h1
+            variants={fadeUp}
+            className="font-black leading-[0.9] tracking-[-0.04em] mb-8"
+            style={{
+              fontSize: "clamp(4rem, 13vw, 10rem)",
+            }}
+          >
+            Building
+            <br />
+            Teams That
+            <br />
+            Scale
+          </motion.h1>
 
-          <p className="text-white/50 text-base md:text-lg max-w-xl leading-relaxed">
-            A specialist technology recruitment partner built for the companies shaping the future of software.
-          </p>
-        </div>
-      </div>
+          <motion.p
+            variants={fadeUp}
+            className="text-lg lg:text-xl text-[#A09A90] max-w-3xl leading-relaxed mb-16"
+          >
+            Selected Group is a specialist technology recruitment business
+            helping software vendors, technology companies, and consulting
+            organisations scale across Go-To-Market, Professional Services,
+            Product, and Engineering functions globally.
+          </motion.p>
 
-      {/* Our Mission */}
-      <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 text-center">
-        <div ref={missionRef}>
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <span className="w-8 h-px bg-white/20" />
-            <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
-              Our Mission
-            </span>
-            <span className="w-8 h-px bg-white/20" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
-            Connecting exceptional talent with companies building the future
-          </h2>
-          <p className="text-white/45 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
-            Selected Group was founded on a simple belief: hiring exceptional technology talent requires exceptional
-            expertise. We exist to bridge the gap between the world's best technology companies and the talent that
-            will define their next chapter — with rigour, honesty, and genuine partnership.
-          </p>
-          <p className="text-white/60 text-base leading-relaxed max-w-3xl mx-auto mt-5">
-            We work exclusively across engineering, product, go-to-market, and professional services talent within
-            the technology sector. This focus isn't a limitation — it's our edge.
-          </p>
-        </div>
-      </div>
+          {/* stats */}
+          <motion.div
+            variants={fadeUp}
+            className="grid grid-cols-2 lg:grid-cols-4 border border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden"
+          >
 
-      {/* What Drives Us */}
-      <div className="border-t border-white/[0.05] bg-[#030303] py-12 md:py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-8 h-px bg-white/20" />
-              <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
-                Our Values
-              </span>
-              <span className="w-8 h-px bg-white/20" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
-              What Drives Us
-            </h2>
-            <p className="text-white/40 text-base max-w-md mx-auto">
-              The principles that guide every search and every partnership
-            </p>
-          </div>
+            {stats.map((s, i) => (
+              <div
+                key={i}
+                className={`relative px-8 py-10 bg-[rgba(255,255,255,0.02)]
+                ${
+                  i < stats.length - 1
+                    ? "border-r border-[rgba(255,255,255,0.08)]"
+                    : ""
+                }
+                ${
+                  i < 2
+                    ? "border-b border-[rgba(255,255,255,0.08)] lg:border-b-0"
+                    : ""
+                }`}
+              >
 
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-            {drives.map((d, i) => (
-              <DriveCard key={d.title} {...d} delay={i * 100} />
-            ))}
-          </div>
-        </div>
-      </div>
+                <div className="absolute top-0 left-0 w-6 h-px bg-[#C8A96B]" />
 
-      {/* What Makes Us Different */}
-      <div className="py-12 md:py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="w-8 h-px bg-white/20" />
-              <span className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase">
-                Our Approach
-              </span>
-              <span className="w-8 h-px bg-white/20" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
-              What Makes Us Different
-            </h2>
-            <p className="text-white/40 text-base max-w-md mx-auto">
-              Why technology companies choose to work with us
-            </p>
-          </div>
+                <div className="absolute top-0 left-0 w-px h-6 bg-[#C8A96B]" />
 
-          <div className="grid md:grid-cols-2 gap-4">
-            {differences.map((d, i) => (
-              <DifferenceCard key={d.title} {...d} delay={i * 80} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Stats banner */}
-      <div
-        ref={statsRef}
-        className="border-t border-white/[0.05] py-16 md:py-20 px-6"
-        style={{ background: 'linear-gradient(135deg, #0d1a3a 0%, #111827 50%, #0d1a3a 100%)' }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
+                <div className="text-5xl lg:text-7xl font-black text-[#C8A96B] leading-none mb-3">
                   {s.value}
                 </div>
-                <div className="text-white/45 text-sm font-medium tracking-wide">{s.label}</div>
+
+                <div className="text-[11px] uppercase tracking-[0.22em] text-[#888]">
+                  {s.label}
+                </div>
+
               </div>
             ))}
+
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ───────────────── STORY ───────────────── */}
+
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+        <SectionLabel
+          number={1}
+          label="Our Story"
+        />
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+          className="grid lg:grid-cols-12 gap-14 lg:gap-20"
+        >
+
+          <motion.div
+            variants={fadeUp}
+            className="lg:col-span-5"
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
+              Built On
+              <span className="text-[#C8A96B]"> Trust, Partnership & Results</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            className="lg:col-span-7 space-y-6 text-[#A09A90] text-lg leading-relaxed"
+          >
+
+            <motion.p variants={fadeUp}>
+              Selected Group was founded over ten years ago by Steven Petty and
+              Harry Brown after a successful partnership during their time at
+              Abika Consulting.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              The business was built on a simple philosophy — recruitment should
+              go far beyond filling vacancies. It should create long-term value,
+              scalable growth, and genuine partnerships.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Over the past decade, Selected Group has helped software vendors,
+              consulting firms, and technology organisations scale strategically
+              across GTM, Product, Engineering, and Professional Services.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Today, the company partners with some of the world’s most
+              innovative technology businesses, supporting expansion into new
+              markets while helping clients build cultures where exceptional
+              people can thrive long-term.
+            </motion.p>
+
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ───────────────── VIDEO SECTION ───────────────── */}
+
+      <section className="bg-[#0D0D0D] border-y border-[rgba(255,255,255,0.06)]">
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+          <SectionLabel
+            number={2}
+            label="Founder Story"
+          />
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="relative overflow-hidden rounded-3xl border border-[rgba(255,255,255,0.08)]"
+          >
+
+            {/* VIDEO */}
+            <video
+              className="w-full h-[600px] object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source
+                src="/videos/selected-story.mp4"
+                type="video/mp4"
+              />
+            </video>
+
+            {/* overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/20 to-transparent" />
+
+            {/* content */}
+            <div className="absolute bottom-0 left-0 p-8 lg:p-14 max-w-3xl">
+
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-full bg-[#C8A96B] flex items-center justify-center">
+                  <Play className="w-5 h-5 text-black fill-black" />
+                </div>
+
+                <span className="text-sm uppercase tracking-[0.25em] text-[#C8A96B]">
+                  AI Generated Founder Story
+                </span>
+              </div>
+
+              <h3 className="text-3xl lg:text-5xl font-bold leading-tight mb-5">
+                The Journey Behind
+                <br />
+                Selected Group
+              </h3>
+
+              <p className="text-[#CFC7BC] text-lg leading-relaxed">
+                Discover how Steven Petty and Harry Brown built Selected Group
+                into a trusted technology recruitment partner focused on
+                long-term relationships, customer success, and helping
+                businesses scale globally.
+              </p>
+
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ───────────────── SERVICES ───────────────── */}
+
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+        <SectionLabel
+          number={3}
+          label="Services & Expertise"
+        />
+
+        <div className="grid lg:grid-cols-2 gap-16">
+
+          {/* services */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl font-bold mb-10"
+            >
+              Recruitment Services
+            </motion.h2>
+
+            <div className="space-y-4">
+              {services.map((service, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  className="flex items-center gap-4 p-5 rounded-xl
+                  border border-[rgba(255,255,255,0.08)]
+                  bg-[rgba(255,255,255,0.02)]"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-[#C8A96B]" />
+
+                  <span className="text-[#F0EDE8] font-medium">
+                    {service}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+          </motion.div>
+
+          {/* expertise */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl font-bold mb-10"
+            >
+              Specialist Areas
+            </motion.h2>
+
+            <div className="space-y-4">
+              {specialisms.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  className="flex items-center gap-4 p-5 rounded-xl
+                  border border-[rgba(200,169,107,0.18)]
+                  bg-[rgba(200,169,107,0.05)]"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-[#C8A96B]" />
+
+                  <span className="text-[#F0EDE8] font-medium">
+                    {item}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ───────────────── VALUES ───────────────── */}
+
+      <section className="bg-[#0D0D0D] border-y border-[rgba(255,255,255,0.06)]">
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+          <SectionLabel
+            number={4}
+            label="What Makes Us Different"
+          />
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            {values.map((value, i) => (
+              <motion.div
+                key={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="p-8 rounded-2xl
+                border border-[rgba(255,255,255,0.08)]
+                bg-[rgba(255,255,255,0.02)]"
+              >
+
+                <span className="text-[10px] font-mono text-[#C8A96B] opacity-40 block mb-5">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                <div className="w-10 h-[2px] bg-[#C8A96B] mb-5" />
+
+                <p className="text-[#F0EDE8] text-lg leading-relaxed">
+                  {value}
+                </p>
+
+              </motion.div>
+            ))}
+
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <div className="border-t border-white/[0.05] py-20 px-6 text-center">
-        <div className="max-w-xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
-            Ready to Work Together?
-          </h2>
-          <p className="text-white/45 text-base leading-relaxed mb-10">
-            Whether you're scaling a team or finding a single critical hire, let's start a conversation.
-          </p>
-          <button
-            onClick={() => {
-              navigate('/contact');
-              setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 300);
-            }}
-            className="group inline-flex items-center gap-3 bg-white text-black px-8 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:bg-white/90"
-          >
-            Get in Touch
-            <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
+      {/* ───────────────── ACHIEVEMENTS ───────────────── */}
+
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+        <SectionLabel
+          number={5}
+          label="Achievements"
+        />
+
+        <div className="space-y-4">
+
+          {achievements.map((item, i) => (
+            <motion.div
+              key={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="flex items-center gap-5 px-6 py-6 rounded-xl
+              border border-[rgba(255,255,255,0.07)]
+              bg-[rgba(255,255,255,0.02)]"
+            >
+
+              <CheckCircle2 className="w-5 h-5 text-[#C8A96B]" />
+
+              <span className="text-[#F0EDE8] text-lg">
+                {item}
+              </span>
+
+            </motion.div>
+          ))}
+
         </div>
-      </div>
+      </section>
+
+      {/* ───────────────── CLIENTS ───────────────── */}
+
+      <section className="bg-[#0D0D0D] border-t border-[rgba(255,255,255,0.06)]">
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+          <SectionLabel
+            number={6}
+            label="Trusted By"
+          />
+
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-3xl lg:text-5xl font-bold leading-tight max-w-4xl mb-16"
+          >
+            Trusted by some of the world’s leading technology businesses
+          </motion.h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+
+            {clients.map((client, i) => (
+              <motion.div
+                key={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="h-28 rounded-2xl border border-[rgba(255,255,255,0.08)]
+                bg-[rgba(255,255,255,0.02)]
+                flex items-center justify-center"
+              >
+
+                <span className="text-xl font-semibold text-[#F0EDE8]">
+                  {client}
+                </span>
+
+              </motion.div>
+            ))}
+
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── CTA ───────────────── */}
+
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="relative overflow-hidden rounded-3xl
+          border border-[rgba(200,169,107,0.2)]
+          bg-[rgba(200,169,107,0.05)]
+          p-10 lg:p-16"
+        >
+
+          <div className="absolute top-0 left-0 w-24 h-px bg-[#C8A96B]" />
+          <div className="absolute top-0 left-0 w-px h-24 bg-[#C8A96B]" />
+
+          <div className="max-w-3xl">
+
+            <p className="text-[11px] uppercase tracking-[0.3em] text-[#C8A96B] mb-5">
+              Let's Build Together
+            </p>
+
+            <h2 className="text-4xl lg:text-6xl font-bold leading-tight mb-8">
+              Helping Technology
+              <br />
+              Businesses Scale Globally
+            </h2>
+
+            <p className="text-[#A09A90] text-lg leading-relaxed mb-10">
+              Whether you are entering a new market, building leadership teams,
+              or scaling enterprise functions, Selected Group partners with you
+              to deliver exceptional talent and long-term growth.
+            </p>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl
+              bg-[#C8A96B] text-black font-bold hover:bg-[#D8BC80]
+              transition-all duration-300"
+            >
+              Speak With Our Team
+
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+
+          </div>
+        </motion.div>
+      </section>
 
     </div>
   );
