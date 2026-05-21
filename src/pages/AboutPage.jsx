@@ -127,25 +127,7 @@ export default function AboutPage() {
               and Engineering.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-
-              <a
-                href="/contact"
-                className="px-8 py-4 rounded-xl bg-white text-black font-semibold
-                hover:scale-[1.02] transition-all duration-300"
-              >
-                Get In Touch
-              </a>
-
-              <a
-                href="#story"
-                className="px-8 py-4 rounded-xl border border-white/10
-                hover:border-white/30 transition-all duration-300"
-              >
-                Our Story
-              </a>
-
-            </div>
+           
 
           </FadeIn>
         </div>
