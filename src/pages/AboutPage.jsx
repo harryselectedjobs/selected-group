@@ -16,10 +16,10 @@ import {
   Shield,
   Zap,
   ChevronRight,
-  Play,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
+import StorySlider from "../components/StorySlider";
 import harywifeImage from "../assets/images/harry-wife.jpg";
 import stevenwifeImage from "../assets/images/steven-wife.jpg";
 
@@ -69,8 +69,6 @@ const stats = [
 ];
 
 export default function AboutPage() {
-  const [videoHovered, setVideoHovered] = useState(false);
-
   return (
     <div className="bg-[#060606] text-white overflow-hidden">
       {/* ───────────────── HERO ───────────────── */}
@@ -283,53 +281,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ───────────────── VIDEO SECTION ───────────────── */}
+      {/* ───────────────── STORY SLIDER ───────────────── */}
 
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
-        <FadeIn className="text-center mb-14">
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <div className="w-8 h-px bg-[#F59E0B]" />
-            <span className="uppercase tracking-[0.25em] text-xs text-[#F59E0B]">
-              Company Story
-            </span>
-            <div className="w-8 h-px bg-[#F59E0B]" />
-          </div>
-
-          <h2 className="text-4xl lg:text-5xl font-bold mb-5">
-            The Selected Group Journey
-          </h2>
-        </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <div
-            onMouseEnter={() => setVideoHovered(true)}
-            onMouseLeave={() => setVideoHovered(false)}
-            className="relative overflow-hidden rounded-3xl border border-white/10
-            bg-gradient-to-br from-[#111827] to-[#0B0B0B]
-            aspect-video flex items-center justify-center group"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_60%)]" />
-            </div>
-
-            <div
-              className={`relative z-10 w-24 h-24 rounded-full border border-white/20
-              flex items-center justify-center transition-all duration-300
-              ${videoHovered ? "scale-110 bg-white/10" : "bg-white/5"}`}
-            >
-              <Play size={32} fill="white" className="ml-1" />
-            </div>
-
-            <div className="absolute bottom-8 left-8">
-              <p className="uppercase tracking-[0.25em] text-xs text-[#A1A1AA] mb-2">
-                AI Generated Founder Story
-              </p>
-
-              <h3 className="text-2xl font-bold">Video Coming Soon</h3>
-            </div>
-          </div>
-        </FadeIn>
-      </section>
+      <StorySlider />
     </div>
   );
 }
