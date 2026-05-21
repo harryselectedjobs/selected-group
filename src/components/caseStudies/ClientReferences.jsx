@@ -1,5 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 import { Quote, Linkedin } from "lucide-react";
 import deliaImage from "../../assets/images/delia-marinescu.jpg";
 import alejandroImage from "../../assets/images/alejandro-nestares.jpg";
@@ -17,6 +17,9 @@ const references = [
     company: "Oracle",
 
     image: deliaImage,
+
+    linkedin:
+      "https://www.linkedin.com/in/deliamarinescu/?originalSubdomain=ae",
 
     details: {
       role: "Enterprise Account Executives",
@@ -38,6 +41,8 @@ const references = [
 
     image: alejandroImage,
 
+    linkedin: "https://www.linkedin.com/in/alejandronestares/",
+
     details: {
       role: "Sales, Marketing & Professional Services",
       region: "Europe & US",
@@ -58,6 +63,8 @@ const references = [
 
     image: alessandroMasiImage,
 
+    linkedin: "https://www.linkedin.com/in/accenture/?originalSubdomain=ae",
+
     details: {
       role: "Enterprise Software Hiring",
       region: "Global",
@@ -68,6 +75,7 @@ const references = [
 ];
 
 export default function ClientReferences() {
+  const navigate = useNavigate();
   return (
     <section className="relative py-28 lg:py-36 bg-gradient-to-b from-[#0A0A0A] to-[#141414] overflow-hidden">
       {/* Background Glow */}
@@ -227,10 +235,15 @@ export default function ClientReferences() {
 
                   {/* Optional CTA */}
                   <div className="mt-8 pt-6 border-t border-white/[0.06]">
-                    <button className="inline-flex items-center gap-2 text-sm text-[#C8A96B] hover:text-[#D8BC82] transition-colors">
+                    <Link
+                      to={ref.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-[#C8A96B] hover:text-[#D8BC82] transition-colors"
+                    >
                       <Linkedin className="w-4 h-4" />
                       View Leadership Profile
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
