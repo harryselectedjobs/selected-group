@@ -20,6 +20,8 @@ import {
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
+import harywifeImage from "../assets/images/harry-wife.jpg";
+import stevenwifeImage from "../assets/images/steven-wife.jpg";
 
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
@@ -30,7 +32,7 @@ const useInView = (threshold = 0.15) => {
       ([entry]) => {
         if (entry.isIntersecting) setInView(true);
       },
-      { threshold }
+      { threshold },
     );
 
     if (ref.current) obs.observe(ref.current);
@@ -71,30 +73,30 @@ export default function AboutPage() {
 
   return (
     <div className="bg-[#060606] text-white overflow-hidden">
-
       {/* ───────────────── HERO ───────────────── */}
 
       <section className="relative min-h-screen flex items-center px-6 lg:px-12 overflow-hidden">
-
         {/* background gradients */}
 
         <div className="absolute inset-0">
+          <div
+            className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px]
+            bg-[#7C3AED]/20 blur-[160px] rounded-full"
+          />
 
-          <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px]
-            bg-[#7C3AED]/20 blur-[160px] rounded-full" />
+          <div
+            className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px]
+            bg-[#F59E0B]/10 blur-[160px] rounded-full"
+          />
 
-          <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px]
-            bg-[#F59E0B]/10 blur-[160px] rounded-full" />
-
-          <div className="absolute top-[40%] left-[50%] w-[400px] h-[400px]
-            bg-[#06B6D4]/10 blur-[120px] rounded-full" />
-
+          <div
+            className="absolute top-[40%] left-[50%] w-[400px] h-[400px]
+            bg-[#06B6D4]/10 blur-[120px] rounded-full"
+          />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10 w-full">
-
           <FadeIn>
-
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-px bg-gradient-to-r from-[#F59E0B] to-[#7C3AED]" />
               <span className="uppercase tracking-[0.3em] text-xs text-[#D1D5DB]">
@@ -110,12 +112,12 @@ export default function AboutPage() {
             >
               Building
               <br />
-
-              <span className="text-transparent bg-clip-text bg-gradient-to-r
-                from-[#F59E0B] via-[#E879F9] to-[#06B6D4]">
+              <span
+                className="text-transparent bg-clip-text bg-gradient-to-r
+                from-[#F59E0B] via-[#E879F9] to-[#06B6D4]"
+              >
                 World-Class
               </span>
-
               <br />
               Technology Teams
             </h1>
@@ -123,12 +125,9 @@ export default function AboutPage() {
             <p className="text-lg lg:text-xl text-[#A1A1AA] max-w-2xl leading-relaxed mb-12">
               Selected Group partners with software vendors, enterprise
               technology businesses, and consulting organisations to build
-              scalable teams across GTM, Product, Professional Services,
-              and Engineering.
+              scalable teams across GTM, Product, Professional Services, and
+              Engineering.
             </p>
-
-           
-
           </FadeIn>
         </div>
       </section>
@@ -137,12 +136,9 @@ export default function AboutPage() {
 
       <section className="border-y border-white/5 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-2 lg:grid-cols-4 gap-10">
-
           {stats.map((s, i) => (
             <FadeIn key={i} delay={i * 0.1}>
-
               <div className="relative p-8 rounded-2xl border border-white/5 bg-white/[0.03]">
-
                 <div className="absolute top-0 left-0 w-10 h-px bg-gradient-to-r from-[#F59E0B] to-transparent" />
 
                 <div className="text-5xl font-black mb-3 text-white">
@@ -152,21 +148,16 @@ export default function AboutPage() {
                 <div className="uppercase tracking-[0.2em] text-xs text-[#71717A]">
                   {s.label}
                 </div>
-
               </div>
-
             </FadeIn>
           ))}
-
         </div>
       </section>
 
       {/* ───────────────── INTRO ───────────────── */}
 
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28 grid lg:grid-cols-12 gap-20">
-
         <FadeIn className="lg:col-span-5">
-
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-px bg-[#E879F9]" />
             <span className="uppercase tracking-[0.25em] text-xs text-[#E879F9]">
@@ -179,11 +170,9 @@ export default function AboutPage() {
             <br />
             Recruitment
           </h2>
-
         </FadeIn>
 
         <FadeIn delay={0.15} className="lg:col-span-7 space-y-6">
-
           <p className="text-lg text-[#A1A1AA] leading-relaxed">
             Selected Group was founded over ten years ago with a clear mission:
             to deliver a genuinely results-driven recruitment service for
@@ -193,8 +182,8 @@ export default function AboutPage() {
 
           <p className="text-lg text-[#A1A1AA] leading-relaxed">
             The company partners with organisations throughout every stage of
-            their growth journey — whether launching into new markets,
-            expanding existing teams, or building scalable global functions.
+            their growth journey — whether launching into new markets, expanding
+            existing teams, or building scalable global functions.
           </p>
 
           <p className="text-lg text-[#A1A1AA] leading-relaxed">
@@ -202,7 +191,6 @@ export default function AboutPage() {
             relationship-led approach combined with deep expertise across
             enterprise technology hiring.
           </p>
-
         </FadeIn>
       </section>
 
@@ -213,9 +201,7 @@ export default function AboutPage() {
         className="bg-[#0B0B0B] border-y border-white/5 py-28 px-6 lg:px-12"
       >
         <div className="max-w-7xl mx-auto">
-
           <FadeIn className="text-center mb-16">
-
             <div className="flex items-center justify-center gap-3 mb-5">
               <div className="w-8 h-px bg-[#06B6D4]" />
               <span className="uppercase tracking-[0.3em] text-xs text-[#06B6D4]">
@@ -229,102 +215,78 @@ export default function AboutPage() {
             </h2>
 
             <p className="text-[#A1A1AA] max-w-2xl mx-auto text-lg leading-relaxed">
-              Selected Group was founded by Steven Petty and Harry Brown —
-              built on long-term friendship, loyalty, and a shared ambition
-              to redefine technology recruitment.
+              Selected Group was founded by Steven Petty and Harry Brown — built
+              on long-term friendship, loyalty, and a shared ambition to
+              redefine technology recruitment.
             </p>
-
           </FadeIn>
 
           {/* founder photo cards */}
 
           <div className="grid lg:grid-cols-2 gap-8">
-
             {/* Harry */}
 
             <FadeIn>
-
               <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-
                 <div className="aspect-[4/5] overflow-hidden">
-
                   <img
-                    src="/founders/harry-wife.jpg"
+                    src={harywifeImage}
                     alt="Harry Brown and wife"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-
                 </div>
 
                 <div className="p-8">
-
                   <p className="uppercase tracking-[0.25em] text-xs text-[#F59E0B] mb-3">
                     Co-Founder
                   </p>
 
-                  <h3 className="text-3xl font-bold mb-4">
-                    Harry Brown
-                  </h3>
+                  <h3 className="text-3xl font-bold mb-4">Harry Brown</h3>
 
                   <p className="text-[#A1A1AA] leading-relaxed">
                     Harry helped build Selected Group around the belief that
-                    recruitment should create long-term impact — not simply
-                    fill vacancies.
+                    recruitment should create long-term impact — not simply fill
+                    vacancies.
                   </p>
-
                 </div>
               </div>
-
             </FadeIn>
 
             {/* Steven */}
 
             <FadeIn delay={0.15}>
-
               <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-
                 <div className="aspect-[4/5] overflow-hidden">
-
                   <img
-                    src="/founders/steven-wife.jpg"
+                    src={stevenwifeImage}
                     alt="Steven Petty and wife"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-
                 </div>
 
                 <div className="p-8">
-
                   <p className="uppercase tracking-[0.25em] text-xs text-[#E879F9] mb-3">
                     Co-Founder
                   </p>
 
-                  <h3 className="text-3xl font-bold mb-4">
-                    Steven Petty
-                  </h3>
+                  <h3 className="text-3xl font-bold mb-4">Steven Petty</h3>
 
                   <p className="text-[#A1A1AA] leading-relaxed">
                     Steven has spent more than a decade helping enterprise
                     technology companies scale through relationship-led,
                     strategic recruitment partnerships.
                   </p>
-
                 </div>
               </div>
-
             </FadeIn>
-
           </div>
-
         </div>
       </section>
 
       {/* ───────────────── VIDEO SECTION ───────────────── */}
 
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-28">
-
         <FadeIn className="text-center mb-14">
-
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="w-8 h-px bg-[#F59E0B]" />
             <span className="uppercase tracking-[0.25em] text-xs text-[#F59E0B]">
@@ -336,11 +298,9 @@ export default function AboutPage() {
           <h2 className="text-4xl lg:text-5xl font-bold mb-5">
             The Selected Group Journey
           </h2>
-
         </FadeIn>
 
         <FadeIn delay={0.1}>
-
           <div
             onMouseEnter={() => setVideoHovered(true)}
             onMouseLeave={() => setVideoHovered(false)}
@@ -348,7 +308,6 @@ export default function AboutPage() {
             bg-gradient-to-br from-[#111827] to-[#0B0B0B]
             aspect-video flex items-center justify-center group"
           >
-
             <div className="absolute inset-0 opacity-20">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_60%)]" />
             </div>
@@ -362,23 +321,15 @@ export default function AboutPage() {
             </div>
 
             <div className="absolute bottom-8 left-8">
-
               <p className="uppercase tracking-[0.25em] text-xs text-[#A1A1AA] mb-2">
                 AI Generated Founder Story
               </p>
 
-              <h3 className="text-2xl font-bold">
-                Video Coming Soon
-              </h3>
-
+              <h3 className="text-2xl font-bold">Video Coming Soon</h3>
             </div>
-
           </div>
-
         </FadeIn>
-
       </section>
-
     </div>
   );
 }
