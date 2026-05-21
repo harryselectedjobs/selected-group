@@ -1,6 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Quote, Linkedin } from "lucide-react";
+import deliaImage from "../../assets/images/delia-marinescu.jpg";
+import alejandroImage from "../../assets/images/alejandro-nestares.jpg";
+import alessandroMasiImage from "../../assets/images/alessandro-masi.png";
 
 const references = [
   {
@@ -13,8 +16,7 @@ const references = [
 
     company: "Oracle",
 
-    image:
-      "/speakers/delia-marinescu.jpg",
+    image: deliaImage,
 
     details: {
       role: "Enterprise Account Executives",
@@ -34,8 +36,7 @@ const references = [
 
     company: "OverIT",
 
-    image:
-      "/speakers/alejandro-nestares.jpg",
+    image: alejandroImage,
 
     details: {
       role: "Sales, Marketing & Professional Services",
@@ -55,8 +56,7 @@ const references = [
 
     company: "OverIT",
 
-    image:
-      "/speakers/alessandro-masi.jpg",
+    image: alessandroMasiImage,
 
     details: {
       role: "Enterprise Software Hiring",
@@ -70,7 +70,6 @@ const references = [
 export default function ClientReferences() {
   return (
     <section className="relative py-28 lg:py-36 bg-gradient-to-b from-[#0A0A0A] to-[#141414] overflow-hidden">
-
       {/* Background Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[180px] opacity-10"
@@ -90,7 +89,6 @@ export default function ClientReferences() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -111,20 +109,17 @@ export default function ClientReferences() {
 
           <h2 className="text-4xl lg:text-6xl font-bold tracking-tight text-[#F5F5F5] mb-6">
             Trusted by Enterprise
-            <span className="block text-white/45">
-              Technology Leaders
-            </span>
+            <span className="block text-white/45">Technology Leaders</span>
           </h2>
 
           <p className="text-lg lg:text-xl text-[#B0B0B0] leading-relaxed max-w-3xl mx-auto">
-            Testimonials from enterprise software and technology leaders
-            across global hiring engagements and strategic growth initiatives.
+            Testimonials from enterprise software and technology leaders across
+            global hiring engagements and strategic growth initiatives.
           </p>
         </motion.div>
 
         {/* Testimonials */}
         <div className="space-y-10">
-
           {references.map((ref, index) => (
             <motion.div
               key={index}
@@ -137,18 +132,14 @@ export default function ClientReferences() {
               }}
               className="group relative overflow-hidden rounded-3xl border border-white/[0.08] bg-[rgba(255,255,255,0.03)] backdrop-blur-2xl hover:border-[rgba(200,169,107,0.18)] hover:bg-[rgba(255,255,255,0.05)] transition-all duration-500"
             >
-
               {/* Top Glow Line */}
               <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#C8A96B] to-transparent opacity-50" />
 
               <div className="grid lg:grid-cols-2 gap-10 p-8 lg:p-14">
-
                 {/* LEFT SIDE */}
                 <div className="relative">
-
                   {/* Speaker Profile */}
                   <div className="flex items-center gap-5 mb-8">
-
                     <div className="relative">
                       <img
                         src={ref.image}
@@ -180,18 +171,15 @@ export default function ClientReferences() {
                   <blockquote className="text-lg lg:text-xl leading-relaxed italic text-[#F5F5F5] mb-10">
                     “{ref.quote}”
                   </blockquote>
-
                 </div>
 
                 {/* RIGHT SIDE */}
                 <div>
-
                   <div className="uppercase text-xs tracking-[0.25em] text-[#C8A96B] mb-8">
                     Hiring Breakdown
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
-
                     {/* Role */}
                     <div className="p-5 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-white/[0.06]">
                       <div className="text-[11px] uppercase tracking-[0.2em] text-[#B0B0B0] mb-3">
@@ -235,25 +223,19 @@ export default function ClientReferences() {
                         {ref.details.stage}
                       </div>
                     </div>
-
                   </div>
 
                   {/* Optional CTA */}
                   <div className="mt-8 pt-6 border-t border-white/[0.06]">
-                    <button
-                      className="inline-flex items-center gap-2 text-sm text-[#C8A96B] hover:text-[#D8BC82] transition-colors"
-                    >
+                    <button className="inline-flex items-center gap-2 text-sm text-[#C8A96B] hover:text-[#D8BC82] transition-colors">
                       <Linkedin className="w-4 h-4" />
                       View Leadership Profile
                     </button>
                   </div>
-
                 </div>
-
               </div>
             </motion.div>
           ))}
-
         </div>
       </div>
     </section>

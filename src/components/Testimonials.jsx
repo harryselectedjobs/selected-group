@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Quote, ChevronDown } from "lucide-react";
+import kevinImage from "../assets/images/kevin-taylor.jpg";
+import peterImage from "../assets/images/peter-gerber.jpg";
+import alexImage from "../assets/images/alex-wood.jpg";
 
 const testimonials = [
   {
@@ -10,7 +13,7 @@ const testimonials = [
 
     role: "Talent Acquisition Lead, AVIV Group",
 
-    image: "/speakers/kevin-taylor.jpg",
+    image: kevinImage,
 
     accent: "#34D399",
 
@@ -28,7 +31,7 @@ const testimonials = [
 
     role: "Senior Director, Product — AVIV Group",
 
-    image: "/speakers/peter-gerber.jpg",
+    image: peterImage,
 
     accent: "#FBBF24",
 
@@ -46,7 +49,7 @@ const testimonials = [
 
     role: "Chief Commercial Officer, Behavox",
 
-    image: "/speakers/alex-wood.jpg",
+    image: alexImage,
 
     accent: "#F87171",
 
@@ -57,21 +60,12 @@ const testimonials = [
   },
 ];
 
-function TestimonialCard({
-  quote,
-  name,
-  role,
-  image,
-  accent,
-  details,
-  delay,
-}) {
+function TestimonialCard({ quote, name, role, image, accent, details, delay }) {
   const ref = useRef(null);
 
   const [expanded, setExpanded] = useState(false);
 
-  const shortQuote =
-    quote.length > 180 ? quote.slice(0, 180) + "..." : quote;
+  const shortQuote = quote.length > 180 ? quote.slice(0, 180) + "..." : quote;
 
   useEffect(() => {
     const el = ref.current;
@@ -85,8 +79,7 @@ function TestimonialCard({
       ([entry]) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
-            el.style.transition =
-              "opacity 0.7s ease, transform 0.7s ease";
+            el.style.transition = "opacity 0.7s ease, transform 0.7s ease";
 
             el.style.opacity = "1";
             el.style.transform = "translateY(0)";
@@ -95,7 +88,7 @@ function TestimonialCard({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     observer.observe(el);
@@ -127,10 +120,7 @@ function TestimonialCard({
             {name}
           </h3>
 
-          <p
-            className="text-sm mt-1 font-medium"
-            style={{ color: accent }}
-          >
+          <p className="text-sm mt-1 font-medium" style={{ color: accent }}>
             {role}
           </p>
         </div>
@@ -175,9 +165,7 @@ function TestimonialCard({
             Focus
           </span>
 
-          <span className="text-sm text-white/85">
-            {details.focus}
-          </span>
+          <span className="text-sm text-white/85">{details.focus}</span>
         </div>
 
         <div className="flex items-center justify-between">
@@ -185,9 +173,7 @@ function TestimonialCard({
             Region
           </span>
 
-          <span className="text-sm text-white/85">
-            {details.region}
-          </span>
+          <span className="text-sm text-white/85">{details.region}</span>
         </div>
       </div>
     </div>
@@ -208,8 +194,7 @@ export default function Testimonials() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.style.transition =
-            "opacity 0.8s ease, transform 0.8s ease";
+          el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
 
           el.style.opacity = "1";
           el.style.transform = "translateY(0)";
@@ -217,7 +202,7 @@ export default function Testimonials() {
           observer.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     observer.observe(el);
@@ -227,7 +212,6 @@ export default function Testimonials() {
 
   return (
     <section className="relative bg-black py-20 md:py-28 border-t border-white/[0.05] overflow-hidden">
-
       {/* Glow */}
       <div
         className="absolute left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[180px] opacity-[0.05]"
@@ -237,10 +221,8 @@ export default function Testimonials() {
       />
 
       <div className="relative max-w-7xl mx-auto px-6">
-
         {/* Header */}
         <div ref={headerRef} className="mb-16">
-
           <div className="flex items-center gap-3 mb-6">
             <span className="w-8 h-px bg-[#C8A96B]" />
 
@@ -251,28 +233,21 @@ export default function Testimonials() {
 
           <h2 className="text-[3rem] md:text-[4.5rem] font-bold text-white leading-[0.95] tracking-tight max-w-4xl">
             Trusted by Enterprise
-            <span className="block text-white/40">
-              Technology Leaders
-            </span>
+            <span className="block text-white/40">Technology Leaders</span>
           </h2>
 
           <p className="text-white/55 text-lg mt-8 max-w-2xl leading-relaxed">
-            Strategic hiring partnerships across enterprise software,
-            SaaS, AI, and global technology organisations.
+            Strategic hiring partnerships across enterprise software, SaaS, AI,
+            and global technology organisations.
           </p>
         </div>
 
         {/* Cards */}
         <div className="grid lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <TestimonialCard
-              key={t.name}
-              {...t}
-              delay={i * 120}
-            />
+            <TestimonialCard key={t.name} {...t} delay={i * 120} />
           ))}
         </div>
-
       </div>
     </section>
   );
