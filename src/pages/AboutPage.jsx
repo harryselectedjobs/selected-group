@@ -117,14 +117,15 @@ export default function AboutPage() {
                 World-Class
               </span>
               <br />
-              Technology Teams
+              Teams
             </h1>
 
             <p className="text-lg lg:text-xl text-[#A1A1AA] max-w-2xl leading-relaxed mb-12">
-              Selected Group partners with software vendors, enterprise
-              technology businesses, and consulting organisations to build
-              scalable teams across GTM, Product, Professional Services, and
-              Engineering.
+              Selected Group is a specialist technology recruitment business
+              founded over ten years ago with a clear mission: to deliver a
+              genuinely results-driven recruitment service for software vendors,
+              technology businesses, and consulting organisations looking to
+              scale.
             </p>
           </FadeIn>
         </div>
@@ -172,22 +173,32 @@ export default function AboutPage() {
 
         <FadeIn delay={0.15} className="lg:col-span-7 space-y-6">
           <p className="text-lg text-[#A1A1AA] leading-relaxed">
-            Selected Group was founded over ten years ago with a clear mission:
-            to deliver a genuinely results-driven recruitment service for
-            software vendors, technology businesses, and consulting
-            organisations looking to scale.
+            Selected Group was founded over ten years ago by Steven Petty and
+            Harry Brown following a successful partnership during their time
+            together at Abika Consulting. Having developed elite recruitment
+            expertise under the guidance of respected industry mentors James
+            Gordon and Joe Armiger, the two founders set out to build a
+            recruitment business with a different approach - one centred around
+            relationships, trust, and genuine partnership.
           </p>
 
           <p className="text-lg text-[#A1A1AA] leading-relaxed">
-            The company partners with organisations throughout every stage of
-            their growth journey — whether launching into new markets, expanding
-            existing teams, or building scalable global functions.
+            hough people often say never to go into business with family or
+            close friends, Steven and Harry have built the foundation of
+            Selected Group’s success on exactly that relationship. Over the past
+            decade, they have experienced the highs and lows of business and
+            life together, creating a culture built on loyalty, resilience, and
+            always wanting the best for one another, their employees, and their
+            customers.
           </p>
 
           <p className="text-lg text-[#A1A1AA] leading-relaxed">
-            What differentiates Selected Group is its consultative,
-            relationship-led approach combined with deep expertise across
-            enterprise technology hiring.
+            Selected Group was established on the belief that recruitment is
+            about far more than filling jobs. The company partners with software
+            vendors, consulting firms, and technology organisations to help them
+            scale strategically across GTM, Professional Services, Product, and
+            Engineering functions - whether entering new markets or expanding
+            existing teams.
           </p>
         </FadeIn>
       </section>
