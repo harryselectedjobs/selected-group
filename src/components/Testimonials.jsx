@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Quote, ChevronDown } from "lucide-react";
-import kevinImage from "../assets/images/kevin-taylor.jpg";
-import peterImage from "../assets/images/peter-gerber.jpg";
-import alexImage from "../assets/images/alex-wood.jpg";
+import philippeImage from "../assets/images/philippe-mathieu.jpg";
+import choleImage from "../assets/images/chloe-elliott.jpg";
+import deliaImage from "../assets/images/delia-marinescu.jpg";
 
 const testimonials = [
   {
     quote:
-      "Selected has been instrumental in building our dynamic team, consistently providing top-tier candidates who perfectly align with our company culture and requirements.",
+      "After receiving commendable feedback from my former associates at Oracle, I engaged with Selected during my tenure at Palantir. Assuming the role of President tasked with advancing our Private Sector initiatives, I sought a reputable agency capable of delivering impeccable service.",
 
-    name: "Kevin Taylor",
+    name: "Philippe Mathieu",
 
-    role: "Talent Acquisition Lead, AVIV Group",
+    role: "President EMEA",
 
-    image: kevinImage,
+    image: philippeImage,
 
     accent: "#34D399",
 
@@ -25,13 +25,13 @@ const testimonials = [
 
   {
     quote:
-      "Steven and his team at Selected are unparalleled in their dedication to sourcing top-tier talent. Selected played an instrumental role in helping me build a stellar team of Product Directors.",
+      "When it comes to Enterprise software sales recruitment Selected is a very strong recruitment partner to Oracle, they were involved in a large scale hiring campaign throughout 2017, road mapping and identifying hidden talent in some of our most challenging regions.",
 
-    name: "Peter Gerber",
+    name: "Delia Marinescu",
 
-    role: "Senior Director, Product — AVIV Group",
+    role: "VP of Talent EMEA",
 
-    image: peterImage,
+    image: deliaImage,
 
     accent: "#FBBF24",
 
@@ -43,13 +43,13 @@ const testimonials = [
 
   {
     quote:
-      "Selected were engaged at a time when we were experiencing a hypergrowth phase, and their ability to understand what was required and execute at pace was superb.",
+      "Harry and the staff at Selected work with laser focus precision to identify the market’s best talent and ensure thoroughness in their delivery at every stage through the process - be that market mapping, industry insights, candidate qualification, expectation setting, offer management etc. ",
 
-    name: "Alex Wood",
+    name: "Chloe Elliott",
 
-    role: "Chief Commercial Officer, Behavox",
+    role: "Global Recruiting Leader",
 
-    image: alexImage,
+    image: choleImage,
 
     accent: "#F87171",
 
