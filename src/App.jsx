@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 /* ───────────────── COMPONENTS ───────────────── */
 import Navbar from "./components/Navbar";
@@ -20,6 +20,7 @@ import CreateSequence from "./components/CreateSequence";
 
 /* ───────────────── PAGES ───────────────── */
 import CRM from "./pages/CRM";
+import Login from "./pages/Login";
 
 import UseCasesPage from "./pages/UseCasesPage";
 
@@ -53,6 +54,16 @@ import AvivCaseStudy from "./pages/CaseStudies/AvivCaseStudy";
 import BehavoxCaseStudy from "./pages/CaseStudies/BehavoxCaseStudy";
 import OverITCaseStudy from "./pages/CaseStudies/OverITCaseStudy";
 import OracleCaseStudy from "./pages/CaseStudies/OracleCaseStudy";
+
+/* ───────────────── PROTECTED ROUTE ───────────────── */
+function ProtectedRoute({ children }) {
+  const location = useLocation();
+  const token = localStorage.getItem("crm_token");
+  if (!token) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  return children;
+}
 
 /* ───────────────── HOME PAGE ───────────────── */
 function Home() {
@@ -152,8 +163,18 @@ export default function App() {
 
           <Route path="/case-studies/behavox" element={<BehavoxCaseStudy />} />
 
+          {/* ───────────── LOGIN ───────────── */}
+          <Route path="/login" element={<Login />} />
+
           {/* ───────────── CRM ───────────── */}
-          <Route path="/crm" element={<CRM />} />
+          <Route
+            path="/crm"
+            element={
+              <ProtectedRoute>
+                <CRM />
+              </ProtectedRoute>
+            }
+          />
 
           {/* ───────────── SEQUENCES ───────────── */}
           <Route path="/sequences" element={<SequenceList />} />
