@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Quote, ChevronDown } from "lucide-react";
+import kevinImage from "../assets/images/kevin-taylor.jpg";
+import peterImage from "../assets/images/peter-gerber.jpg";
+import alexImage from "../assets/images/alex-wood.jpg";
 import philippeImage from "../assets/images/philippe-mathieu.jpg";
 import choleImage from "../assets/images/chloe-elliott.jpg";
 import deliaImage from "../assets/images/delia-marinescu.jpg";
@@ -50,6 +53,57 @@ const testimonials = [
     role: "Global Recruiting Leader",
 
     image: choleImage,
+
+    accent: "#F87171",
+
+    details: {
+      focus: "Hypergrowth Enterprise Hiring",
+      region: "UK & United States",
+    },
+  },
+  {
+    quote:
+      "Selected has been instrumental in building our dynamic team, consistently providing top-tier candidates who perfectly align with our company culture and requirements.",
+
+    name: "Kevin Taylor",
+
+    role: "Talent Acquisition Lead, AVIV Group",
+
+    image: kevinImage,
+
+    accent: "#34D399",
+
+    details: {
+      focus: "Product Leadership Recruitment",
+      region: "Europe",
+    },
+  },
+  {
+    quote:
+      "Steven and his team at Selected are unparalleled in their dedication to sourcing top-tier talent. Selected played an instrumental role in helping me build a stellar team of Product Directors.",
+
+    name: "Peter Gerber",
+
+    role: "Senior Director, Product — AVIV Group",
+
+    image: peterImage,
+
+    accent: "#FBBF24",
+
+    details: {
+      focus: "Product Director Search",
+      region: "European Markets",
+    },
+  },
+  {
+    quote:
+      "Selected were engaged at a time when we were experiencing a hypergrowth phase, and their ability to understand what was required and execute at pace was superb.",
+
+    name: "Alex Wood",
+
+    role: "Chief Commercial Officer, Behavox",
+
+    image: alexImage,
 
     accent: "#F87171",
 
