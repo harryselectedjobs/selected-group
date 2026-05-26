@@ -21,6 +21,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
+          command_timeout: 10m        # ← add this (default is only 10s)
           script: |
             cd /home/ec2-user
 
