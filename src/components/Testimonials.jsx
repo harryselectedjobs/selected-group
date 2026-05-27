@@ -14,7 +14,7 @@ const testimonials = [
 
     name: "Philippe Mathieu",
 
-    role: "President EMEA",
+    role: "President EMEA — Palantir",
 
     image: philippeImage,
 
@@ -32,7 +32,7 @@ const testimonials = [
 
     name: "Delia Marinescu",
 
-    role: "VP of Talent EMEA",
+    role: "VP of Talent EMEA — Oracle",
 
     image: deliaImage,
 
@@ -50,7 +50,7 @@ const testimonials = [
 
     name: "Chloe Elliott",
 
-    role: "Global Recruiting Leader",
+    role: "Global Recruiting Leader — Apple",
 
     image: choleImage,
 
