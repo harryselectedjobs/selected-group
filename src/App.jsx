@@ -21,6 +21,7 @@ import CreateSequence from "./components/CreateSequence";
 /* ───────────────── PAGES ───────────────── */
 import CRM from "./pages/CRM";
 import Login from "./pages/Login";
+import NewsPage from "./pages/NewsPage";
 
 import UseCasesPage from "./pages/UseCasesPage";
 
@@ -97,6 +98,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/research" element={<ResearchPage />} />
+          <Route path="/news" element={<NewsPage />} />
 
           {/* ───────────── PRACTICE AREAS ───────────── */}
           <Route path="/gtm" element={<GTMPage />} />

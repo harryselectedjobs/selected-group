@@ -9,6 +9,7 @@ const navLinks = [
   { label: "About", href: null, route: "/about" },
   { label: "Case Studies", href: null, route: "/case-studies" },
   { label: "Engagement Models", href: null, route: "/engagement-models" },
+  { label: "News", href: null, route: "/news" },
   { label: "Contact", href: null, route: "/contact" },
 ];
 
@@ -38,6 +39,8 @@ export default function Navbar() {
       setActive("Engagement Models");
     } else if (location.pathname === "/contact") {
       setActive("Contact");
+    } else if (location.pathname === "/news") {
+      setActive("News");
     } else if (location.pathname === "/crm") {
       setActive("CRM");
     } else if (location.pathname === "/") {
