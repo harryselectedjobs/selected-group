@@ -7,6 +7,10 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+ARG VITE_GNEWS_API_KEY
+ENV VITE_GNEWS_API_KEY=$VITE_GNEWS_API_KEY
+
 RUN npm run build
 
 # Step 2: Serve with nginx
