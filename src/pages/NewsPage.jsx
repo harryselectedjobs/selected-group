@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import {
@@ -15,13 +15,14 @@ import {
   Share2,
   ExternalLink,
   Clock,
-  RefreshCw,
   ChevronRight,
+  ChevronDown,
   Newspaper,
   Rocket,
   Layers,
   BarChart2,
   Zap,
+  CalendarDays,
 } from "lucide-react";
 
 const TOPICS = [
@@ -48,18 +49,46 @@ function getTodayDate() {
   return new Date().toISOString().split("T")[0];
 }
 
+function getLast7Dates() {
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    return d.toISOString().split("T")[0];
+  });
+}
+
+function formatDateLabel(dateStr) {
+  const today = getTodayDate();
+  const yesterday = (() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 1);
+    return d.toISOString().split("T")[0];
+  })();
+  if (dateStr === today) return "Today";
+  if (dateStr === yesterday) return "Yesterday";
+  const d = new Date(dateStr + "T00:00:00");
+  return d.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 export default function NewsPage() {
   const [activeTopic, setActiveTopic] = useState(TOPICS[5]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(getTodayDate());
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
+  const datePickerRef = useRef(null);
 
-  const fetchNews = useCallback(async (topic) => {
+  const fetchNews = useCallback(async (topic, date) => {
     setLoading(true);
     setError(null);
     try {
       const res = await axios.get(API_BASE, {
-        params: { topic: topic.label, date: getTodayDate() },
+        params: { topic: topic.label, date },
       });
       setArticles(res.data.data || []);
     } catch (err) {
@@ -71,8 +100,18 @@ export default function NewsPage() {
   }, []);
 
   useEffect(() => {
-    fetchNews(activeTopic);
-  }, [activeTopic, fetchNews]);
+    fetchNews(activeTopic, selectedDate);
+  }, [activeTopic, selectedDate, fetchNews]);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
+        setDatePickerOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white pt-20">
@@ -177,17 +216,59 @@ export default function NewsPage() {
                 <h2 className="text-lg font-light">{activeTopic.label}</h2>
                 <p className="text-xs text-white/35 mt-0.5">Latest updates</p>
               </div>
-              <button
-                onClick={() => fetchNews(activeTopic)}
-                disabled={loading}
-                className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors px-3 py-2 rounded-lg border border-white/10 hover:border-white/25"
-              >
-                <RefreshCw
-                  size={11}
-                  className={loading ? "animate-spin" : ""}
-                />
-                Refresh
-              </button>
+              {/* Date picker */}
+              <div className="relative" ref={datePickerRef}>
+                <button
+                  onClick={() => setDatePickerOpen((o) => !o)}
+                  className={`flex items-center gap-2 text-xs px-3 py-2 rounded-lg border transition-all duration-200 ${
+                    datePickerOpen
+                      ? "border-white/30 text-white bg-white/[0.06]"
+                      : "border-white/10 text-white/50 hover:text-white hover:border-white/25"
+                  }`}
+                >
+                  <CalendarDays size={12} />
+                  <span>{formatDateLabel(selectedDate)}</span>
+                  <ChevronDown
+                    size={11}
+                    className={`transition-transform duration-200 ${datePickerOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {datePickerOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 top-full mt-2 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50"
+                    >
+                      {getLast7Dates().map((date) => {
+                        const isSelected = date === selectedDate;
+                        return (
+                          <button
+                            key={date}
+                            onClick={() => {
+                              setSelectedDate(date);
+                              setDatePickerOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-4 py-2.5 text-xs transition-colors duration-150 ${
+                              isSelected
+                                ? "bg-white/10 text-white"
+                                : "text-white/50 hover:text-white hover:bg-white/5"
+                            }`}
+                          >
+                            <span>{formatDateLabel(date)}</span>
+                            <span className="text-[10px] text-white/25 font-mono">
+                              {date.slice(5)}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
             {error && (
