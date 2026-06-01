@@ -9,8 +9,6 @@ import {
   Brain,
   Shield,
   Server,
-  Zap,
-  Rocket,
   Globe,
   Briefcase,
   BookOpen,
@@ -20,104 +18,50 @@ import {
   RefreshCw,
   ChevronRight,
   Newspaper,
+  Rocket,
+  Layers,
+  BarChart2,
+  Zap,
 } from "lucide-react";
 
 const TOPICS = [
-  {
-    label: "Quantum & Deep Tech",
-    query: "quantum computing deep tech",
-    icon: Cpu,
-  },
-  {
-    label: "Government Digital Transformation",
-    query: "government digital transformation",
-    icon: Landmark,
-  },
-  {
-    label: "Startup Funding Intelligence",
-    query: "startup funding venture capital",
-    icon: TrendingUp,
-  },
-  {
-    label: "Agentic AI",
-    query: "agentic AI autonomous agents",
-    icon: Bot,
-  },
-  {
-    label: "Artificial Intelligence",
-    query: "artificial intelligence AI",
-    icon: Brain,
-  },
-  {
-    label: "Cybersecurity",
-    query: "cybersecurity data breach",
-    icon: Shield,
-  },
-  {
-    label: "AI Infrastructure & Compute",
-    query: "AI infrastructure GPU compute",
-    icon: Server,
-  },
-  {
-    label: "Robotics & Physical AI",
-    query: "robotics physical AI",
-    icon: Zap,
-  },
-  {
-    label: "Defense & Space Technology",
-    query: "defense space technology",
-    icon: Rocket,
-  },
-  {
-    label: "Emerging Technologies",
-    query: "emerging technology innovation",
-    icon: Globe,
-  },
-  {
-    label: "Business & Enterprise Technology",
-    query: "enterprise technology business software",
-    icon: Briefcase,
-  },
-  {
-    label: "Research & Intelligence",
-    query: "AI research intelligence",
-    icon: BookOpen,
-  },
-  {
-    label: "Social & Content Automation",
-    query: "content automation social media AI",
-    icon: Share2,
-  },
+  { label: "Quantum Computing & Quantum Technology", icon: Cpu },
+  { label: "Government Digital Transformation Projects", icon: Landmark },
+  { label: "Startup Funding & Venture Capital", icon: TrendingUp },
+  { label: "Agentic AI & Autonomous AI Systems", icon: Bot },
+  { label: "Cybersecurity & Cyber World", icon: Shield },
+  { label: "Artificial Intelligence & Machine Learning", icon: Brain },
+  { label: "Emerging Technology Research", icon: Zap },
+  { label: "Enterprise Technology & Cloud", icon: Server },
+  { label: "Global Technology News & Trends", icon: Globe },
+  { label: "Social Media Automation & AI Content Generation", icon: Share2 },
+  { label: "Autonomous Content Intelligence Platform", icon: Layers },
+  { label: "Technology Investment Intelligence", icon: BarChart2 },
+  { label: "Future of Work & Automation", icon: Briefcase },
+  { label: "Defense, Space & Strategic Technology", icon: Rocket },
+  { label: "Technology Research & Thought Leadership", icon: BookOpen },
 ];
 
-const API_KEY = import.meta.env.VITE_GNEWS_API_KEY;
+const API_BASE = "http://13.61.16.106:1802/api/news";
+
+function getTodayDate() {
+  return new Date().toISOString().split("T")[0];
+}
 
 export default function NewsPage() {
-  const [activeTopic, setActiveTopic] = useState(TOPICS[4]);
+  const [activeTopic, setActiveTopic] = useState(TOPICS[5]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchNews = useCallback(async (topic) => {
-    if (!API_KEY) {
-      setError(
-        "API key not configured. Add VITE_GNEWS_API_KEY=your_key to your .env file. Get a free key at gnews.io"
-      );
-      return;
-    }
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get("https://gnews.io/api/v4/search", {
-        params: {
-          q: topic.query,
-          token: API_KEY,
-          lang: "en",
-          max: 12,
-          sortby: "publishedAt",
-        },
+      const res = await axios.get(API_BASE, {
+        params: { topic: topic.label, date: getTodayDate() },
       });
-      setArticles(res.data.articles || []);
+      setArticles(res.data.data || []);
     } catch (err) {
       setError("Failed to fetch news. Please try again.");
       setArticles([]);
@@ -132,7 +76,6 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-black text-white pt-20">
-      {/* Page Header */}
       <div className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-10">
           <motion.div
@@ -147,8 +90,7 @@ export default function NewsPage() {
               </span>
             </div>
             <h1 className="text-3xl md:text-5xl font-light tracking-tight">
-              Latest{" "}
-              <span className="text-white/40">Industry</span> News
+              Latest <span className="text-white/40">Industry</span> News
             </h1>
             <p className="mt-3 text-white/50 text-sm max-w-xl">
               Curated intelligence across the most critical sectors shaping the
@@ -161,7 +103,7 @@ export default function NewsPage() {
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar – desktop */}
-          <aside className="hidden lg:block w-60 flex-shrink-0">
+          <aside className="hidden lg:block w-64 flex-shrink-0">
             <div className="sticky top-28">
               <p className="text-xs tracking-widest uppercase text-white/30 mb-4 px-1">
                 Topics
@@ -174,7 +116,7 @@ export default function NewsPage() {
                     <button
                       key={topic.label}
                       onClick={() => setActiveTopic(topic)}
-                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm transition-all duration-200 group ${
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-200 group ${
                         isActive
                           ? "bg-white/10 text-white"
                           : "text-white/50 hover:text-white hover:bg-white/5"
@@ -188,7 +130,9 @@ export default function NewsPage() {
                             : "text-white/35 flex-shrink-0 group-hover:text-white/60"
                         }
                       />
-                      <span className="leading-tight flex-1">{topic.label}</span>
+                      <span className="leading-tight flex-1 text-xs">
+                        {topic.label}
+                      </span>
                       {isActive && (
                         <ChevronRight
                           size={12}
@@ -228,7 +172,6 @@ export default function NewsPage() {
 
           {/* Main content */}
           <main className="flex-1 min-w-0">
-            {/* Section header */}
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-lg font-light">{activeTopic.label}</h2>
@@ -247,34 +190,31 @@ export default function NewsPage() {
               </button>
             </div>
 
-            {/* Error state */}
             {error && (
               <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-6 text-center">
                 <p className="text-red-400/80 text-sm">{error}</p>
               </div>
             )}
 
-            {/* Loading skeleton */}
             {loading && (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {[...Array(6)].map((_, i) => (
+              <div className="flex flex-col gap-5">
+                {[...Array(4)].map((_, i) => (
                   <div
                     key={i}
-                    className="rounded-xl border border-white/10 overflow-hidden animate-pulse"
+                    className="flex rounded-2xl border border-white/10 overflow-hidden animate-pulse h-44"
                   >
-                    <div className="h-44 bg-white/5" />
-                    <div className="p-4 space-y-3">
-                      <div className="h-2.5 bg-white/5 rounded w-1/3" />
+                    <div className="flex-1 p-6 space-y-3">
+                      <div className="h-2.5 bg-white/5 rounded w-1/5" />
                       <div className="h-4 bg-white/5 rounded w-full" />
                       <div className="h-4 bg-white/5 rounded w-4/5" />
-                      <div className="h-3 bg-white/5 rounded w-2/3" />
+                      <div className="h-3 bg-white/5 rounded w-2/3 mt-4" />
                     </div>
+                    <div className="w-2/5 md:w-64 bg-white/5 flex-shrink-0" />
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Articles */}
             {!loading && !error && (
               <AnimatePresence mode="wait">
                 <motion.div
@@ -283,12 +223,17 @@ export default function NewsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
+                  className="flex flex-col gap-6"
                 >
                   {articles.length === 0 ? (
-                    <div className="col-span-full text-center py-20 text-white/25">
-                      <Newspaper size={36} className="mx-auto mb-4 opacity-40" />
-                      <p className="text-sm">No articles found for this topic.</p>
+                    <div className="text-center py-20 text-white/25">
+                      <Newspaper
+                        size={36}
+                        className="mx-auto mb-4 opacity-40"
+                      />
+                      <p className="text-sm">
+                        No articles found for this topic.
+                      </p>
                     </div>
                   ) : (
                     articles.map((article, i) => (
@@ -306,7 +251,19 @@ export default function NewsPage() {
 }
 
 function ArticleCard({ article, index }) {
-  const timeAgo = formatTimeAgo(new Date(article.publishedAt));
+  const timeAgo = formatTimeAgo(new Date(article.published_at));
+  const isReversed = index % 2 !== 0;
+  const description = article.description
+    ? article.description
+        .replace(/<[^>]+>/g, "")
+        .replace(/&#8230;/g, "…")
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&#[0-9]+;/g, "")
+        .trim()
+    : null;
 
   return (
     <motion.a
@@ -315,56 +272,67 @@ function ArticleCard({ article, index }) {
       rel="noopener noreferrer"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.04 }}
-      className="group flex flex-col rounded-xl border border-white/10 overflow-hidden hover:border-white/25 transition-all duration-300 hover:-translate-y-1 bg-white/[0.02] hover:bg-white/[0.04]"
+      transition={{ duration: 0.4, delay: Math.min(index * 0.06, 0.4) }}
+      className={`group flex ${isReversed ? "flex-row-reverse" : "flex-row"} rounded-2xl border border-white/10 hover:border-white/25 transition-all duration-300 hover:-translate-y-0.5 bg-white/[0.02] hover:bg-white/[0.04]`}
     >
-      {/* Thumbnail */}
-      {article.image ? (
-        <div className="h-44 overflow-hidden bg-white/5 flex-shrink-0">
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-5 md:p-7">
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          <Clock size={10} className="text-white/25 flex-shrink-0" />
+          <span className="text-[10px] text-white/30">{timeAgo}</span>
+          {article.author && (
+            <>
+              <span className="text-white/15 text-[10px]">·</span>
+              <span className="text-[10px] text-white/25 truncate max-w-[180px]">
+                {article.author}
+              </span>
+            </>
+          )}
+        </div>
+
+        <h3 className="text-sm md:text-base font-medium text-white/85 leading-snug mb-3 group-hover:text-white transition-colors line-clamp-2">
+          {article.title}
+        </h3>
+
+        {description && (
+          <p className="text-xs text-white/40 flex-1 mb-4 leading-relaxed line-clamp-3">
+            {description}
+          </p>
+        )}
+
+        <div className="flex items-center gap-1.5 text-xs text-white/30 group-hover:text-white/60 transition-colors mt-auto">
+          Read article
+          <ExternalLink size={10} />
+        </div>
+      </div>
+
+      {/* Image – extends slightly above and below the card */}
+      <div
+        className={`relative w-[38%] md:w-[260px] flex-shrink-0 -my-4 overflow-hidden border border-white/[0.08] ${
+          isReversed
+            ? "rounded-r-2xl rounded-l-xl"
+            : "rounded-l-2xl rounded-r-xl"
+        }`}
+      >
+        {article.image ? (
           <img
             src={article.image}
             alt={article.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {
-              e.target.closest(".h-44").classList.add("hidden");
+              e.currentTarget.style.display = "none";
             }}
           />
-        </div>
-      ) : (
-        <div className="h-44 bg-white/5 flex items-center justify-center flex-shrink-0">
-          <Newspaper size={28} className="text-white/10" />
-        </div>
-      )}
-
-      {/* Body */}
-      <div className="flex flex-col flex-1 p-4">
-        {/* Source + time */}
-        <div className="flex items-center justify-between mb-2.5">
-          <span className="text-[10px] tracking-widest uppercase text-white/40 font-medium truncate max-w-[60%]">
-            {article.source?.name}
-          </span>
-          <div className="flex items-center gap-1 text-[10px] text-white/30 flex-shrink-0">
-            <Clock size={9} />
-            {timeAgo}
+        ) : (
+          <div className="w-full h-full bg-white/5 flex items-center justify-center min-h-[176px]">
+            <Newspaper size={28} className="text-white/10" />
           </div>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-sm font-medium text-white/85 leading-snug mb-2 group-hover:text-white transition-colors line-clamp-3">
-          {article.title}
-        </h3>
-
-        {/* Description */}
-        {article.description && (
-          <p className="text-xs text-white/40 line-clamp-2 flex-1 mb-3 leading-relaxed">
-            {article.description}
-          </p>
         )}
-
-        {/* CTA */}
-        <div className="flex items-center gap-1.5 text-xs text-white/30 group-hover:text-white/60 transition-colors mt-auto pt-1">
-          Read article
-          <ExternalLink size={10} />
+        {/* Source label overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pt-10 pb-3 px-3">
+          <span className="text-[9px] tracking-[0.15em] uppercase text-white/55 font-medium">
+            {article.source || "News Portal"}
+          </span>
         </div>
       </div>
     </motion.a>
