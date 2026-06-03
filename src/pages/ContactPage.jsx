@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Send,
   Mail,
@@ -7,75 +7,75 @@ import {
   Clock,
   ArrowRight,
   CheckCircle,
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const API_BASE = 'http://13.61.16.106:1802';
+const API_BASE = "http://13.48.59.189:1802";
 
 const contactDetails = [
   {
     icon: Mail,
-    label: 'Business Email',
-    value: 'harry@selected.jobs',
-    href: 'mailto:harry@selected.jobs',
-    accent: '#4F9CF9',
+    label: "Business Email",
+    value: "harry@selected.jobs",
+    href: "mailto:harry@selected.jobs",
+    accent: "#4F9CF9",
   },
   {
     icon: Phone,
-    label: 'Contact Phone',
-    value: '0203 005 2908',
-    href: 'tel:02030052908',
-    accent: '#34D399',
+    label: "Contact Phone",
+    value: "0203 005 2908",
+    href: "tel:02030052908",
+    accent: "#34D399",
   },
   {
     icon: MapPin,
-    label: 'Office Address',
-    value: '3 Manor Royal',
-    sub: 'Crawley RH10 9LU',
-    href: 'https://maps.google.com/?q=3+Manor+Royal+Crawley+RH10+9LU',
-    accent: '#A78BFA',
+    label: "Office Address",
+    value: "3 Manor Royal",
+    sub: "Crawley RH10 9LU",
+    href: "https://maps.google.com/?q=3+Manor+Royal+Crawley+RH10+9LU",
+    accent: "#A78BFA",
   },
   {
     icon: Clock,
-    label: 'Response Time',
-    value: 'Within 24 hours',
-    sub: 'Monday – Friday',
+    label: "Response Time",
+    value: "Within 24 hours",
+    sub: "Monday – Friday",
     href: null,
-    accent: '#FBBF24',
+    accent: "#FBBF24",
   },
 ];
 
 const nextSteps = [
-  { n: '01', text: 'We review your requirement' },
-  { n: '02', text: 'Discovery call to understand your needs' },
-  { n: '03', text: 'Tailored candidate shortlist' },
-  { n: '04', text: 'First CVs typically within one week' },
+  { n: "01", text: "We review your requirement" },
+  { n: "02", text: "Discovery call to understand your needs" },
+  { n: "03", text: "Tailored candidate shortlist" },
+  { n: "04", text: "First CVs typically within one week" },
 ];
 
 const practiceOptions = [
-  'GTM Talent Recruitment',
-  'Engineering Recruitment',
-  'Product Management Recruitment',
-  'Professional Services Recruitment',
-  'Executive Search',
-  'Other',
+  "GTM Talent Recruitment",
+  "Engineering Recruitment",
+  "Product Management Recruitment",
+  "Professional Services Recruitment",
+  "Executive Search",
+  "Other",
 ];
 
 export default function ContactPage() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    practice: '',
-    message: '',
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    practice: "",
+    message: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -88,14 +88,14 @@ export default function ContactPage() {
     e.preventDefault();
 
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
       const response = await fetch(`${API_BASE}/contact-us/add`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           full_name: form.name,
@@ -110,23 +110,23 @@ export default function ContactPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data?.message || 'Failed to submit form');
+        throw new Error(data?.message || "Failed to submit form");
       }
 
       setSubmitted(true);
 
       // reset form
       setForm({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        practice: '',
-        message: '',
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        practice: "",
+        message: "",
       });
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Something went wrong');
+      setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -134,25 +134,24 @@ export default function ContactPage() {
 
   return (
     <div className="bg-black min-h-screen">
-
       {/* Hero banner */}
       <div className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div
           className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full blur-[160px] pointer-events-none opacity-40"
-          style={{ backgroundColor: 'rgba(79,156,249,0.3)' }}
+          style={{ backgroundColor: "rgba(79,156,249,0.3)" }}
         />
 
         <div
           className="absolute bottom-0 -left-20 w-[500px] h-[500px] rounded-full blur-[130px] pointer-events-none opacity-30"
-          style={{ backgroundColor: 'rgba(167,139,250,0.3)' }}
+          style={{ backgroundColor: "rgba(167,139,250,0.3)" }}
         />
 
         <div
           className="absolute inset-0 opacity-[0.025] pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)',
-            backgroundSize: '80px 80px',
+              "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)",
+            backgroundSize: "80px 80px",
           }}
         />
 
@@ -168,16 +167,16 @@ export default function ContactPage() {
           </div>
 
           <h1 className="text-[3.25rem] font-bold text-white tracking-tight mb-5 max-w-2xl leading-tight">
-            Let's Find Your{' '}
+            Let's Find Your{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
               Next Hire
             </span>
           </h1>
 
           <p className="text-white/50 text-base md:text-lg max-w-xl leading-relaxed">
-            Specialist recruitment across GTM, Engineering, Product
-            Management and Professional Services. All conversations are
-            strictly confidential.
+            Specialist recruitment across GTM, Engineering, Product Management
+            and Professional Services. All conversations are strictly
+            confidential.
           </p>
         </div>
       </div>
@@ -205,44 +204,36 @@ export default function ContactPage() {
                 {href ? (
                   <a
                     href={href}
-                    target={href.startsWith('http') ? '_blank' : undefined}
+                    target={href.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
                     className="text-white text-sm font-semibold hover:opacity-70 transition-opacity"
                   >
                     {value}
                   </a>
                 ) : (
-                  <p className="text-white text-sm font-semibold">
-                    {value}
-                  </p>
+                  <p className="text-white text-sm font-semibold">{value}</p>
                 )}
 
-                {sub && (
-                  <p className="text-white/40 text-xs mt-0.5">
-                    {sub}
-                  </p>
-                )}
+                {sub && <p className="text-white/40 text-xs mt-0.5">{sub}</p>}
               </div>
-            )
+            ),
           )}
         </div>
       </div>
 
       {/* Main Layout */}
       <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-5 gap-12 lg:gap-16">
-
         {/* Left */}
         <div className="lg:col-span-2 flex flex-col gap-10">
-
           <div>
             <h2 className="text-white text-xl font-bold tracking-tight mb-4">
               Working With Us
             </h2>
 
             <p className="text-white/45 text-sm leading-relaxed mb-4">
-              Selected Group is a specialist technology recruitment
-              business operating across GTM, Engineering, Product
-              Management and Professional Services.
+              Selected Group is a specialist technology recruitment business
+              operating across GTM, Engineering, Product Management and
+              Professional Services.
             </p>
 
             <p className="text-white/60 text-sm leading-relaxed">
@@ -283,24 +274,24 @@ export default function ContactPage() {
             <div className="flex flex-col gap-2">
               {[
                 {
-                  label: 'GTM Talent',
-                  route: '/',
-                  accent: '#4F9CF9',
+                  label: "GTM Talent",
+                  route: "/",
+                  accent: "#4F9CF9",
                 },
                 {
-                  label: 'Engineering & Technology',
-                  route: '/engineering',
-                  accent: '#34D399',
+                  label: "Engineering & Technology",
+                  route: "/engineering",
+                  accent: "#34D399",
                 },
                 {
-                  label: 'Product Management',
-                  route: '/product-management',
-                  accent: '#A78BFA',
+                  label: "Product Management",
+                  route: "/product-management",
+                  accent: "#A78BFA",
                 },
                 {
-                  label: 'Professional Services',
-                  route: '/professional-services',
-                  accent: '#FBBF24',
+                  label: "Professional Services",
+                  route: "/professional-services",
+                  accent: "#FBBF24",
                 },
               ].map((p) => (
                 <button
@@ -328,14 +319,10 @@ export default function ContactPage() {
         {/* Right Form */}
         <div className="lg:col-span-3">
           <div className="bg-[#0d0d0d] border border-white/[0.07] p-8 md:p-10">
-
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-16 text-center gap-5">
                 <div className="w-16 h-16 rounded-full bg-[#34D399]/10 flex items-center justify-center">
-                  <CheckCircle
-                    size={32}
-                    className="text-[#34D399]"
-                  />
+                  <CheckCircle size={32} className="text-[#34D399]" />
                 </div>
 
                 <div>
@@ -344,8 +331,8 @@ export default function ContactPage() {
                   </h3>
 
                   <p className="text-white/45 text-sm leading-relaxed max-w-sm">
-                    Thank you for reaching out. Harry and the team will
-                    review your brief and be in touch within 24 hours.
+                    Thank you for reaching out. Harry and the team will review
+                    your brief and be in touch within 24 hours.
                   </p>
                 </div>
 
@@ -364,8 +351,8 @@ export default function ContactPage() {
                   </h2>
 
                   <p className="text-white/60 text-sm">
-                    Fill in the details below and we'll be in touch
-                    within 24 hours.
+                    Fill in the details below and we'll be in touch within 24
+                    hours.
                   </p>
                 </div>
 
@@ -376,13 +363,9 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-5"
-                >
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                   {/* Name + Company */}
                   <div className="grid sm:grid-cols-2 gap-5">
-
                     <div>
                       <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Full Name *
@@ -426,7 +409,6 @@ export default function ContactPage() {
 
                   {/* Email + Phone */}
                   <div className="grid sm:grid-cols-2 gap-5">
-
                     <div>
                       <label className="block text-white/60 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                         Work Email *
@@ -489,11 +471,7 @@ export default function ContactPage() {
                       </option>
 
                       {practiceOptions.map((o) => (
-                        <option
-                          key={o}
-                          value={o}
-                          className="bg-[#141414]"
-                        >
+                        <option key={o} value={o} className="bg-[#141414]">
                           {o}
                         </option>
                       ))}
@@ -535,7 +513,6 @@ export default function ContactPage() {
                     ) : (
                       <>
                         Submit Brief
-
                         <Send
                           size={14}
                           className="transition-transform group-hover:translate-x-1"
@@ -545,8 +522,8 @@ export default function ContactPage() {
                   </button>
 
                   <p className="text-white/45 text-xs text-center leading-relaxed">
-                    By submitting this form you agree that your details
-                    may be used to contact you about our services.
+                    By submitting this form you agree that your details may be
+                    used to contact you about our services.
                   </p>
                 </form>
               </>

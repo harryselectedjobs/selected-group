@@ -43,7 +43,7 @@ const TOPICS = [
   { label: "Technology Research & Thought Leadership", icon: BookOpen },
 ];
 
-const API_BASE = "http://13.61.16.106:1802/api/news";
+const API_BASE = "http://13.48.59.189:1802/api/news";
 
 function getTodayDate() {
   return new Date().toISOString().split("T")[0];

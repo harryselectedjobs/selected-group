@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const API_BASE = "http://13.61.16.106:1802";
+const API_BASE = "http://13.48.59.189:1802";
 
 export default function Login() {
   const navigate = useNavigate();
