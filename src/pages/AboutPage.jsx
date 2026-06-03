@@ -183,7 +183,7 @@ export default function AboutPage() {
           </p>
 
           <p className="text-lg text-[#A1A1AA] leading-relaxed">
-            hough people often say never to go into business with family or
+            Though people often say never to go into business with family or
             close friends, Steven and Harry have built the foundation of
             Selected Group’s success on exactly that relationship. Over the past
             decade, they have experienced the highs and lows of business and
