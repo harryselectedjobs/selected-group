@@ -20,7 +20,7 @@ This is a **React + Vite SPA** for Selected Group, a B2B executive recruitment f
 Marketing site with practice area pages (GTM, Engineering, Product, Executive, Professional Services), case studies for 7 named clients (Palantir, Apple, Oracle, Celonis, Behavox, Aviv, OverIT), and a news portal backed by the GNews API (`VITE_GNEWS_API_KEY`).
 
 ### 2. CRM Dashboard (Protected)
-Internal tool at `/crm` for managing companies, contacts, and email outreach sequences. Requires token-based auth via a Node backend at `http://13.48.59.189:1802/api/v1` (configured in [src/services/api.js](src/services/api.js)).
+Internal tool at `/crm` for managing companies, contacts, and email outreach sequences. Requires token-based auth via a Node backend at `http://3.109.182.15:1802/api/v1` (configured in [src/services/api.js](src/services/api.js)).
 
 **Auth flow:** `/crm` is guarded by a `ProtectedRoute` component that checks `localStorage.getItem("crm_token")`. The login page (`/login`) POSTs credentials to the backend, stores the returned token in localStorage, then redirects into the CRM.
 
