@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import CompaniesTable from "../components/CompaniesTable";
 import ContactsTable from "../components/ContactsTable";
-import { Mail } from "lucide-react";
+import { Mail, ClipboardList } from "lucide-react";
 import SequenceList from "../components/sequenceList";
+import EnquireList from "../components/EnquireList";
 
 const API_BASE = "http://3.109.182.15:1802";
 
@@ -153,6 +154,20 @@ export default function CRM() {
               <Mail size={14} />
               Sequences
             </button>
+            <button
+              onClick={() => {
+                setActiveTab("enquire");
+                setSidebarOpen(false);
+              }}
+              className={`px-3 py-2 rounded flex items-center gap-2 transition ${
+                activeTab === "enquire"
+                  ? "bg-white text-black"
+                  : "text-gray-400 hover:bg-white/10"
+              }`}
+            >
+              <ClipboardList size={14} />
+              Enquire
+            </button>
           </div>
 
           {/* LOGOUT */}
@@ -243,7 +258,7 @@ export default function CRM() {
           )}
 
           {/* 🟢 SEARCH + TABLES */}
-          {activeTab && activeTab !== "sequences" && (
+          {activeTab && activeTab !== "sequences" && activeTab !== "enquire" && (
             <>
               {/* SEARCH */}
               <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
@@ -274,6 +289,9 @@ export default function CRM() {
 
           {/* 🟣 SEQUENCES PAGE */}
           {activeTab === "sequences" && <SequenceList />}
+
+          {/* 🔵 ENQUIRE PAGE */}
+          {activeTab === "enquire" && <EnquireList />}
         </div>
       </div>
     </div>
