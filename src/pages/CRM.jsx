@@ -8,7 +8,7 @@ import { Mail, ClipboardList } from "lucide-react";
 import SequenceList from "../components/sequenceList";
 import EnquireList from "../components/EnquireList";
 
-const API_BASE = "http://3.109.182.15:1802";
+const API_BASE = "https://www.selected.jobs/api";
 
 export default function CRM() {
   const navigate = useNavigate();
