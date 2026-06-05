@@ -14,6 +14,7 @@ import {
   Eye,
 } from "lucide-react";
 import api from "../services/api";
+import EnrollmentTable from "./EnrollmentTable";
 
 export default function SequenceDetail() {
   const { id } = useParams();
@@ -61,10 +62,7 @@ export default function SequenceDetail() {
       };
 
       if (editingStepId) {
-        await api.patch(
-          `/sequences/${id}/steps/${editingStepId}`,
-          stepData
-        );
+        await api.patch(`/sequences/${id}/steps/${editingStepId}`, stepData);
       } else {
         await api.post(`/sequences/${id}/steps`, stepData);
       }
@@ -106,12 +104,9 @@ export default function SequenceDetail() {
 
   const getStatusBadge = (status) => {
     const styles = {
-      draft:
-        "bg-gray-500/10 text-gray-400 border border-gray-500/20",
-      active:
-        "bg-green-500/10 text-green-400 border border-green-500/20",
-      paused:
-        "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20",
+      draft: "bg-gray-500/10 text-gray-400 border border-gray-500/20",
+      active: "bg-green-500/10 text-green-400 border border-green-500/20",
+      paused: "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20",
     };
 
     return styles[status?.toLowerCase()] || styles.draft;
@@ -129,7 +124,6 @@ export default function SequenceDetail() {
 
   return (
     <div className="min-h-screen bg-black text-white pt-20 relative z-0">
-
       {/* HEADER */}
       <div className="mb-10">
         <Link
@@ -143,22 +137,18 @@ export default function SequenceDetail() {
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <h1 className="text-4xl font-bold">
-                {sequence.name}
-              </h1>
+              <h1 className="text-4xl font-bold">{sequence.name}</h1>
 
               <span
                 className={`px-3 py-1 rounded-full text-sm ${getStatusBadge(
-                  sequence.status
+                  sequence.status,
                 )}`}
               >
                 {sequence.status}
               </span>
             </div>
 
-            <p className="text-gray-400">
-              {sequence.goal}
-            </p>
+            <p className="text-gray-400">{sequence.goal}</p>
           </div>
         </div>
       </div>
@@ -166,7 +156,7 @@ export default function SequenceDetail() {
       {/* TABS */}
       <div className="border-b border-[#222] mb-8">
         <div className="flex gap-8">
-          {["overview", "steps", "contacts"].map((tab) => (
+          {["overview", "steps", "enroll"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -185,10 +175,26 @@ export default function SequenceDetail() {
       {/* OVERVIEW */}
       {activeTab === "overview" && (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          <Card title="Open Rate" value={`${sequence.openRate || 0}%`} icon={<Mail />} />
-          <Card title="Click Rate" value={`${sequence.clickRate || 0}%`} icon={<MousePointerClick />} />
-          <Card title="Reply Rate" value={`${sequence.replyRate || 0}%`} icon={<Reply />} />
-          <Card title="Enrolled" value={sequence.enrolledContacts || 0} icon={<Users />} />
+          <Card
+            title="Open Rate"
+            value={`${sequence.openRate || 0}%`}
+            icon={<Mail />}
+          />
+          <Card
+            title="Click Rate"
+            value={`${sequence.clickRate || 0}%`}
+            icon={<MousePointerClick />}
+          />
+          <Card
+            title="Reply Rate"
+            value={`${sequence.replyRate || 0}%`}
+            icon={<Reply />}
+          />
+          <Card
+            title="Enrolled"
+            value={sequence.enrolledContacts || 0}
+            icon={<Users />}
+          />
         </div>
       )}
 
@@ -210,10 +216,7 @@ export default function SequenceDetail() {
 
             <div className="space-y-8">
               {(sequence.steps || []).map((step) => (
-                <div
-                  key={step.step_id}
-                  className="relative pl-24"
-                >
+                <div key={step.step_id} className="relative pl-24">
                   {/* STEP NUMBER */}
                   <div className="absolute left-0 w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
                     {step.step_order}
@@ -222,9 +225,7 @@ export default function SequenceDetail() {
                   {/* CARD */}
                   <div className="bg-[#111111] border border-[#222] rounded-2xl p-6">
                     <div className="flex justify-between mb-4">
-                      <h3 className="text-xl font-semibold">
-                        {step.subject}
-                      </h3>
+                      <h3 className="text-xl font-semibold">{step.subject}</h3>
 
                       <div className="flex gap-2">
                         <button onClick={() => handleEditStep(step)}>
@@ -242,7 +243,8 @@ export default function SequenceDetail() {
                     </p>
 
                     <p className="text-sm text-gray-500 mt-3">
-                      Send window: {step.send_window_start} - {step.send_window_end}
+                      Send window: {step.send_window_start} -{" "}
+                      {step.send_window_end}
                     </p>
                   </div>
                 </div>
@@ -252,18 +254,13 @@ export default function SequenceDetail() {
         </div>
       )}
 
-      {/* CONTACTS */}
-      {activeTab === "contacts" && (
-        <div className="text-gray-400">
-          Contacts section coming soon...
-        </div>
-      )}
+      {/* ENROLL */}
+      {activeTab === "enroll" && <EnrollmentTable sequenceId={id} />}
 
       {/* MODAL */}
       {showStepModal && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-[#111111] border border-[#222] rounded-3xl p-8 w-full max-w-2xl">
-
             <h2 className="text-2xl mb-6">
               {editingStepId ? "Edit Step" : "Add Step"}
             </h2>
@@ -308,9 +305,7 @@ export default function SequenceDetail() {
             </div>
 
             <div className="flex justify-end gap-4">
-              <button onClick={() => setShowStepModal(false)}>
-                Cancel
-              </button>
+              <button onClick={() => setShowStepModal(false)}>Cancel</button>
 
               <button
                 onClick={handleSaveStep}
