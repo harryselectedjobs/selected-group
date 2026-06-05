@@ -7,6 +7,8 @@ import {
   Mail,
   Send,
   TrendingUp,
+  Trash2,
+  AlertTriangle,
 } from "lucide-react";
 
 import api from "../services/api";
@@ -15,6 +17,8 @@ export default function SequenceList() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [mockSequences, setMockSequences] = useState([]);
+  const [deleteTarget, setDeleteTarget] = useState(null); // { id, name }
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     fetchSequences();
@@ -26,6 +30,26 @@ export default function SequenceList() {
       setMockSequences(response.data || []);
     } catch (error) {
       console.error("Error fetching sequences:", error);
+    }
+  };
+
+  const openDeleteModal = (sequence, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDeleteTarget({ id: sequence.sequence_id, name: sequence.name });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await api.delete(`/sequences/${deleteTarget.id}`);
+      setMockSequences((prev) => prev.filter((s) => s.sequence_id !== deleteTarget.id));
+      setDeleteTarget(null);
+    } catch (error) {
+      console.error("Error deleting sequence:", error);
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -170,6 +194,7 @@ const filteredSequences = mockSequences.filter((s) => {
                 <th className="px-6 py-5 text-left text-gray-400">Steps</th>
                 <th className="px-6 py-5 text-left text-gray-400">Enrolled</th>
                 <th className="px-6 py-5 text-left text-gray-400">Reply Rate</th>
+                <th className="px-6 py-5 text-left text-gray-400">Action</th>
               </tr>
             </thead>
 
@@ -224,12 +249,64 @@ const filteredSequences = mockSequences.filter((s) => {
                       </span>
                     </div>
                   </td>
+
+                  <td className="px-6 py-5">
+                    <button
+                      onClick={(e) => openDeleteModal(sequence, e)}
+                      className="p-2 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition"
+                      title="Delete sequence"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
+
+      {/* DELETE MODAL */}
+      {deleteTarget && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          onClick={() => !deleting && setDeleteTarget(null)}
+        >
+          <div
+            className="bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 w-full max-w-md shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Icon */}
+            <div className="flex items-center justify-center w-14 h-14 rounded-full bg-red-500/10 border border-red-500/20 mx-auto mb-6">
+              <AlertTriangle className="w-7 h-7 text-red-400" />
+            </div>
+
+            <h2 className="text-xl font-semibold text-center mb-2">Delete Sequence</h2>
+            <p className="text-gray-400 text-center text-sm mb-8">
+              Are you sure you want to delete{" "}
+              <span className="text-white font-medium">"{deleteTarget.name}"</span>?
+              This action cannot be undone.
+            </p>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setDeleteTarget(null)}
+                disabled={deleting}
+                className="flex-1 py-3 rounded-xl border border-[#333] text-gray-300 hover:bg-[#1a1a1a] transition disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                disabled={deleting}
+                className="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium transition disabled:opacity-50"
+              >
+                {deleting ? "Deleting..." : "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
