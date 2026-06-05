@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Users, CheckSquare, Square, Send } from "lucide-react";
 import api from "../services/api";
 
-const ENROLL_API = "http://3.109.182.15:1802/api/v1/sequence-queue/enroll";
+const ENROLL_API = "https://www.selected.jobs/api/api/v1/sequence-queue/enroll";
 
 export default function EnrollmentTable({ sequenceId }) {
   const [contacts, setContacts] = useState([]);
@@ -19,7 +19,7 @@ export default function EnrollmentTable({ sequenceId }) {
     setLoading(true);
     try {
       const res = await api.get(
-        `/sequence-queue/${sequenceId}/unenrolled-contacts?page=${page}&limit=${limit}`
+        `/sequence-queue/${sequenceId}/unenrolled-contacts?page=${page}&limit=${limit}`,
       );
       const data = res.data;
       setTotalPages(data.total_pages || 1);
@@ -51,7 +51,7 @@ export default function EnrollmentTable({ sequenceId }) {
 
   const toggleCheck = (id) => {
     setCheckedIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
     );
   };
 
@@ -62,7 +62,7 @@ export default function EnrollmentTable({ sequenceId }) {
   const toggleAll = () => {
     if (allChecked) {
       setCheckedIds((prev) =>
-        prev.filter((id) => !contacts.find((c) => c.contactId === id))
+        prev.filter((id) => !contacts.find((c) => c.contactId === id)),
       );
     } else {
       setCheckedIds((prev) => [
@@ -216,9 +216,7 @@ export default function EnrollmentTable({ sequenceId }) {
                       </div>
                     </td>
                     <td className="p-3 text-gray-400">{item.email || "—"}</td>
-                    <td className="p-3 text-gray-400">
-                      {item.company || "—"}
-                    </td>
+                    <td className="p-3 text-gray-400">{item.company || "—"}</td>
                     <td className="p-3 text-gray-400">
                       {item.jobtitle || "—"}
                     </td>
