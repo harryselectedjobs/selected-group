@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Download, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import carrieMiller from "../../assets/images/Carrie Miller.jfif";
 
 /* ─── animation presets ─── */
 const fadeUp = {
@@ -183,12 +184,32 @@ export default function CelonisCaseStudy() {
           variants={stagger}
           className="grid lg:grid-cols-12 gap-12 lg:gap-20"
         >
-          {/* left pull text */}
-          <motion.div variants={fadeUp} className="lg:col-span-5">
+          {/* left pull text + portrait */}
+          <motion.div
+            variants={fadeUp}
+            className="lg:col-span-5 flex flex-col gap-16"
+          >
             <h2 className="text-4xl lg:text-5xl font-bold leading-tight text-[#F0EDE8]">
               The World's Leader in{" "}
               <span className="text-[#C8A96B]">Process Mining</span>
             </h2>
+
+            {/* Carrie Miller */}
+            <div className="flex items-center gap-5">
+              <img
+                src={carrieMiller}
+                alt="Carrie Miller"
+                className="w-20 h-20 rounded-full object-cover object-top flex-shrink-0 ring-1 ring-[rgba(200,169,107,0.35)]"
+              />
+              <div>
+                <p className="text-[#F0EDE8] font-semibold text-base">
+                  Carrie Miller
+                </p>
+                <p className="text-[#C8A96B] text-xs mt-1 tracking-wide leading-snug">
+                  Global Talent Acquisition Leader — Celonis
+                </p>
+              </div>
+            </div>
           </motion.div>
 
           {/* right body */}
@@ -197,24 +218,37 @@ export default function CelonisCaseStudy() {
             className="lg:col-span-7 space-y-5 text-[#A09A90] text-lg leading-relaxed"
           >
             <motion.p variants={fadeUp}>
-              As the global leader in Process Mining and Execution Management,
-              Celonis has experienced rapid growth as enterprises increasingly
-              prioritise operational efficiency, digital transformation, and
-              data-driven decision making.
+              I have had the pleasure of partnering with Selected Group as a
+              strategic recruitment partner supporting our hiring efforts across
+              North America, and I can confidently recommend them to any
+              organisation looking for a high-performing talent acquisition
+              partner.
             </motion.p>
             <motion.p variants={fadeUp}>
-              With expansion across EMEA and increasing demand for value-led
-              customer engagement, Celonis required high-performing commercial
-              and consulting talent capable of operating in a complex enterprise
-              software environment — combining technical credibility with
-              commercial acumen, particularly within Value Engineering and
-              strategic customer-facing functions.
+              Throughout our partnership, the team at Selected Group has
+              consistently demonstrated a deep understanding of our business,
+              hiring requirements, and talent market dynamics. They have become
+              a trusted extension of our Talent Acquisition function, providing
+              high-quality candidates, valuable market intelligence, and
+              exceptional responsiveness throughout the recruitment process.
+              What has particularly impressed me is their ability to quickly
+              understand complex hiring needs and deliver strong talent across a
+              variety of functions and seniority levels. Their communication is
+              proactive, their execution is reliable, and they continually focus
+              on delivering results while maintaining an excellent candidate
+              experience.
             </motion.p>
             <motion.p variants={fadeUp}>
-              Celonis' growth strategy required professionals who could engage
-              senior stakeholders, articulate measurable business value, and
-              support enterprise customers through large-scale transformation
-              initiatives across multiple industries.
+              Beyond simply filling roles, Selected Group has built a genuine
+              partnership with our team. They invest time in understanding our
+              culture, challenge our thinking when appropriate, and consistently
+              bring solutions that help us attract and secure top talent in a
+              highly competitive market. I greatly value the relationship we
+              have built and consider Selected Group one of our most trusted
+              recruitment partners. I would have no hesitation in recommending
+              them to organisations seeking a recruitment partner that combines
+              professionalism, market expertise, and a true commitment to client
+              success.
             </motion.p>
           </motion.div>
         </motion.div>
@@ -380,7 +414,7 @@ export default function CelonisCaseStudy() {
           {/* button */}
 
           <a
-            href="/pdfs/Celonis Case Study.pdf"
+            // href="/pdfs/Celonis Case Study.pdf"
             download
             className="group shrink-0 inline-flex items-center gap-3
                   px-8 py-4 rounded-xl bg-[#C8A96B]

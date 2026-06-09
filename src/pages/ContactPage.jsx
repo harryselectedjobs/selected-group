@@ -23,8 +23,8 @@ const contactDetails = [
   {
     icon: Phone,
     label: "Contact Phone",
-    value: "0203 005 2908",
-    href: "tel:02030052908",
+    value: "02038656229",
+    href: "tel:02038656229",
     accent: "#34D399",
   },
   {
