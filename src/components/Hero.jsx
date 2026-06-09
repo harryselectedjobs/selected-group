@@ -10,11 +10,11 @@ import { useNavigate } from "react-router-dom";
 
 const slides = [
   {
-    id: 'gtm',
-    number: '01',
-    label: 'GTM Talent',
-    videoId: 'qz9ADlOqqs8',
-    title: ['GTM', 'Recruitment'],
+    id: "gtm",
+    number: "01",
+    label: "GTM Talent",
+    videoId: "qz9ADlOqqs8",
+    title: ["GTM", "Recruitment"],
     description:
       "Enterprise software sales and go-to-market recruitment specialist, placing high-performing sales leaders across the US and European markets with over 1,000 successful placements.",
     cta: "Find GTM Talent",
@@ -27,15 +27,15 @@ const slides = [
   },
 
   {
-    id: 'executive',
-    number: '02',
-    label: 'Executive Recruitment',
-    videoId: 'zwUsFN__jtE',
-    title: ['Executive', 'Recruitment'],
+    id: "executive",
+    number: "02",
+    label: "Executive Recruitment",
+    videoId: "zwUsFN__jtE",
+    title: ["Executive", "Recruitment"],
     description:
-      'We identify and place transformational leaders who define company direction — from C-suite and board appointments to VP-level mandates across enterprise technology businesses globally.',
-    cta: 'Explore Executive Search',
-    route: '/executive-recruitment',
+      "We identify and place transformational leaders who define company direction — from C-suite and board appointments to VP-level mandates across enterprise technology businesses globally.",
+    cta: "Explore Executive Search",
+    route: "/executive-recruitment",
     stats: [
       { value: "C-Suite", label: "Leadership" },
       { value: "Global", label: "Network" },
@@ -44,11 +44,11 @@ const slides = [
   },
 
   {
-    id: 'product',
-    number: '03',
-    label: 'Product Management',
-    videoId: 'zwUsFN__jtE',
-    title: ['Product', 'Management'],
+    id: "product",
+    number: "03",
+    label: "Product Management",
+    videoId: "zwUsFN__jtE",
+    title: ["Product", "Management"],
     description:
       "Product management sits at the centre of every successful technology business, connecting customer needs, commercial strategy and engineering execution.",
     cta: "Explore Product Roles",
@@ -61,11 +61,11 @@ const slides = [
   },
 
   {
-    id: 'engineering',
-    number: '04',
-    label: 'Engineering',
-    videoId: 'Hgg7M3kSqyE',
-    title: ['Engineering'],
+    id: "engineering",
+    number: "04",
+    label: "Engineering",
+    videoId: "Hgg7M3kSqyE",
+    title: ["Engineering"],
     description:
       "Building the teams responsible for designing, developing, scaling and securing modern enterprise technology products.",
     cta: "Explore Engineering",
@@ -501,7 +501,7 @@ export default function Hero() {
                 ${
                   i === current
                     ? "text-white"
-                    : "text-white/25 group-hover:text-white/50"
+                    : "text-white/60 group-hover:text-white/80"
                 }
               `}
             >
