@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 
 /* ───────────────── COMPONENTS ───────────────── */
 import Navbar from "./components/Navbar";
@@ -35,6 +41,7 @@ import GTMExpertisePage from "./pages/HeroPages/GTMExpertisePage";
 import EngineeringPage from "./pages/EngineeringPage";
 import ProductManagementPage from "./pages/ProductManagementPage";
 import ProfessionalServicesPage from "./pages/ProfessionalServicesPage";
+import ExecutiveRecruitmentPage from "./pages/ExecutiveRecruitmentPage";
 
 import OurExpertise from "./pages/OurExpertise";
 import EngagementModelsPage from "./pages/EngagementModelsPage";
@@ -114,6 +121,11 @@ export default function App() {
           <Route
             path="/professional-services"
             element={<ProfessionalServicesPage />}
+          />
+
+          <Route
+            path="/executive-recruitment"
+            element={<ExecutiveRecruitmentPage />}
           />
 
           {/* ───────────── ENGAGEMENT MODELS ───────────── */}

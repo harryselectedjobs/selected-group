@@ -3,11 +3,14 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Download, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-
 /* ─── animation presets ─── */
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -59,20 +62,25 @@ function SectionLabel({ number, label }) {
         {String(number).padStart(2, "0")}
       </span>
       <div className="h-px flex-1 bg-[rgba(255,255,255,0.08)]" />
-      <span className="text-[11px] uppercase tracking-[0.25em] text-[#C8A96B]">{label}</span>
+      <span className="text-[11px] uppercase tracking-[0.25em] text-[#C8A96B]">
+        {label}
+      </span>
     </div>
   );
 }
 
 export default function CelonisCaseStudy() {
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="bg-[#080808] min-h-screen text-[#F0EDE8] overflow-x-hidden">
-
       {/* ─────────────────────── NAV ─────────────────────── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-5
-                      bg-[rgba(8,8,8,0.85)] backdrop-blur-lg border-b border-[rgba(255,255,255,0.04)]">
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-5
+                      bg-[rgba(8,8,8,0.85)] backdrop-blur-lg border-b border-[rgba(255,255,255,0.04)]"
+      >
         <Link
           to="/case-studies"
           className="group inline-flex items-center gap-2 text-sm text-[#888] hover:text-[#C8A96B] transition-colors"
@@ -80,7 +88,9 @@ export default function CelonisCaseStudy() {
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Case Studies
         </Link>
-        <span className="text-[11px] uppercase tracking-[0.25em] text-[#C8A96B]">Celonis</span>
+        <span className="text-[11px] uppercase tracking-[0.25em] text-[#C8A96B]">
+          Celonis
+        </span>
       </nav>
 
       {/* ─────────────────────── HERO ─────────────────────── */}
@@ -107,9 +117,14 @@ export default function CelonisCaseStudy() {
           className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-20 pt-40 w-full"
         >
           {/* eyebrow */}
-          <motion.div variants={fadeUp} className="flex items-center gap-3 mb-8">
+          <motion.div
+            variants={fadeUp}
+            className="flex items-center gap-3 mb-8"
+          >
             <div className="h-px w-12 bg-[#C8A96B]" />
-            <span className="text-xs uppercase tracking-[0.3em] text-[#C8A96B]">Case Study</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-[#C8A96B]">
+              Case Study
+            </span>
           </motion.div>
 
           {/* company name — massive */}
@@ -182,21 +197,24 @@ export default function CelonisCaseStudy() {
             className="lg:col-span-7 space-y-5 text-[#A09A90] text-lg leading-relaxed"
           >
             <motion.p variants={fadeUp}>
-              As the global leader in Process Mining and Execution Management, Celonis has
-              experienced rapid growth as enterprises increasingly prioritise operational efficiency,
-              digital transformation, and data-driven decision making.
+              As the global leader in Process Mining and Execution Management,
+              Celonis has experienced rapid growth as enterprises increasingly
+              prioritise operational efficiency, digital transformation, and
+              data-driven decision making.
             </motion.p>
             <motion.p variants={fadeUp}>
-              With expansion across EMEA and increasing demand for value-led customer engagement,
-              Celonis required high-performing commercial and consulting talent capable of operating
-              in a complex enterprise software environment — combining technical credibility with
-              commercial acumen, particularly within Value Engineering and strategic customer-facing
-              functions.
+              With expansion across EMEA and increasing demand for value-led
+              customer engagement, Celonis required high-performing commercial
+              and consulting talent capable of operating in a complex enterprise
+              software environment — combining technical credibility with
+              commercial acumen, particularly within Value Engineering and
+              strategic customer-facing functions.
             </motion.p>
             <motion.p variants={fadeUp}>
-              Celonis' growth strategy required professionals who could engage senior stakeholders,
-              articulate measurable business value, and support enterprise customers through
-              large-scale transformation initiatives across multiple industries.
+              Celonis' growth strategy required professionals who could engage
+              senior stakeholders, articulate measurable business value, and
+              support enterprise customers through large-scale transformation
+              initiatives across multiple industries.
             </motion.p>
           </motion.div>
         </motion.div>
@@ -228,7 +246,9 @@ export default function CelonisCaseStudy() {
                   <span className="text-[10px] font-mono text-[#C8A96B] opacity-50">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm font-semibold text-[#C8A96B]">{area}</span>
+                  <span className="text-sm font-semibold text-[#C8A96B]">
+                    {area}
+                  </span>
                 </div>
               ))}
             </motion.div>
@@ -239,23 +259,26 @@ export default function CelonisCaseStudy() {
               className="lg:col-span-8 space-y-5 text-[#A09A90] text-lg leading-relaxed"
             >
               <motion.p variants={fadeUp}>
-                Selected partnered with Celonis to support hiring across several key strategic
-                business areas, including Value Partner roles, Value Engineering, Enterprise Sales,
-                and Leadership appointments.
+                Selected partnered with Celonis to support hiring across several
+                key strategic business areas, including Value Partner roles,
+                Value Engineering, Enterprise Sales, and Leadership
+                appointments.
               </motion.p>
               <motion.p variants={fadeUp}>
-                We were tasked with identifying and attracting high-calibre talent with expertise
-                in enterprise SaaS, process transformation, consultative selling, and value
-                realisation methodologies.
+                We were tasked with identifying and attracting high-calibre
+                talent with expertise in enterprise SaaS, process
+                transformation, consultative selling, and value realisation
+                methodologies.
               </motion.p>
               <motion.p variants={fadeUp}>
-                The search required extensive market mapping across highly competitive talent pools,
-                alongside a consultative approach to candidate engagement and stakeholder management.
+                The search required extensive market mapping across highly
+                competitive talent pools, alongside a consultative approach to
+                candidate engagement and stakeholder management.
               </motion.p>
               <motion.p variants={fadeUp}>
-                In addition to delivering hires, Selected supported Celonis with market
-                intelligence, compensation benchmarking, and strategic hiring insight throughout
-                the process.
+                In addition to delivering hires, Selected supported Celonis with
+                market intelligence, compensation benchmarking, and strategic
+                hiring insight throughout the process.
               </motion.p>
             </motion.div>
           </motion.div>
@@ -279,15 +302,16 @@ export default function CelonisCaseStudy() {
               12 Strategic Hires Delivered
             </h2>
             <p className="text-[#A09A90] text-lg leading-relaxed mb-6">
-              Selected successfully delivered 12 hires across multiple functions and regions,
-              helping Celonis strengthen both its customer-facing and strategic leadership
-              capabilities.
+              Selected successfully delivered 12 hires across multiple functions
+              and regions, helping Celonis strengthen both its customer-facing
+              and strategic leadership capabilities.
             </p>
             <p className="text-[#A09A90] text-lg leading-relaxed">
-              By leveraging deep enterprise technology networks and a highly targeted search
-              methodology, Selected reduced time-to-hire and consistently delivered candidates
-              with the right combination of technical expertise, stakeholder engagement, and
-              commercial influence.
+              By leveraging deep enterprise technology networks and a highly
+              targeted search methodology, Selected reduced time-to-hire and
+              consistently delivered candidates with the right combination of
+              technical expertise, stakeholder engagement, and commercial
+              influence.
             </p>
           </motion.div>
 
@@ -322,53 +346,52 @@ export default function CelonisCaseStudy() {
       </section>
 
       {/* ───────────────────── DOWNLOAD ───────────────────── */}
-            <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="relative overflow-hidden rounded-2xl
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="relative overflow-hidden rounded-2xl
                 border border-[rgba(200,169,107,0.2)]
                 bg-[rgba(200,169,107,0.04)]
                 px-10 py-12 lg:px-16 lg:py-14
                 flex flex-col lg:flex-row items-start lg:items-center
                 gap-10 justify-between"
-              >
-                <div className="absolute top-0 left-0 w-24 h-px bg-[#C8A96B]" />
-                <div className="absolute top-0 left-0 w-px h-24 bg-[#C8A96B]" />
-      
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-[#C8A96B] mb-4">
-                    Download PDF
-                  </p>
-      
-                  <h3 className="text-2xl lg:text-3xl font-bold mb-3">
-                    Get the Full Case Study
-                  </h3>
-      
-                  <p className="text-[#A09A90] max-w-xl leading-relaxed">
-                    Access the complete Celonis case study including Product
-                    hiring strategy, leadership placements, and transformation outcomes.
-                  </p>
-                </div>
-      
-                {/* button */}
-              
-      
-                <a
-                  href="/pdfs/Celonis Case Study.pdf"
-                  download
-                  className="group shrink-0 inline-flex items-center gap-3
+        >
+          <div className="absolute top-0 left-0 w-24 h-px bg-[#C8A96B]" />
+          <div className="absolute top-0 left-0 w-px h-24 bg-[#C8A96B]" />
+
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-[#C8A96B] mb-4">
+              Download PDF
+            </p>
+
+            <h3 className="text-2xl lg:text-3xl font-bold mb-3">
+              Get the Full Case Study
+            </h3>
+
+            <p className="text-[#A09A90] max-w-xl leading-relaxed">
+              Access the complete Celonis case study including Product hiring
+              strategy, leadership placements, and transformation outcomes.
+            </p>
+          </div>
+
+          {/* button */}
+
+          <a
+            href="/pdfs/Celonis Case Study.pdf"
+            download
+            className="group shrink-0 inline-flex items-center gap-3
                   px-8 py-4 rounded-xl bg-[#C8A96B]
                   text-[#0A0A0A] font-bold text-sm
                   hover:bg-[#D6B97A] transition-all duration-200"
-                >
-                  <Download className="w-4 h-4" />
-                  Download PDF
-                </a>
-              </motion.div>
-            </section>
+          >
+            <Download className="w-4 h-4" />
+            Download PDF
+          </a>
+        </motion.div>
+      </section>
 
       {/* ─────────────────────── PARTNERSHIP ─────────────────────── */}
       <section className="bg-[#0D0D0D] border-t border-[rgba(255,255,255,0.06)]">
@@ -385,7 +408,8 @@ export default function CelonisCaseStudy() {
               variants={fadeUp}
               className="text-3xl lg:text-4xl font-bold mb-14 max-w-2xl text-[#F0EDE8] leading-tight"
             >
-              Selected became a trusted recruitment partner to Celonis by providing:
+              Selected became a trusted recruitment partner to Celonis by
+              providing:
             </motion.h2>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -401,7 +425,9 @@ export default function CelonisCaseStudy() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="w-8 h-[2px] bg-[#C8A96B] mb-5 group-hover:w-14 transition-all duration-300" />
-                  <p className="text-[#F0EDE8] font-medium leading-relaxed">{service}</p>
+                  <p className="text-[#F0EDE8] font-medium leading-relaxed">
+                    {service}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -410,14 +436,13 @@ export default function CelonisCaseStudy() {
               variants={fadeUp}
               className="mt-14 text-[#A09A90] text-lg leading-relaxed max-w-4xl"
             >
-              The partnership continues to demonstrate Selected's capability to deliver exceptional
-              talent within complex, high-growth enterprise technology businesses.
+              The partnership continues to demonstrate Selected's capability to
+              deliver exceptional talent within complex, high-growth enterprise
+              technology businesses.
             </motion.p>
           </motion.div>
         </div>
       </section>
-
-
     </div>
   );
 }
