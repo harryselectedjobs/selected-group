@@ -9,7 +9,7 @@ export default function EnrollmentTable({ sequenceId }) {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
+  const limit = 100;
 
   const [checkedIds, setCheckedIds] = useState([]);
   const [enrolling, setEnrolling] = useState(false);

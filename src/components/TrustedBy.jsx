@@ -38,7 +38,7 @@ const row2 = [
   { name: "Backblaze", slug: "backblaze" },
   { name: "Rubrik", slug: "rubrik" },
   { name: "Wasabi", slug: "wasabi" },
-  { name: "Cyera", slug: "cyera" },
+  // { name: "Cyera", slug: "cyera" },
   { name: "Pentera", slug: "pentera" },
   { name: "Semperis", slug: "semperis" },
   { name: "Lacework", slug: "lacework" },
