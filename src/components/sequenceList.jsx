@@ -111,7 +111,7 @@ const filteredSequences = mockSequences.filter((s) => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-8">
+    <div className="min-h-screen bg-black text-white px-8 pb-8 pt-28">
       {/* HEADER */}
       <div className="flex items-center justify-between mb-10">
         <div>

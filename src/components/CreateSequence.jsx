@@ -15,12 +15,7 @@ import {
 /*                                STEP CARD                                   */
 /* -------------------------------------------------------------------------- */
 
-function StepCard({
-  step,
-  onUpdate,
-  onDelete,
-  disableDelete,
-}) {
+function StepCard({ step, onUpdate, onDelete, disableDelete }) {
   const mergeTags = [
     "{{firstname}}",
     "{{lastname}}",
@@ -78,13 +73,9 @@ function StepCard({
               >
                 <option value="draft">Draft</option>
 
-                <option value="active">
-                  Active
-                </option>
+                <option value="active">Active</option>
 
-                <option value="paused">
-                  Paused
-                </option>
+                <option value="paused">Paused</option>
               </select>
             </div>
 
@@ -100,8 +91,7 @@ function StepCard({
                 value={step.delayDays}
                 onChange={(e) =>
                   onUpdate(step.id, {
-                    delayDays:
-                      Number(e.target.value) || 0,
+                    delayDays: Number(e.target.value) || 0,
                   })
                 }
                 className="w-40 bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500"
@@ -153,10 +143,7 @@ function StepCard({
                     type="button"
                     onClick={() =>
                       onUpdate(step.id, {
-                        body:
-                          (step.body || "") +
-                          " " +
-                          tag,
+                        body: (step.body || "") + " " + tag,
                       })
                     }
                     className="px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs hover:bg-purple-500/20 transition"
@@ -183,8 +170,7 @@ function StepCard({
                     value={step.sendWindowStart}
                     onChange={(e) =>
                       onUpdate(step.id, {
-                        sendWindowStart:
-                          e.target.value,
+                        sendWindowStart: e.target.value,
                       })
                     }
                     className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500"
@@ -206,8 +192,7 @@ function StepCard({
                     value={step.sendWindowEnd}
                     onChange={(e) =>
                       onUpdate(step.id, {
-                        sendWindowEnd:
-                          e.target.value,
+                        sendWindowEnd: e.target.value,
                       })
                     }
                     className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500"
@@ -229,26 +214,21 @@ function StepCard({
 export default function CreateSequence() {
   const navigate = useNavigate();
 
-  const [sequenceName, setSequenceName] =
-    useState("");
+  const [sequenceName, setSequenceName] = useState("");
 
   const [goal, setGoal] = useState("");
 
-  const [status, setStatus] =
-    useState("draft");
+  const [status, setStatus] = useState("draft");
 
-  const [saving, setSaving] =
-    useState(false);
+  const [saving, setSaving] = useState(false);
 
   const [error, setError] = useState("");
 
   /* SEARCH + FILTER */
 
-  const [searchTerm, setSearchTerm] =
-    useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const [filterStatus, setFilterStatus] =
-    useState("all");
+  const [filterStatus, setFilterStatus] = useState("all");
 
   /* STEPS */
 
@@ -304,11 +284,7 @@ export default function CreateSequence() {
 
   const updateStep = (id, updates) => {
     setSteps((prev) =>
-      prev.map((step) =>
-        step.id === id
-          ? { ...step, ...updates }
-          : step
-      )
+      prev.map((step) => (step.id === id ? { ...step, ...updates } : step)),
     );
   };
 
@@ -318,23 +294,19 @@ export default function CreateSequence() {
 
   const deleteStep = (id) => {
     if (steps.length === 1) {
-      alert(
-        "Sequence must contain at least 1 step."
-      );
+      alert("Sequence must contain at least 1 step.");
 
       return;
     }
 
-    const filtered = steps.filter(
-      (step) => step.id !== id
-    );
+    const filtered = steps.filter((step) => step.id !== id);
 
     setSteps(
       filtered.map((step, index) => ({
         ...step,
 
         stepNumber: index + 1,
-      }))
+      })),
     );
   };
 
@@ -344,21 +316,11 @@ export default function CreateSequence() {
 
   const filteredSteps = steps.filter((step) => {
     const matchesSearch =
-      (step.subject || "")
-        .toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        ) ||
-      (step.body || "")
-        .toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        );
+      (step.subject || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (step.body || "").toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesStatus =
-      filterStatus === "all"
-        ? true
-        : step.status === filterStatus;
+      filterStatus === "all" ? true : step.status === filterStatus;
 
     return matchesSearch && matchesStatus;
   });
@@ -423,26 +385,19 @@ export default function CreateSequence() {
 
           body_template: step.body,
 
-          send_window_start:
-            step.sendWindowStart + ":00",
+          send_window_start: step.sendWindowStart + ":00",
 
-          send_window_end:
-            step.sendWindowEnd + ":00",
+          send_window_end: step.sendWindowEnd + ":00",
         })),
       };
 
       await api.post("/sequences", payload);
 
       navigate("/sequences");
-
     } catch (error) {
       console.error(error);
 
-      setError(
-        error?.response?.data?.message ||
-          "Failed to create sequence."
-      );
-
+      setError(error?.response?.data?.message || "Failed to create sequence.");
     } finally {
       setSaving(false);
     }
@@ -462,13 +417,9 @@ export default function CreateSequence() {
             Back to Sequences
           </Link>
 
-          <h1 className="text-4xl font-bold mb-2">
-            Create New Sequence
-          </h1>
+          <h1 className="text-4xl font-bold mb-2">Create New Sequence</h1>
 
-          <p className="text-gray-400">
-            Build automated email workflows
-          </p>
+          <p className="text-gray-400">Build automated email workflows</p>
         </div>
 
         {/* ERROR */}
@@ -482,20 +433,14 @@ export default function CreateSequence() {
         {/* DETAILS */}
 
         <div className="bg-[#111111] border border-[#222] rounded-3xl p-8 mb-8">
-          <h2 className="text-2xl font-semibold mb-6">
-            Sequence Details
-          </h2>
+          <h2 className="text-2xl font-semibold mb-6">Sequence Details</h2>
 
           <div className="space-y-5">
             {/* NAME */}
 
             <input
               value={sequenceName}
-              onChange={(e) =>
-                setSequenceName(
-                  e.target.value
-                )
-              }
+              onChange={(e) => setSequenceName(e.target.value)}
               placeholder="Sequence Name"
               className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500"
             />
@@ -504,9 +449,7 @@ export default function CreateSequence() {
 
             <input
               value={goal}
-              onChange={(e) =>
-                setGoal(e.target.value)
-              }
+              onChange={(e) => setGoal(e.target.value)}
               placeholder="Goal"
               className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500"
             />
@@ -515,115 +458,16 @@ export default function CreateSequence() {
 
             <select
               value={status}
-              onChange={(e) =>
-                setStatus(e.target.value)
-              }
+              onChange={(e) => setStatus(e.target.value)}
               className="w-full bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500"
             >
-              <option value="draft">
-                Draft
-              </option>
+              <option value="draft">Draft</option>
 
-              <option value="active">
-                Active
-              </option>
+              <option value="active">Active</option>
 
-              <option value="paused">
-                Paused
-              </option>
+              <option value="paused">Paused</option>
             </select>
           </div>
-        </div>
-
-        {/* SEARCH + FILTER */}
-
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          {/* SEARCH */}
-
-          <input
-            placeholder="Search steps..."
-            value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(
-                e.target.value
-              )
-            }
-            className="flex-1 bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500"
-          />
-
-          {/* FILTER */}
-
-          <select
-            value={filterStatus}
-            onChange={(e) =>
-              setFilterStatus(
-                e.target.value
-              )
-            }
-            className="bg-black border border-[#222] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500 min-w-[180px]"
-          >
-            <option value="all">
-              All Steps
-            </option>
-
-            <option value="draft">
-              Draft
-            </option>
-
-            <option value="active">
-              Active
-            </option>
-
-            <option value="paused">
-              Paused
-            </option>
-          </select>
-        </div>
-
-        {/* STEPS */}
-
-        <div className="bg-[#111111] border border-[#222] rounded-3xl p-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-2xl font-semibold">
-                Email Steps
-              </h2>
-
-              <p className="text-gray-500 text-sm mt-1">
-                Create automated outreach flow
-              </p>
-            </div>
-
-            <button
-              onClick={addStep}
-              className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition"
-            >
-              <Plus className="w-4 h-4" />
-              Add Step
-            </button>
-          </div>
-
-          {/* NO RESULTS */}
-
-          {filteredSteps.length === 0 ? (
-            <div className="border border-dashed border-[#333] rounded-2xl p-10 text-center text-gray-500">
-              No steps found.
-            </div>
-          ) : (
-            <div className="space-y-5">
-              {filteredSteps.map((step) => (
-                <StepCard
-                  key={step.id}
-                  step={step}
-                  onUpdate={updateStep}
-                  onDelete={deleteStep}
-                  disableDelete={
-                    steps.length === 1
-                  }
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
 
@@ -632,9 +476,7 @@ export default function CreateSequence() {
       <div className="fixed bottom-0 left-0 right-0 bg-[#111111]/95 backdrop-blur-md border-t border-[#222] z-50">
         <div className="max-w-5xl mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row justify-end gap-4">
           <button
-            onClick={() =>
-              navigate("/sequences")
-            }
+            onClick={() => navigate("/sequences")}
             disabled={saving}
             className="px-6 py-3 rounded-xl border border-[#222] hover:bg-[#1a1a1a] transition"
           >

@@ -24,6 +24,7 @@ export default function SequenceDetail() {
 
   const [showStepModal, setShowStepModal] = useState(false);
   const [editingStepId, setEditingStepId] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   const [subject, setSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
@@ -51,6 +52,7 @@ export default function SequenceDetail() {
   /* ---------------- SAVE STEP ---------------- */
 
   const handleSaveStep = async () => {
+    setIsSaving(true);
     try {
       const stepData = {
         step_order: (sequence?.steps?.length || 0) + 1,
@@ -72,6 +74,8 @@ export default function SequenceDetail() {
       setEditingStepId(null);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -123,7 +127,7 @@ export default function SequenceDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20 relative z-0">
+    <div className="min-h-screen bg-black text-white pt-20 px-6 md:px-10 pb-16 relative z-0">
       {/* HEADER */}
       <div className="mb-10">
         <Link
@@ -305,13 +309,45 @@ export default function SequenceDetail() {
             </div>
 
             <div className="flex justify-end gap-4">
-              <button onClick={() => setShowStepModal(false)}>Cancel</button>
+              <button
+                onClick={() => setShowStepModal(false)}
+                disabled={isSaving}
+                className="text-gray-400 hover:text-white transition disabled:opacity-40"
+              >
+                Cancel
+              </button>
 
               <button
                 onClick={handleSaveStep}
-                className="px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl"
+                disabled={isSaving}
+                className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition"
               >
-                Save
+                {isSaving ? (
+                  <>
+                    <svg
+                      className="w-4 h-4 animate-spin"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                      />
+                    </svg>
+                    Saving…
+                  </>
+                ) : (
+                  "Save"
+                )}
               </button>
             </div>
           </div>
