@@ -344,6 +344,7 @@ function TranscriptModal({ contact, onClose }) {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [sending, setSending] = useState(false);
+  const [showCompose, setShowCompose] = useState(false);
   const messagesEndRef = useRef(null);
 
   const fetchEmails = useCallback(async () => {
@@ -405,6 +406,7 @@ function TranscriptModal({ contact, onClose }) {
 
       setSubject("");
       setBody("");
+      setShowCompose(false);
       await fetchEmails();
     } catch {
       alert("Failed to send email ❌");
@@ -443,12 +445,25 @@ function TranscriptModal({ contact, onClose }) {
               ({contact.email})
             </span>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-white p-1.5 rounded hover:bg-white/10 transition-colors shrink-0 ml-2"
-          >
-            <X size={15} />
-          </button>
+          <div className="flex items-center gap-2 shrink-0 ml-2">
+            <button
+              onClick={() => {
+                setShowCompose((v) => !v);
+                setSubject("");
+                setBody("");
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-white text-xs font-medium rounded-lg transition-colors"
+            >
+              <Mail size={12} />
+              New Mail
+            </button>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-white p-1.5 rounded hover:bg-white/10 transition-colors"
+            >
+              <X size={15} />
+            </button>
+          </div>
         </div>
 
         {/* Messages */}
@@ -518,7 +533,7 @@ function TranscriptModal({ contact, onClose }) {
         </div>
 
         {/* Compose area */}
-        <div className="border-t border-white/10 bg-[#0f1217] px-5 py-4 space-y-2.5 rounded-b-xl shrink-0">
+        {showCompose && <div className="border-t border-white/10 bg-[#0f1217] px-5 py-4 space-y-2.5 rounded-b-xl shrink-0">
           <input
             type="text"
             value={subject}
@@ -535,8 +550,7 @@ function TranscriptModal({ contact, onClose }) {
           />
           <div className="flex justify-between items-center">
             <span className="text-[10px] text-gray-600">
-              To:{" "}
-              <span className="text-gray-400">{contact.email}</span>
+              To: <span className="text-gray-400">{contact.email}</span>
             </span>
             <button
               onClick={handleSend}
@@ -556,7 +570,7 @@ function TranscriptModal({ contact, onClose }) {
               )}
             </button>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );
