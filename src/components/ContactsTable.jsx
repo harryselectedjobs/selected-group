@@ -12,6 +12,9 @@ import {
   Building2,
   Search,
   ChevronDown,
+  MessageSquare,
+  Mail,
+  Send,
 } from "lucide-react";
 
 const API_BASE = "https://www.selected.jobs/api";
@@ -334,6 +337,231 @@ function CompanyDropdown({ value, onChange, compact = false }) {
   );
 }
 
+/* ─── Transcript Modal ─── */
+function TranscriptModal({ contact, onClose }) {
+  const [emails, setEmails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [sending, setSending] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  const fetchEmails = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${API_BASE}/transcript/email/${encodeURIComponent(contact.email)}`,
+      );
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      setEmails(Array.isArray(data) ? data : []);
+    } catch {
+      setEmails([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [contact.email]);
+
+  useEffect(() => {
+    fetchEmails();
+  }, [fetchEmails]);
+
+  useEffect(() => {
+    if (!loading) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [emails, loading]);
+
+  const handleSend = async () => {
+    if (!subject.trim() || !body.trim()) return;
+    setSending(true);
+    try {
+      const sendRes = await fetch(`${API_BASE}/api/send-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipient: contact.email,
+          subject: subject.trim(),
+          body_text: body.trim(),
+          body_html: `<p>${body.trim().replace(/\n/g, "<br/>")}</p>`,
+        }),
+      });
+      const sendData = await sendRes.json();
+      if (!sendData.success) throw new Error("Send failed");
+
+      await fetch(`${API_BASE}/transcript/save`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sender_email:
+            localStorage.getItem("crm_user_email") || "recruiter@selected.jobs",
+          receiver_email: contact.email,
+          subject: subject.trim(),
+          body: body.trim(),
+          direction: "outbound",
+          sent_at: new Date().toISOString(),
+        }),
+      });
+
+      setSubject("");
+      setBody("");
+      await fetchEmails();
+    } catch {
+      alert("Failed to send email ❌");
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const fmt = (dateStr) => {
+    try {
+      return new Date(dateStr).toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch {
+      return dateStr;
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[60]">
+      <div className="bg-[#0d1117] border border-white/10 rounded-xl w-[700px] h-[88vh] flex flex-col shadow-2xl">
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-[#111418] rounded-t-xl shrink-0">
+          <div className="flex items-center gap-2 min-w-0">
+            <MessageSquare size={15} className="text-teal-400 shrink-0" />
+            <h2 className="text-sm font-semibold text-white">Transcript</h2>
+            <span className="text-gray-500 text-xs">—</span>
+            <span className="text-gray-200 text-xs font-medium truncate">
+              {contact.fullName}
+            </span>
+            <span className="text-gray-600 text-xs truncate hidden sm:block">
+              ({contact.email})
+            </span>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-white p-1.5 rounded hover:bg-white/10 transition-colors shrink-0 ml-2"
+          >
+            <X size={15} />
+          </button>
+        </div>
+
+        {/* Messages */}
+        <div
+          className="flex-1 overflow-y-auto px-5 py-4 space-y-3"
+          style={{
+            scrollbarWidth: "thin",
+            scrollbarColor: "rgba(255,255,255,0.08) transparent",
+          }}
+        >
+          {loading ? (
+            <div className="flex items-center justify-center h-full gap-2 text-gray-500 text-sm">
+              <span className="w-4 h-4 border border-white/15 border-t-white/50 rounded-full animate-spin" />
+              Loading emails…
+            </div>
+          ) : emails.length === 0 ? (
+            <div className="flex items-center justify-center h-full text-gray-600 text-sm italic">
+              No emails found for {contact.email}
+            </div>
+          ) : (
+            emails.map((email) => {
+              const isOut = email.direction === "outbound";
+              return (
+                <div
+                  key={email.message_id}
+                  className={`flex flex-col ${isOut ? "items-end" : "items-start"}`}
+                >
+                  <div
+                    className={`max-w-[85%] rounded-xl px-4 py-3 ${
+                      isOut
+                        ? "bg-[#0d4a3a] border border-teal-800/40"
+                        : "bg-[#1a1f2e] border border-white/[0.07]"
+                    }`}
+                  >
+                    {/* Meta row */}
+                    <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
+                      <Mail
+                        size={11}
+                        className={isOut ? "text-teal-400" : "text-blue-400"}
+                      />
+                      <span className="text-xs font-medium text-gray-200 truncate max-w-[180px]">
+                        {email.sender_email}
+                      </span>
+                      {isOut && (
+                        <span className="text-[10px] text-gray-500">
+                          (To: {email.receiver_email})
+                        </span>
+                      )}
+                      <span className="text-[10px] text-gray-600 ml-auto">
+                        {fmt(email.sent_at)}
+                      </span>
+                    </div>
+                    {/* Subject */}
+                    <div className="text-[10px] text-gray-500 mb-2 uppercase tracking-wide">
+                      Subject: {email.subject}
+                    </div>
+                    {/* Body */}
+                    <p className="text-sm text-gray-200 leading-relaxed whitespace-pre-wrap">
+                      {email.body}
+                    </p>
+                  </div>
+                </div>
+              );
+            })
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Compose area */}
+        <div className="border-t border-white/10 bg-[#0f1217] px-5 py-4 space-y-2.5 rounded-b-xl shrink-0">
+          <input
+            type="text"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="Subject…"
+            className="w-full bg-[#1a1f2e] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors"
+          />
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            placeholder="Write your email…"
+            rows={4}
+            className="w-full bg-[#1a1f2e] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
+          />
+          <div className="flex justify-between items-center">
+            <span className="text-[10px] text-gray-600">
+              To:{" "}
+              <span className="text-gray-400">{contact.email}</span>
+            </span>
+            <button
+              onClick={handleSend}
+              disabled={sending || !subject.trim() || !body.trim()}
+              className="flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {sending ? (
+                <>
+                  <span className="w-3.5 h-3.5 border border-white/30 border-t-white rounded-full animate-spin" />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  <Send size={13} />
+                  Send
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main component ─── */
 export default function ContactsTable({ search }) {
   const [contacts, setContacts] = useState([]);
@@ -349,6 +577,7 @@ export default function ContactsTable({ search }) {
   const [checkedIds, setCheckedIds] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [addForm, setAddForm] = useState(EMPTY_FORM);
+  const [transcriptContact, setTranscriptContact] = useState(null);
 
   // ─── FETCH ──────────────────────────────────────────────────────────────────
   const fetchContacts = async () => {
@@ -555,7 +784,7 @@ export default function ContactsTable({ search }) {
                 <th className="p-3 text-left">Email</th>
                 <th className="p-3 text-left">Company</th>
                 <th className="p-3 text-left">Job Title</th>
-                <th className="p-3 w-20 text-center">Actions</th>
+                <th className="p-3 w-32 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -605,7 +834,17 @@ export default function ContactsTable({ search }) {
                       {item.jobtitle || "—"}
                     </td>
                     <td className="p-3" onClick={(e) => e.stopPropagation()}>
-                      <div className="flex items-center justify-center gap-2">
+                      <div className="flex items-center justify-center gap-1.5">
+                        <button
+                          title="Transcript"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setTranscriptContact(item);
+                          }}
+                          className="text-gray-400 hover:text-teal-400 transition-colors p-1 rounded hover:bg-teal-500/10"
+                        >
+                          <MessageSquare size={13} />
+                        </button>
                         <button
                           title="Edit"
                           onClick={(e) => {
@@ -919,6 +1158,14 @@ export default function ContactsTable({ search }) {
             </div>
           )}
         </div>
+      )}
+
+      {/* ── TRANSCRIPT MODAL ───────────────────────────────────────────────────── */}
+      {transcriptContact && (
+        <TranscriptModal
+          contact={transcriptContact}
+          onClose={() => setTranscriptContact(null)}
+        />
       )}
 
       {/* ── ADD MODAL ──────────────────────────────────────────────────────────── */}
