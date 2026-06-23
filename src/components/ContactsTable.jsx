@@ -395,7 +395,7 @@ function TranscriptModal({ contact, onClose }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           sender_email:
-            localStorage.getItem("crm_user_email") || "recruiter@selected.jobs",
+            localStorage.getItem("crm_user_email") || "harry@selected.jobs",
           receiver_email: contact.email,
           subject: subject.trim(),
           body: body.trim(),
@@ -533,44 +533,46 @@ function TranscriptModal({ contact, onClose }) {
         </div>
 
         {/* Compose area */}
-        {showCompose && <div className="border-t border-white/10 bg-[#0f1217] px-5 py-4 space-y-2.5 rounded-b-xl shrink-0">
-          <input
-            type="text"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            placeholder="Subject…"
-            className="w-full bg-[#1a1f2e] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors"
-          />
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            placeholder="Write your email…"
-            rows={4}
-            className="w-full bg-[#1a1f2e] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
-          />
-          <div className="flex justify-between items-center">
-            <span className="text-[10px] text-gray-600">
-              To: <span className="text-gray-400">{contact.email}</span>
-            </span>
-            <button
-              onClick={handleSend}
-              disabled={sending || !subject.trim() || !body.trim()}
-              className="flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              {sending ? (
-                <>
-                  <span className="w-3.5 h-3.5 border border-white/30 border-t-white rounded-full animate-spin" />
-                  Sending…
-                </>
-              ) : (
-                <>
-                  <Send size={13} />
-                  Send
-                </>
-              )}
-            </button>
+        {showCompose && (
+          <div className="border-t border-white/10 bg-[#0f1217] px-5 py-4 space-y-2.5 rounded-b-xl shrink-0">
+            <input
+              type="text"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              placeholder="Subject…"
+              className="w-full bg-[#1a1f2e] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors"
+            />
+            <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              placeholder="Write your email…"
+              rows={4}
+              className="w-full bg-[#1a1f2e] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white/20 transition-colors resize-none"
+            />
+            <div className="flex justify-between items-center">
+              <span className="text-[10px] text-gray-600">
+                To: <span className="text-gray-400">{contact.email}</span>
+              </span>
+              <button
+                onClick={handleSend}
+                disabled={sending || !subject.trim() || !body.trim()}
+                className="flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {sending ? (
+                  <>
+                    <span className="w-3.5 h-3.5 border border-white/30 border-t-white rounded-full animate-spin" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    <Send size={13} />
+                    Send
+                  </>
+                )}
+              </button>
+            </div>
           </div>
-        </div>}
+        )}
       </div>
     </div>
   );
