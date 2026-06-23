@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import CompaniesTable from "../components/CompaniesTable";
 import ContactsTable from "../components/ContactsTable";
-import { Mail, ClipboardList } from "lucide-react";
+import { Mail, ClipboardList, Activity } from "lucide-react";
 import SequenceList from "../components/sequenceList";
 import EnquireList from "../components/EnquireList";
+import SequenceLeads from "../components/SequenceLeads";
 
 const API_BASE = "https://www.selected.jobs/api";
 
@@ -168,6 +169,20 @@ export default function CRM() {
               <ClipboardList size={14} />
               Enquire
             </button>
+            <button
+              onClick={() => {
+                setActiveTab("sequenceLeads");
+                setSidebarOpen(false);
+              }}
+              className={`px-3 py-2 rounded flex items-center gap-2 transition ${
+                activeTab === "sequenceLeads"
+                  ? "bg-white text-black"
+                  : "text-gray-400 hover:bg-white/10"
+              }`}
+            >
+              <Activity size={14} />
+              Sequences Leads
+            </button>
           </div>
 
           {/* LOGOUT */}
@@ -258,40 +273,46 @@ export default function CRM() {
           )}
 
           {/* 🟢 SEARCH + TABLES */}
-          {activeTab && activeTab !== "sequences" && activeTab !== "enquire" && (
-            <>
-              {/* SEARCH */}
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
-                <div className="flex items-center gap-3 bg-[#111] px-4 py-2 border border-white/10 rounded w-full sm:max-w-xs">
-                  <Search size={14} />
+          {activeTab &&
+            activeTab !== "sequences" &&
+            activeTab !== "enquire" &&
+            activeTab !== "sequenceLeads" && (
+              <>
+                {/* SEARCH */}
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
+                  <div className="flex items-center gap-3 bg-[#111] px-4 py-2 border border-white/10 rounded w-full sm:max-w-xs">
+                    <Search size={14} />
 
-                  <input
-                    className="bg-transparent outline-none text-sm w-full"
-                    placeholder={`Search ${activeTab}...`}
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
+                    <input
+                      className="bg-transparent outline-none text-sm w-full"
+                      placeholder={`Search ${activeTab}...`}
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                    />
+                  </div>
                 </div>
-              </div>
 
-              {/* TABLE */}
-              <div className="bg-[#0F0F0F] border border-white/10 rounded-lg p-4 overflow-x-auto">
-                {activeTab === "companies" && (
-                  <CompaniesTable search={debouncedSearch} />
-                )}
+                {/* TABLE */}
+                <div className="bg-[#0F0F0F] border border-white/10 rounded-lg p-4 overflow-x-auto">
+                  {activeTab === "companies" && (
+                    <CompaniesTable search={debouncedSearch} />
+                  )}
 
-                {activeTab === "contacts" && (
-                  <ContactsTable search={debouncedSearch} />
-                )}
-              </div>
-            </>
-          )}
+                  {activeTab === "contacts" && (
+                    <ContactsTable search={debouncedSearch} />
+                  )}
+                </div>
+              </>
+            )}
 
           {/* 🟣 SEQUENCES PAGE */}
           {activeTab === "sequences" && <SequenceList />}
 
           {/* 🔵 ENQUIRE PAGE */}
           {activeTab === "enquire" && <EnquireList />}
+
+          {/* 🟡 SEQUENCE LEADS PAGE */}
+          {activeTab === "sequenceLeads" && <SequenceLeads />}
         </div>
       </div>
     </div>
