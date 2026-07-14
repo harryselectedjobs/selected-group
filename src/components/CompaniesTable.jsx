@@ -11,7 +11,7 @@ import {
   Square,
 } from "lucide-react";
 
-const API_BASE = "https://www.selected.jobs/api";
+const API_BASE = "https://api.selected.jobs";
 
 const EMPTY_FORM = {
   name: "",

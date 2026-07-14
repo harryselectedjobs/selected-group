@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Users, CheckSquare, Square, Send } from "lucide-react";
 import api from "../services/api";
 
-const ENROLL_API = "https://www.selected.jobs/api/api/v1/sequence-queue/enroll";
+const ENROLL_API = "https://api.selected.jobs/api/v1/sequence-queue/enroll";
 
 export default function EnrollmentTable({ sequenceId }) {
   const [contacts, setContacts] = useState([]);

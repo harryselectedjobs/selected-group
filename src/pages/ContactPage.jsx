@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = "https://www.selected.jobs/api";
+const API_BASE = "https://api.selected.jobs";
 
 const contactDetails = [
   {

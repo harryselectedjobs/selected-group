@@ -9,7 +9,7 @@ import SequenceList from "../components/sequenceList";
 import EnquireList from "../components/EnquireList";
 import SequenceLeads from "../components/SequenceLeads";
 
-const API_BASE = "https://www.selected.jobs/api";
+const API_BASE = "https://api.selected.jobs";
 
 export default function CRM() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const API_BASE = "https://www.selected.jobs/api";
+const API_BASE = "https://api.selected.jobs";
 
 export default function Login() {
   const navigate = useNavigate();

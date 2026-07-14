@@ -9,8 +9,8 @@ import {
   Send,
 } from "lucide-react";
 
-const API_BASE = "https://www.selected.jobs/api/helper";
-const TRANSCRIPT_API = "https://www.selected.jobs/api";
+const API_BASE = "https://api.selected.jobs/helper";
+const TRANSCRIPT_API = "https://api.selected.jobs";
 
 function Alert({ type, message, onClose }) {
   useEffect(() => {

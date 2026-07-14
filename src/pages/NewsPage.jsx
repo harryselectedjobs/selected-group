@@ -9,7 +9,7 @@ import {
   CalendarDays,
 } from "lucide-react";
 
-const API_BASE = "https://www.selected.jobs/api/tech-news";
+const API_BASE = "https://api.selected.jobs/tech-news";
 
 function getTodayDate() {
   return new Date().toISOString().split("T")[0];

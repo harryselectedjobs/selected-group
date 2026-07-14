@@ -9,7 +9,7 @@ import {
   Search,
 } from "lucide-react";
 
-const API_BASE = "https://www.selected.jobs/api";
+const API_BASE = "https://api.selected.jobs";
 
 function formatDate(iso) {
   if (!iso) return "—";
